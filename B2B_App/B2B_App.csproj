@@ -109,6 +109,8 @@
     </Compile>
     <Compile Include="Models\APA\Configuration\CommonConfig.cs" />
     <Compile Include="Models\APA\Configuration\CommonConfigurationModel.cs" />
+    <Compile Include="Models\APA\Configuration\Template.cs" />
+    <Compile Include="Models\APA\Configuration\TemplateConfigModel.cs" />
     <Compile Include="Models\APA\Schemas\CommonConfiguration1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,6 +125,7 @@
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\APA\ACommonConfigModelView.cs" />
     <Compile Include="ViewModels\APA\AMainPageViewModel.cs" />
+    <Compile Include="ViewModels\APA\ATemplateConfigViewModel.cs" />
     <Compile Include="ViewModels\B2B\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\DetailPageViewModel.cs" />
