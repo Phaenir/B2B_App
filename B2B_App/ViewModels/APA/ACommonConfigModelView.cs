@@ -49,28 +49,31 @@ namespace B2B_App.ViewModels.APA
         {
             _startConfig=new CommonConfig();
             _endConfig=new CommonConfig();
+            _configuration=new CommonConfigurationModel();
+            _startConfig = _configuration.GetConfiguration();
+            _endConfig.Copy(_startConfig);
+            AgencyName = _startConfig.AgencyName;
+            AgencyNumber = _startConfig.AgencyNumber;
+            AgencyPassword = _startConfig.AgencyPassword;
+            AgencySalespoint = _startConfig.AgencySalespoint;
+            DatabasePassword = _startConfig.DatabasePassword;
+            DatabaseHost = _startConfig.DatabaseHost;
+            DatabaseName = _startConfig.DatabaseName;
+            DatabaseRemoteHost = _startConfig.DatabaseRemote;
+            DatabaseUser = _startConfig.DatabaseUser;
+            DatabasePort = _startConfig.DatabasePort;
+            FormLimit = _startConfig.FormLimit;
+            PageLimit = _startConfig.PageLimit;
+            SearchLimit = _startConfig.SearchLimit;
         }
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             if (suspensionState.Any())
             {
-                _startConfig = _configuration.GetConfiguration();
-                _endConfig.Copy(_startConfig);
-                AgencyName = _startConfig.AgencyName;
-                AgencyNumber = _startConfig.AgencyNumber;
-                AgencyPassword = _startConfig.AgencyPassword;
-                AgencySalespoint = _startConfig.AgencySalespoint;
-                DatabasePassword = _startConfig.DatabasePassword;
-                DatabaseHost = _startConfig.DatabaseHost;
-                DatabaseName = _startConfig.DatabaseName;
-                DatabaseRemoteHost = _startConfig.DatabaseRemote;
-                DatabaseUser = _startConfig.DatabaseUser;
-                DatabasePort = _startConfig.DatabasePort;
-                FormLimit = _startConfig.FormLimit;
-                PageLimit = _startConfig.PageLimit;
-                SearchLimit = _startConfig.SearchLimit;
+               
             }
             await Task.CompletedTask;
+
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
@@ -89,5 +92,28 @@ namespace B2B_App.ViewModels.APA
 
         public void GotoPreferableRoutesPage() => NavigationService.Navigate(typeof(Views.APA.PrefListPage), 0);
         public void GotoMakeWebsiteTemplatePage() => NavigationService.Navigate(typeof(Views.APA.TemplateConfigPage), 1);
+
+        public void SaveNewCommonConfig()
+        {
+            _startConfig.AgencyName= AgencyName;
+            _startConfig.AgencyNumber= AgencyNumber;
+            _startConfig.AgencyPassword= AgencyPassword;
+            _startConfig.AgencySalespoint= AgencySalespoint;
+            _startConfig.DatabasePassword =DatabasePassword ;
+            _startConfig.DatabaseHost =DatabaseHost ;
+            _startConfig.DatabaseName= DatabaseName  ;
+            _startConfig.DatabaseRemote= DatabaseRemoteHost  ;
+            _startConfig.DatabaseUser =DatabaseUser  ;
+            _startConfig.DatabasePort =DatabasePort  ;
+            _startConfig.FormLimit =FormLimit  ;
+            _startConfig.PageLimit =PageLimit  ;
+            _startConfig.SearchLimit =SearchLimit  ;
+            if (_endConfig.IsSame(_startConfig))
+            {
+                NavigationService.Navigate(typeof(Views.APA.MainPage));
+            }
+            _configuration.SetConfiguration(config:_startConfig);
+            NavigationService.Navigate(typeof(Views.APA.MainPage));
+        }
     }
 }

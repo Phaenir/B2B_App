@@ -42,13 +42,88 @@ namespace B2B_App
             var _file = await folder.CreateFileAsync(fileName, _option);
             await Windows.Storage.FileIO.WriteTextAsync(_file, Serialize());
         }
+
+        public new static void SaveToFile(string fileName, CommonConfiguration xml,bool flag)
+        {
+            System.IO.FileStream file = null;
+            System.IO.StreamWriter sr = null;
+
+            try
+            {
+                file = new System.IO.FileStream(fileName, FileMode.Create, FileAccess.Write);
+                sr = new System.IO.StreamWriter(file);
+                string xmlString = xml.Serialize();
+                sr.WriteLine(xmlString);
+                sr.Dispose();
+                file.Dispose();
+            }
+            finally
+            {
+                if ((file != null))
+                {
+                    file.Dispose();
+                }
+                if ((sr != null))
+                {
+                    sr.Dispose();
+                }
+            }
+        }
+
         public static async Task<CommonConfiguration> LoadFromFile(string fileName, Windows.Storage.StorageFolder folder)
         {
             var _file = await folder.GetFileAsync(fileName);
             var xml = await Windows.Storage.FileIO.ReadTextAsync(_file);
             return Deserialize(xml);
         }
-        
+        public static bool LoadFromFile(string fileName, out CommonConfiguration obj, out System.Exception exception)
+        {
+            exception = null;
+            obj = default(CommonConfiguration);
+            try
+            {
+                obj = LoadFromFile(fileName);
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                exception = ex;
+                return false;
+            }
+        }
+        public static bool LoadFromFile(string fileName, out CommonConfiguration obj)
+        {
+            System.Exception exception = null;
+            return LoadFromFile(fileName, out obj, out exception);
+        }
+
+        public new static CommonConfiguration LoadFromFile(string fileName)
+        {
+            System.IO.FileStream file = null;
+            System.IO.StreamReader sr = null;
+
+            try
+            {
+                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
+                sr = new System.IO.StreamReader(file);
+                string xmlString = sr.ReadToEnd();
+                sr.Dispose();
+                file.Dispose();
+                return Deserialize(xmlString);
+            }
+            finally
+            {
+                if ((file != null))
+                {
+                    file.Dispose();
+                }
+                if ((sr != null))
+                {
+                    sr.Dispose();
+                }
+            }
+        }
+
         public CommonConfiguration()
         {
             this._searchEngine = new CommonConfigurationSearchEngine();

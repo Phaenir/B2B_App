@@ -14,9 +14,11 @@ namespace B2B_App.Models.APA.Configuration
     {
         private readonly string ConfigFileName = "ConfigFile.xml";
         private readonly string CommonConfigFolder = "ConfigFiles";
-        private void Init()
+        //private CommonConfiguration configuration;
+        string path;
+        private void Init(out CommonConfiguration common)
         {
-            CommonConfiguration common=new CommonConfiguration();
+            common=new CommonConfiguration();
             CommonConfigurationBerlogicEngineAgency agency = new CommonConfigurationBerlogicEngineAgency
             {
                 Name = "Test",
@@ -45,24 +47,29 @@ namespace B2B_App.Models.APA.Configuration
             common.SearchEngine = searchEngine;
             common.StateDate=DateTime.Now;
 
-            string ourProjectRoot = Directory.GetCurrentDirectory();
-            IAsyncOperation<StorageFolder> currentFolder=StorageFolder.GetFolderFromPathAsync(ourProjectRoot);
-            IAsyncOperation<StorageFolder> configFolder = currentFolder.GetResults()
-                .CreateFolderAsync(CommonConfigFolder, CreationCollisionOption.OpenIfExists);
-            common.SaveToFile(ConfigFileName,configFolder.GetResults());
-            PathToCommonConfigFile.FOLDER = configFolder;
-            PathToCommonConfigFile.NAME = ConfigFileName;
+            common.Serialize();
+            common.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);   
         }
 
+        public async void WaitConfig()
+        {
+            CommonConfiguration configuration = await CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME, PathToCommonConfigFile.FOLDER);
+            await Task.CompletedTask;
+        }
         public CommonConfig GetConfiguration()
         {
             CommonConfig config=new CommonConfig();
+            CommonConfiguration configuration;
             if (!FileExist())
             {
-                Init();
+                Init(out configuration);
             }
-            var configuration = CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,
-                PathToCommonConfigFile.FOLDER.GetResults()).Result;
+            else
+            {
+                configuration = CommonConfiguration.LoadFromFile(path);
+            }
+            //string path= @"D:\Common Documents\visual studio 2015\Projects\B2B_App\B2B_App\bin\x86\Debug\AppX\ConfigFiles\"+ConfigFileName;
+            //configuration=CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER).Result;
             config.AgencyName = configuration.BerlogicEngine.Agency.Name;
             config.AgencyNumber = configuration.BerlogicEngine.Agency.Number;
             config.AgencyPassword = configuration.BerlogicEngine.Agency.Password;
@@ -82,8 +89,9 @@ namespace B2B_App.Models.APA.Configuration
 
         public void SetConfiguration(CommonConfig config)
         {
-            var configuration = CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,
-                PathToCommonConfigFile.FOLDER.GetResults()).Result;
+            //var configuration = CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER).Result;
+            CommonConfiguration configuration = CommonConfiguration.LoadFromFile(path);
+            configuration.StateDate=DateTime.Now;
             configuration.BerlogicEngine.Agency.Name = config.AgencyName;
             configuration.BerlogicEngine.Agency.Number= config.AgencyNumber;
             configuration.BerlogicEngine.Agency.Password= config.AgencyPassword;
@@ -97,23 +105,33 @@ namespace B2B_App.Models.APA.Configuration
             configuration.SearchEngine.FormLimit= config.FormLimit;
             configuration.SearchEngine.PageLimit= config.PageLimit;
             configuration.SearchEngine.SearchLimit= config.SearchLimit;
-            configuration.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER.GetResults());
+            configuration.Serialize();
+            configuration.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);
+            //string path = @"D:\Common Documents\visual studio 2015\Projects\B2B_App\B2B_App\bin\x86\Debug\AppX\ConfigFiles\" + ConfigFileName;
+            //CommonConfiguration.SaveToFile(path,configuration,true);
         }
 
         private bool FileExist()
         {
-            IAsyncOperation<StorageFile> file=StorageFile.GetFileFromPathAsync(PathToCommonConfigFile.FOLDER.GetResults().Path.ToString()+"\\"+PathToCommonConfigFile.NAME);
-            if (file.GetResults().IsAvailable)
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            path = storageFolder.Path + "\\" + ConfigFileName;
+            PathToCommonConfigFile.FOLDER = storageFolder;
+            PathToCommonConfigFile.NAME = ConfigFileName;
+            try
             {
+                IAsyncOperation<StorageFile> file = StorageFile.GetFileFromPathAsync(path);
                 return true;
             }
-            return false;
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 
     public class PathToCommonConfigFile
     {
-        public static IAsyncOperation<StorageFolder> FOLDER;
+        public static StorageFolder FOLDER;
         public static string NAME;
     }
 }
