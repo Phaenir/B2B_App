@@ -107,6 +107,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\APA\Configuration\CommonConfig.cs" />
     <Compile Include="Models\APA\Configuration\CommonConfigurationModel.cs" />
     <Compile Include="Models\APA\Schemas\CommonConfiguration1.Designer.cs">
       <AutoGen>True</AutoGen>
