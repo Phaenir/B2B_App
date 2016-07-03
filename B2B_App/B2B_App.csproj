@@ -93,15 +93,30 @@
     <None Include="B2B_App_TemporaryKey.pfx" />
     <None Include="Models\APA\Schemas\CommonConfiguration.xsd">
       <SubType>Designer</SubType>
+      <LastGenOutput>CommonConfiguration1.Designer.cs</LastGenOutput>
+      <Generator>xsd2codecustomtool</Generator>
     </None>
     <None Include="Models\APA\Schemas\WebsitesTemplate.xsd">
       <SubType>Designer</SubType>
+      <Generator>xsd2codecustomtool</Generator>
+      <LastGenOutput>WebsitesTemplate1.Designer.cs</LastGenOutput>
     </None>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APA\Configuration\CommonConfigurationModel.cs" />
+    <Compile Include="Models\APA\Schemas\CommonConfiguration1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonConfiguration.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APA\Schemas\WebsitesTemplate1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebsitesTemplate.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />

@@ -42,6 +42,6 @@
         <TextBox x:Name="DBUserTextBox" HorizontalAlignment="Left" Margin="337,399,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178"/>
         <TextBlock x:Name="textBlock_Copy10" HorizontalAlignment="Left" Margin="36,463,0,0" TextWrapping="Wrap" Text="Database Name" VerticalAlignment="Top" Height="32" Width="281"/>
         <TextBox x:Name="DBNameTextBox" HorizontalAlignment="Left" Margin="337,463,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" />
-        <Slider x:Name="WebSiteLimiterSlider" HorizontalAlignment="Left" Margin="337,69,0,0" VerticalAlignment="Top" Width="178" Maximum="50" Minimum="1" Value=""/>
+        <Slider x:Name="WebSiteLimiterSlider" HorizontalAlignment="Left" Margin="337,69,0,0" VerticalAlignment="Top" Width="178" Maximum="50" Minimum="1" Value="2"/>
     </Grid>
 </Page>
