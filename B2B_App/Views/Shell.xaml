@@ -8,6 +8,8 @@
       xmlns:local="using:B2B_App.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:views="using:B2B_App.Views"
+      xmlns:bbviews="using:B2B_App.Views.B2B"
+      xmlns:apaviews="using:B2B_App.Views.APA"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
 
@@ -15,7 +17,7 @@
 
         <Controls:HamburgerMenu.PrimaryButtons>
             <!--  mainpage button  -->
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MainPage" 
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="bbviews:MainPage" 
                                           AutomationProperties.Name="Jerry"
                                           >
                 <StackPanel Orientation="Horizontal">
@@ -23,6 +25,14 @@
                                 Symbol="Home" />
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
                                Text="Home" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="apaviews:MainPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="Contact2" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Price Analyzing" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.PrimaryButtons>

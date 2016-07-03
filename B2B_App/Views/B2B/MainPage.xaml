@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="B2B_App.Views.B2B.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:B2B_App.Views.B2B"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:B2B_App.ViewModels.B2B"
+    xmlns:controls="using:Template10.Controls"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <viewModels:MainPageViewModel x:Name="Vm"></viewModels:MainPageViewModel>
+    </Page.DataContext>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader Frame="{x:Bind Frame}" Text="B2B Support Engine">
+            <controls:PageHeader.SecondaryCommands>
+                <AppBarButton Click="{x:Bind Vm.GotoSettings}" Label="Settings" />
+                <AppBarButton Click="{x:Bind Vm.GotoPrivacy}" Label="Privacy" />
+                <AppBarButton Click="{x:Bind Vm.GotoAbout}" Label="About" />
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
+        <Grid Margin="10,53,486,152">
+            <Button x:Name="ApaStartButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="123" Width="144" BorderThickness="0" Click="{x:Bind Vm.GotoApaMainPage}">
+                <Button.Background>
+                    <ImageBrush ImageSource="ms-appx:///Assets/Price Analyse.png"/>
+                </Button.Background>
+            </Button>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="0,128,0,0" TextWrapping="Wrap" Text="APA Page" VerticalAlignment="Top" Width="144" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Page>

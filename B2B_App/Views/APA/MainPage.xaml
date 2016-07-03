@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="B2B_App.Views.APA.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:B2B_App.Views.APA"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:apaview="using:B2B_App.Views.APA"
+    xmlns:bbview="using:B2B_App.Views.B2B"
+    xmlns:viewModel="using:B2B_App.ViewModels.APA"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <viewModel:AMainPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader Text="Price Analyzing Application - Main Page" Frame="{x:Bind Frame}" Height="48">
+            <controls:PageHeader.SecondaryCommands>
+                <AppBarButton Label="Configuration" Click="{x:Bind ViewModel.GotoCommonConfigPage}"/>
+                <AppBarButton Label="Preview Result" Click="{x:Bind ViewModel.GotoResultPage}"/>
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
+        <ListView x:Name="WebsiteList" HorizontalAlignment="Left" Height="208" Margin="10,68,0,0" VerticalAlignment="Top" Width="209" BorderBrush="Black" BorderThickness="1"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" Text="Website list:" VerticalAlignment="Top" Width="209"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,293,0,0" TextWrapping="Wrap" Text="Prefferable Routes list:" VerticalAlignment="Top" Width="209"/>
+        <ListView x:Name="PrefRoutesList" HorizontalAlignment="Left" Height="237" Margin="10,313,0,0" VerticalAlignment="Top" Width="209" BorderThickness="1" BorderBrush="Black"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="226,48,0,0" TextWrapping="Wrap" Text="Browser:" VerticalAlignment="Top" Width="120" Height="20"/>
+        <RadioButton x:Name="radioButton" Content="Firefox" HorizontalAlignment="Left" Margin="226,67,0,0" VerticalAlignment="Top" Width="99"/>
+        <RadioButton x:Name="radioButton1" Content="Chrome" HorizontalAlignment="Left" Margin="226,99,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="226,293,0,0" TextWrapping="Wrap" Text="Routes:" VerticalAlignment="Top" Width="120" Height="20"/>
+        <ListView x:Name="RoutesList" HorizontalAlignment="Left" Height="237" Margin="226,313,0,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" BorderThickness="1"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="671,79,0,0" TextWrapping="Wrap" Text="To:" VerticalAlignment="Top" Width="178"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="435,79,0,0" TextWrapping="Wrap" Text="From:" VerticalAlignment="Top" Width="178"/>
+        <TextBox x:Name="DeparturePointTextBox" HorizontalAlignment="Left" Margin="435,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.349,1.68" Width="178"/>
+        <TextBox x:Name="ArrivalPointTextBox" HorizontalAlignment="Left" Margin="671,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178"/>
+        <Button x:Name="RoundTripButton" Content="" HorizontalAlignment="Left" Margin="614,142,0,0" VerticalAlignment="Top" Height="39" Width="54" RenderTransformOrigin="-0.322,0.787"/>
+        <CalendarDatePicker x:Name="DepartureDatePicker" HorizontalAlignment="Left" Margin="435,182,0,0" VerticalAlignment="Top" Width="178"/>
+        <CalendarDatePicker x:Name="RoundDepartureDatePicker" HorizontalAlignment="Left" Margin="671,182,0,0" VerticalAlignment="Top" Width="178"/>
+        <Button x:Name="SearchButton" Content="SEARCH" HorizontalAlignment="Left" Margin="567,238,0,0" VerticalAlignment="Top" Width="140" BorderBrush="#FF0EE40E" BorderThickness="5"/>
+    </Grid>
+</Page>
