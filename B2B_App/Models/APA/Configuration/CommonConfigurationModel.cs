@@ -100,7 +100,7 @@ namespace B2B_App.Models.APA.Configuration
             configuration.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER.GetResults());
         }
 
-        public bool FileExist()
+        private bool FileExist()
         {
             IAsyncOperation<StorageFile> file=StorageFile.GetFileFromPathAsync(PathToCommonConfigFile.FOLDER.GetResults().Path.ToString()+"\\"+PathToCommonConfigFile.NAME);
             if (file.GetResults().IsAvailable)
