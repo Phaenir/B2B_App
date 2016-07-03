@@ -5,9 +5,43 @@
     xmlns:local="using:B2B_App.Views.APA"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:viewModel="using:B2B_App.ViewModels.APA"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <viewModel:ACommonConfigModelView x:Name="Config"/>
+    </Page.DataContext>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <controls:PageHeader Text="Common Configuration" Frame="{x:Bind Frame}">
+            <controls:PageHeader.SecondaryCommands>
+                <AppBarButton Label="Set Prefferable Routes" Click="{x:Bind Config.GotoPreferableRoutesPage}"/>
+                <AppBarButton Label="Make Website Template" Click="{x:Bind Config.GotoMakeWebsiteTemplatePage}"/>
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="36,76,0,0" TextWrapping="Wrap" Text="Search Page Limit" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="36,113,0,0" TextWrapping="Wrap" Text="Time Limit on Fill WebForms" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="TimeLimitOnFillTextBox" HorizontalAlignment="Left" Margin="337,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="20"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="36,145,0,0" TextWrapping="Wrap" Text="Time Limit on Search Function" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="TimeLimitOnSearchTextBox" HorizontalAlignment="Left" Margin="337,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="64"/>
+        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="36,177,0,0" TextWrapping="Wrap" Text="Salespoint" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="SalespointTextBox" HorizontalAlignment="Left" Margin="337,177,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+        <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="36,209,0,0" TextWrapping="Wrap" Text="Agency" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="AgencyNameTextBox" HorizontalAlignment="Left" Margin="337,209,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+        <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="36,241,0,0" TextWrapping="Wrap" Text="Agency Number" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="AgencyNumberTextBox" HorizontalAlignment="Left" Margin="337,241,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="114"/>
+        <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Margin="36,273,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="AgencyPasswordTextBox" HorizontalAlignment="Left" Margin="337,273,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+        <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Margin="36,335,0,0" TextWrapping="Wrap" Text="Database Host" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="DBHostTextBox" HorizontalAlignment="Left" Margin="337,335,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+        <TextBlock x:Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="36,367,0,0" TextWrapping="Wrap" Text="Database Port" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="DBPortTextBox" HorizontalAlignment="Left" Margin="337,367,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="114"/>
+        <TextBlock x:Name="textBlock_Copy8" HorizontalAlignment="Left" Margin="36,431,0,0" TextWrapping="Wrap" Text="Database Remote Host" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="DBRemoteHostTextBox" HorizontalAlignment="Left" Margin="337,431,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+        <TextBlock x:Name="textBlock_Copy9" HorizontalAlignment="Left" Margin="36,399,0,0" TextWrapping="Wrap" Text="Database User" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="DBUserTextBox" HorizontalAlignment="Left" Margin="337,399,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178"/>
+        <TextBlock x:Name="textBlock_Copy10" HorizontalAlignment="Left" Margin="36,463,0,0" TextWrapping="Wrap" Text="Database Name" VerticalAlignment="Top" Height="32" Width="281"/>
+        <TextBox x:Name="DBNameTextBox" HorizontalAlignment="Left" Margin="337,463,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" />
+        <Slider x:Name="WebSiteLimiterSlider" HorizontalAlignment="Left" Margin="337,69,0,0" VerticalAlignment="Top" Width="178" Maximum="50" Minimum="1" Value=""/>
     </Grid>
 </Page>
