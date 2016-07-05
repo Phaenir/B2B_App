@@ -87,15 +87,6 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="ArrivalPoint">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="Tag" type="xs:string"/>
-                    <xs:element name="Attr" type="xs:string"/>
-                    <xs:element name="Name" type="xs:string"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
               <xs:element name="DepartureDate">
                 <xs:complexType>
                   <xs:sequence>
@@ -105,7 +96,43 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="DepartureTime">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Tag" type="xs:string"/>
+                    <xs:element name="Attr" type="xs:string"/>
+                    <xs:element name="Name" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ArrivalPoint">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Tag" type="xs:string"/>
+                    <xs:element name="Attr" type="xs:string"/>
+                    <xs:element name="Name" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="ArrivalDate">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Tag" type="xs:string"/>
+                    <xs:element name="Attr" type="xs:string"/>
+                    <xs:element name="Name" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ArrivalTime">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Tag" type="xs:string"/>
+                    <xs:element name="Attr" type="xs:string"/>
+                    <xs:element name="Name" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="AirlineName">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="Tag" type="xs:string"/>
@@ -193,24 +220,6 @@
                 </xs:complexType>
               </xs:element>
               <xs:element name="ExactlyAirline">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="Tag" type="xs:string"/>
-                    <xs:element name="Attr" type="xs:string"/>
-                    <xs:element name="Name" type="xs:string"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="DepartureTime">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="Tag" type="xs:string"/>
-                    <xs:element name="Attr" type="xs:string"/>
-                    <xs:element name="Name" type="xs:string"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="ArrivalTime">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="Tag" type="xs:string"/>

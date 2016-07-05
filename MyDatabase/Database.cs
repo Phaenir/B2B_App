@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace B2B_App.Models.APA.Configuration
+namespace MyDatabase
 {
     class Database
     {
@@ -15,8 +15,8 @@ namespace B2B_App.Models.APA.Configuration
         private MySqlConnection _connection;
 
         private readonly ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
-        public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;
-
+        public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;        
+        
         
         public void Init()
         {

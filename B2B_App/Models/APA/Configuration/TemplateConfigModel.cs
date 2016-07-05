@@ -14,15 +14,13 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Automation.Peers;
+using B2B_App.Models.APA.Schemas;
 using Chilkat;
 
 namespace B2B_App.Models.APA.Configuration
 {
     class TemplateConfigModel
-    {
-        string path;
-        
-
+    {      
         public async Task<Template> GetConfiguration(string fileName)
         {
             Template template = new Template();
@@ -46,7 +44,7 @@ namespace B2B_App.Models.APA.Configuration
 
             return config;
         }
-
+        /*
         public void SetConfiguration(Template website)
         {
             //var configuration = CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER).Result;
@@ -70,7 +68,7 @@ namespace B2B_App.Models.APA.Configuration
             //string path = @"D:\Common Documents\visual studio 2015\Projects\B2B_App\B2B_App\bin\x86\Debug\AppX\ConfigFiles\" + ConfigFileName;
             //CommonConfiguration.SaveToFile(path,configuration,true);
         }
-
+        */
         private async Task<bool> FileExist(string name)
         {
           return  await RemoteSave.FileExist(name + ".xml", RemoteSave.State.TEMPLATE);

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 
-namespace B2B_App.Models.APA.Configuration
+namespace MyDatabase
 {
-    class TemplateTable
+    public class TemplateTable
     {
         public string Name { get; set; }
         public string FolderPath { get; set; }

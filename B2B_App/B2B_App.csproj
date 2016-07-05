@@ -109,12 +109,14 @@
     </Compile>
     <Compile Include="Models\APA\Configuration\CommonConfig.cs" />
     <Compile Include="Models\APA\Configuration\CommonConfigurationModel.cs" />
-    <Compile Include="Models\APA\Configuration\Database.cs" />
     <Compile Include="Models\APA\Configuration\HtmlTags.cs" />
     <Compile Include="Models\APA\Configuration\RemoteSave.cs" />
     <Compile Include="Models\APA\Configuration\Template.cs" />
+    <Compile Include="Models\APA\Configuration\TemplateAdditionalInfo.cs" />
+    <Compile Include="Models\APA\Configuration\TemplateCommonInfo.cs" />
     <Compile Include="Models\APA\Configuration\TemplateConfigModel.cs" />
-    <Compile Include="Models\APA\Configuration\TemplateTable.cs" />
+    <Compile Include="Models\APA\Configuration\TemplateResultEngine.cs" />
+    <Compile Include="Models\APA\Configuration\TemplateSearchEngine.cs" />
     <Compile Include="Models\APA\Schemas\CommonConfiguration1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,9 +255,10 @@
     <Folder Include="Models\B2B\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data.RT">
-      <HintPath>C:\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\RT\MySql.Data.RT.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\MyDatabase\MyDatabase.csproj">
+      <Project>{4f4260b2-3ba0-4791-bca6-93b9818ee534}</Project>
+      <Name>MyDatabase</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
