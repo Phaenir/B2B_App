@@ -555,11 +555,11 @@ namespace FTP_Client
 
         public async Task<StorageFile> RetrieveFileAsync(string path)
         {
-            if (!(await FileExistsAsync(path)))
+           /* if (!(await FileExistsAsync(path)))
             {
                 throw new FileNotFoundException("FTP file could not be retrieved", path);
             }
-
+            */
             StorageFile resultantFile;
             FtpResponse reply;
 
@@ -567,7 +567,7 @@ namespace FTP_Client
             // A more efficient way, maybe a DataReader can be used here
             using (var stream = await OpenReadAsync(path))
             {
-                var buffer = new byte[512].AsBuffer();
+                var buffer = new byte[2048].AsBuffer();
                 var resultingBuffer = new byte[0];
 
                 while (true)
@@ -603,7 +603,7 @@ namespace FTP_Client
                 // A more efficient way, maybe a DataReader can be used here
                 using (var readStream = await file.OpenReadAsync())
                 {
-                    var buffer = new byte[512].AsBuffer();
+                    var buffer = new byte[2048].AsBuffer();
                     var resultingBuffer = new byte[0];
 
                     while (true)

@@ -12,8 +12,8 @@ namespace B2B_App.ViewModels.APA
     {
         public ATemplateConfigViewModel()
         {
-            TemplateConfigModel config=new TemplateConfigModel();
-            config.SaveInFtp();
         }
+
+
     }
 }
