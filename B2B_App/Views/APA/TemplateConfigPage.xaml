@@ -6,7 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:vm="using:B2B_App.ViewModels.APA"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:ATemplateConfigViewModel x:Name="TemplateModel"></vm:ATemplateConfigViewModel>
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader Text="Manage Websites' Templates"></controls:PageHeader>

@@ -248,6 +248,12 @@
   <ItemGroup>
     <Folder Include="Models\B2B\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FTP_Client\FTP_Client.csproj">
+      <Project>{a3f794ac-490d-4017-ae5a-929200d1552a}</Project>
+      <Name>FTP_Client</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity
-    Name="9b8d323b-038a-4d93-9445-8610bdb46907"
-    Publisher = "CN=phaen"
-    Version = "1.0.0.0" /> 
-  <mp:PhoneIdentity PhoneProductId="9b8d323b-038a-4d93-9445-8610bdb46907" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Identity Name="9b8d323b-038a-4d93-9445-8610bdb46907" Publisher="CN=phaen" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="9b8d323b-038a-4d93-9445-8610bdb46907" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>B2B_App</DisplayName>
     <PublisherDisplayName>phaen</PublisherDisplayName>
@@ -27,5 +24,6 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="internetClientServer" />
   </Capabilities>
 </Package>

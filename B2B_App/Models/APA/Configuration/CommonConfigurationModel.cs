@@ -13,7 +13,7 @@ namespace B2B_App.Models.APA.Configuration
     class CommonConfigurationModel
     {
         private readonly string ConfigFileName = "ConfigFile.xml";
-        private readonly string CommonConfigFolder = "ConfigFiles";
+        //private readonly string CommonConfigFolder = "ConfigFiles";
         //private CommonConfiguration configuration;
         string path;
         private void Init(out CommonConfiguration common)

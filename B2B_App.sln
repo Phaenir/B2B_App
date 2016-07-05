@@ -5,16 +5,21 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B2B_App", "B2B_App\B2B_App.csproj", "{FC7479A3-8C08-48D5-9E72-81576DB44CCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTP_Client", "FTP_Client\FTP_Client.csproj", "{A3F794AC-490D-4017-AE5A-929200D1552A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Debug|ARM.ActiveCfg = Debug|ARM
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Debug|ARM.Build.0 = Debug|ARM
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -24,6 +29,7 @@ Global
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Debug|x86.ActiveCfg = Debug|x86
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Debug|x86.Build.0 = Debug|x86
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Debug|x86.Deploy.0 = Debug|x86
+		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Release|Any CPU.ActiveCfg = Release|x86
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Release|ARM.ActiveCfg = Release|ARM
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Release|ARM.Build.0 = Release|ARM
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Release|ARM.Deploy.0 = Release|ARM
@@ -33,6 +39,22 @@ Global
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Release|x86.ActiveCfg = Release|x86
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Release|x86.Build.0 = Release|x86
 		{FC7479A3-8C08-48D5-9E72-81576DB44CCE}.Release|x86.Deploy.0 = Release|x86
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|ARM.Build.0 = Debug|ARM
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|x64.ActiveCfg = Debug|x64
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|x64.Build.0 = Debug|x64
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|x86.ActiveCfg = Debug|x86
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Debug|x86.Build.0 = Debug|x86
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|ARM.ActiveCfg = Release|ARM
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|ARM.Build.0 = Release|ARM
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|x64.ActiveCfg = Release|x64
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|x64.Build.0 = Release|x64
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|x86.ActiveCfg = Release|x86
+		{A3F794AC-490D-4017-AE5A-929200D1552A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
