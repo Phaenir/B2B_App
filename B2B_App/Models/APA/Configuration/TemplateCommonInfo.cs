@@ -8,8 +8,8 @@ namespace B2B_App.Models.APA.Configuration
 {
     class TemplateCommonInfo
     {
-        public HtmlTags WebsiteName { get; set; }
-        public HtmlTags WebsiteUrl { get; set; }
+        public string WebsiteName { get; set; }
+        public string WebsiteUrl { get; set; }
         public TemplateCommonInfo() { }
         public TemplateCommonInfo(TemplateCommonInfo commonInfo)
         {

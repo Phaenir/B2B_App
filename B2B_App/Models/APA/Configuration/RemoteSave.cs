@@ -46,11 +46,11 @@ namespace B2B_App.Models.APA.Configuration
             {
                 case State.TEMPLATE:
                     Success = await _ftp.ChangeRemoteDirAsync("Templates");
-                    Success = await _ftp.PutFileFromTextDataAsync(fileName, content, Encoding.UTF8.EncodingName);
+                    Success = await _ftp.PutFileFromTextDataAsync(fileName+".xml", content, Encoding.UTF8.EncodingName);
                     break;
                 case State.ROUTE:
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
-                    Success = await _ftp.PutFileFromTextDataAsync(fileName, content, Encoding.UTF8.EncodingName);
+                    Success = await _ftp.PutFileFromTextDataAsync(fileName+".csv", content, Encoding.UTF8.EncodingName);
                     break;
             }
             Success = await _ftp.DisconnectAsync();
@@ -65,11 +65,11 @@ namespace B2B_App.Models.APA.Configuration
             {
                     case State.TEMPLATE:
                         Success = await _ftp.ChangeRemoteDirAsync("Templates");
-                        Success = await _ftp.PutFileAsync(file.Path, fileName);
+                        Success = await _ftp.PutFileAsync(file.Path, fileName+".xml");
                         break;
                 case State.ROUTE:
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
-                    Success = await _ftp.PutFileAsync(file.Path, fileName);
+                    Success = await _ftp.PutFileAsync(file.Path, fileName+".csv");
                     break;
             }
             Success = await _ftp.PutFileAsync(file.Path,fileName);
@@ -85,11 +85,11 @@ namespace B2B_App.Models.APA.Configuration
             {
                 case State.TEMPLATE:
                     Success = await _ftp.ChangeRemoteDirAsync("Templates");
-                    data = await _ftp.GetRemoteFileTextDataAsync(fileName);
+                    data = await _ftp.GetRemoteFileTextDataAsync(fileName+".xml");
                     break;
                 case State.ROUTE:
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
-                    data = await _ftp.GetRemoteFileTextDataAsync(fileName);
+                    data = await _ftp.GetRemoteFileTextDataAsync(fileName+".csv");
                     break;
             }
             Success = await _ftp.DisconnectAsync();
@@ -105,11 +105,11 @@ namespace B2B_App.Models.APA.Configuration
             {
                 case State.TEMPLATE:
                     Success = await _ftp.ChangeRemoteDirAsync("Templates");
-                    Success = await _ftp.GetFileAsync(localPath, fileName);
+                    Success = await _ftp.GetFileAsync(localPath, fileName+".xml");
                     break;
                 case State.ROUTE:
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
-                    Success = await _ftp.GetFileAsync(localPath, fileName);
+                    Success = await _ftp.GetFileAsync(localPath, fileName+".csv");
                     break;
             }
             Success = await _ftp.DisconnectAsync();
@@ -131,11 +131,11 @@ namespace B2B_App.Models.APA.Configuration
                 {
                     case State.TEMPLATE:
                         Success = await _ftp.ChangeRemoteDirAsync("Templates");
-                        file = await _ftp.GetRemoteFileTextDataAsync(fileName);
+                        file = await _ftp.GetRemoteFileTextDataAsync(fileName+".xml");
                         break;
                     case State.ROUTE:
                         Success = await _ftp.ChangeRemoteDirAsync("Routes");
-                        file = await _ftp.GetRemoteFileTextDataAsync(fileName);
+                        file = await _ftp.GetRemoteFileTextDataAsync(fileName+".csv");
                         break;
                 }
                 return true;

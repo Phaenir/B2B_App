@@ -43,7 +43,7 @@ namespace B2B_App
             await Windows.Storage.FileIO.WriteTextAsync(_file, Serialize());
         }
 
-        /*public new static void SaveToFile(string fileName, CommonConfiguration xml,bool flag)
+        public new static void SaveToFile(string fileName, CommonConfiguration xml,bool flag)
         {
             System.IO.FileStream file = null;
             System.IO.StreamWriter sr = null;
@@ -68,7 +68,7 @@ namespace B2B_App
                     sr.Dispose();
                 }
             }
-        }*/
+        }
 
         public static async Task<CommonConfiguration> LoadFromFile(string fileName, Windows.Storage.StorageFolder folder)
         {
@@ -104,7 +104,6 @@ namespace B2B_App
 
             try
             {
-                //file = new System.IO.FileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write);
                 file=new FileStream(fileName,FileMode.Create,FileAccess.Write);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
