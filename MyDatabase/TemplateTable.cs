@@ -24,5 +24,6 @@ namespace MyDatabase
         {
             Name = name;
         }
+        public TemplateTable() { }
     }
 }

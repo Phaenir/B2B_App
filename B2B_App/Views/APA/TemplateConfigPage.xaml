@@ -9,7 +9,7 @@
     xmlns:vm="using:B2B_App.ViewModels.APA"
     mc:Ignorable="d">
     <Page.DataContext>
-        <vm:ATemplateConfigViewModel x:Name="TemplateModel"></vm:ATemplateConfigViewModel>
+        <vm:ATemplateConfigViewModel x:Name="Model"/>
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -174,7 +174,7 @@
             <TextBox x:Name="DirectNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
         </Grid>
         <TextBlock x:Name="textBlock33" HorizontalAlignment="Left" Margin="28,56,0,0" TextWrapping="Wrap" Text="Template List:" VerticalAlignment="Top"/>
-        <ListView x:Name="TemplateListView" HorizontalAlignment="Left" Height="235" Margin="28,81,0,0" VerticalAlignment="Top" Width="310"/>
+        <ListView x:Name="TemplateListView" HorizontalAlignment="Left" Height="235" Margin="28,81,0,0" VerticalAlignment="Top" Width="310" IsItemClickEnabled="True" ItemClick="" ItemsSource="{Binding TemplateTables}"/>
         <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="365,354,0,0" VerticalAlignment="Top" Height="69" Width="83" BorderBrush="#FFF7E20F" Background="#33F72525" BorderThickness="5" FontWeight="Bold" FontSize="22"/>
     </Grid>
 </Page>

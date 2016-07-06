@@ -8,17 +8,20 @@ using MySql.Data.MySqlClient;
 
 namespace MyDatabase
 {
-    class Database
+    public class Database
     {
         private static readonly Database Templates=new Database();
         private MySqlConnectionStringBuilder _builder;
         private MySqlConnection _connection;
 
         private readonly ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
-        public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;        
-        
-        
-        public void Init()
+        public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;
+
+        public Database()
+        {
+            this.GetTemplates();
+        }
+        private void Init()
         {
             _builder = new MySqlConnectionStringBuilder
             {
