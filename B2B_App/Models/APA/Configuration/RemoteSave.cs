@@ -16,28 +16,22 @@ namespace B2B_App.Models.APA.Configuration
         public static bool Success { get; set; }
 
 
-        private static async void Init()
+        private static void Init()
         {
-            _ftp=new Ftp2();
+            _ftp = new Ftp2();
             Success = _ftp.UnlockComponent("Anything for 30-day trial");
             if (!Success)
             {
-                Debug.Assert(false,_ftp.LastErrorText);
+                Debug.Assert(false, _ftp.LastErrorText);
             }
             _ftp.Hostname = "ftp.lokador.net";
             _ftp.Username = "b2bapp";
             _ftp.Password = "3P3k6P8t";
             _ftp.Port = 21;
             _ftp.Passive = false;
-
-            Success = await _ftp.ConnectAsync();
-            if (!Success)
-            {
-                Debug.Assert(false,_ftp.LastErrorText);
-            }
         }
 
-        public static async void SaveContentToFtp(string content, string fileName, State state)
+        public static async Task SaveContentToFtp(string content, string fileName, State state)
         {
             Init();
             Success = await _ftp.ConnectAsync();

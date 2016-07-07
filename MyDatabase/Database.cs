@@ -16,10 +16,12 @@ namespace MyDatabase
 
         private readonly ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
         public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;
+        private readonly ObservableCollection<string> _templateTableNames=new ObservableCollection<string>();
+        public ObservableCollection<string> TemplateTableNames => Templates._templateTableNames; 
 
         public Database()
         {
-            this.GetTemplates();
+            Init();
         }
         private void Init()
         {
@@ -30,7 +32,8 @@ namespace MyDatabase
                 Password = "0O2z6T7e",
                 Database = "b2b_support",
                 CharacterSet = "utf8",
-                SslMode = MySqlSslMode.None
+                SslMode = MySqlSslMode.None,
+                Port = 3306,
             };
             _connection=new MySqlConnection(_builder.ToString());
         }
@@ -39,7 +42,6 @@ namespace MyDatabase
         {
             try
             {
-                Init();
                 _connection.Open();
                 MySqlCommand command = _connection.CreateCommand();
                 command.CommandText = "SELECT name FROM templates_storage;";
@@ -47,7 +49,9 @@ namespace MyDatabase
                 {
                     while (reader.Read())
                     {
-                        Templates._templateTables.Add(new TemplateTable(reader.GetString("name")));
+                        TemplateTable tt=new TemplateTable(reader.GetString("name"));
+                        Templates._templateTables.Add(tt);
+                        Templates._templateTableNames.Add(tt.Name);
                     }
                 }
             }
@@ -56,6 +60,7 @@ namespace MyDatabase
                 
                 throw new Exception("Template Tables wrong access: "+e);
             }
+            _connection.Close();
             return Templates.TemplateTables;
         }
 
@@ -64,7 +69,7 @@ namespace MyDatabase
             TemplateTable newRow=new TemplateTable(name,path,file);
             try
             {
-                Init();
+                _connection.Close();
                 _connection.Open();
                 MySqlCommand insert = _connection.CreateCommand();
                 insert.CommandText =
@@ -74,6 +79,7 @@ namespace MyDatabase
                 insert.Parameters.AddWithValue("@file", file);
                 insert.ExecuteNonQuery();
                 Templates._templateTables.Add(newRow);
+                _connection.Close();
                 return true;
             }
             catch (MySqlException)
@@ -87,7 +93,6 @@ namespace MyDatabase
         {
             try
             {
-                Init();
                 _connection.Open();
                 MySqlCommand insert = _connection.CreateCommand();
                 insert.CommandText =
@@ -95,6 +100,7 @@ namespace MyDatabase
                 insert.Parameters.AddWithValue("@upd", upd);
                 insert.Parameters.AddWithValue("@old", old);
                 insert.ExecuteNonQuery();
+                _connection.Close();
                 return true;
             }
             catch (MySqlException)

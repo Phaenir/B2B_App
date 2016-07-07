@@ -15,7 +15,7 @@ namespace B2B_App.Models.APA.Configuration
         private readonly string ConfigFileName = "ConfigFile.xml";
         //private readonly string CommonConfigFolder = "ConfigFiles";
         //private CommonConfiguration configuration;
-        string path;
+        string _path;
         private void Init(out CommonConfiguration common)
         {
             common=new CommonConfiguration();
@@ -47,8 +47,9 @@ namespace B2B_App.Models.APA.Configuration
             common.SearchEngine = searchEngine;
             common.StateDate=DateTime.Now;
 
-            common.Serialize();
-            common.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);   
+            string xml= common.Serialize();
+            //CommonConfiguration.SaveAltToFile(PathToCommonConfigFile.NAME,common,true);
+            common.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);
         }
 
         public async void WaitConfig()
@@ -66,7 +67,7 @@ namespace B2B_App.Models.APA.Configuration
             }
             else
             {
-                configuration = CommonConfiguration.LoadFromFile(path);
+                configuration = CommonConfiguration.LoadFromFile(_path);
             }
             //string path= @"D:\Common Documents\visual studio 2015\Projects\B2B_App\B2B_App\bin\x86\Debug\AppX\ConfigFiles\"+ConfigFileName;
             //configuration=CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER).Result;
@@ -90,7 +91,7 @@ namespace B2B_App.Models.APA.Configuration
         public void SetConfiguration(CommonConfig config)
         {
             //var configuration = CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER).Result;
-            CommonConfiguration configuration = CommonConfiguration.LoadFromFile(path);
+            CommonConfiguration configuration = CommonConfiguration.LoadFromFile(_path);
             configuration.StateDate=DateTime.Now;
             configuration.BerlogicEngine.Agency.Name = config.AgencyName;
             configuration.BerlogicEngine.Agency.Number= config.AgencyNumber;
@@ -114,12 +115,12 @@ namespace B2B_App.Models.APA.Configuration
         private bool FileExist()
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            path = storageFolder.Path + "\\" + ConfigFileName;
+            _path = storageFolder.Path + "\\" + ConfigFileName;
             PathToCommonConfigFile.FOLDER = storageFolder;
             PathToCommonConfigFile.NAME = ConfigFileName;
             try
             {
-                IAsyncOperation<StorageFile> file = StorageFile.GetFileFromPathAsync(path);
+                IAsyncOperation<StorageFile> b= StorageFile.GetFileFromPathAsync(_path);
                 return true;
             }
             catch (Exception)

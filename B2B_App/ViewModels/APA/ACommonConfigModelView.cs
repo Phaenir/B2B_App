@@ -42,16 +42,16 @@ namespace B2B_App.ViewModels.APA
         public int SearchLimit { get { return _searchLimit; } set { Set(ref _searchLimit, value); } }
 
         private CommonConfig _startConfig;
-        private CommonConfig _endConfig;
+        // CommonConfig _endConfig;
         private CommonConfigurationModel _configuration;
 
         public ACommonConfigModelView()
         {
             _startConfig=new CommonConfig();
-            _endConfig=new CommonConfig();
+            //_endConfig=new CommonConfig();
             _configuration=new CommonConfigurationModel();
             _startConfig = _configuration.GetConfiguration();
-            _endConfig.Copy(_startConfig);
+            //_endConfig.Copy(_startConfig);
             AgencyName = _startConfig.AgencyName;
             AgencyNumber = _startConfig.AgencyNumber;
             AgencyPassword = _startConfig.AgencyPassword;
@@ -108,10 +108,10 @@ namespace B2B_App.ViewModels.APA
             _startConfig.FormLimit =FormLimit  ;
             _startConfig.PageLimit =PageLimit  ;
             _startConfig.SearchLimit =SearchLimit  ;
-            if (_endConfig.IsSame(_startConfig))
+           /* if (_endConfig.IsSame(_startConfig))
             {
                 NavigationService.Navigate(typeof(Views.APA.MainPage));
-            }
+            }*/
             _configuration.SetConfiguration(config:_startConfig);
             NavigationService.Navigate(typeof(Views.APA.MainPage));
         }

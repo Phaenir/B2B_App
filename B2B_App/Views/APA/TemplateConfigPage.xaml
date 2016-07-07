@@ -6,175 +6,191 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
-    xmlns:vm="using:B2B_App.ViewModels.APA"
+    xmlns:viewModel="using:B2B_App.ViewModels.APA"
     mc:Ignorable="d">
+
     <Page.DataContext>
-        <vm:ATemplateConfigViewModel x:Name="Model"/>
+        <viewModel:ATemplateConfigViewModel x:Name="ViewModel"></viewModel:ATemplateConfigViewModel>
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:PageHeader Text="Manage Websites' Templates"></controls:PageHeader>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="28,329,0,0" TextWrapping="Wrap" Text="Common:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="28,442,0,0" TextWrapping="Wrap" Text="Search:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="576,52,0,0" TextWrapping="Wrap" Text="Result:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="576,418,0,0" TextWrapping="Wrap" Text="Filters:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="54,366,0,0" TextWrapping="Wrap" Text="Website Name:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="54,403,0,0" TextWrapping="Wrap" Text="Website URL:" VerticalAlignment="Top" Width="100"/>
-        <TextBox x:Name="WebsiteNameTextBox" HorizontalAlignment="Left" Margin="171,354,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167"/>
-        <TextBox x:Name="WebsiteUrlTextBox" HorizontalAlignment="Left" Margin="171,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167"/>
-        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Height="2" Margin="143,549,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="11"/>
-        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="171,450,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="248,450,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="324,450,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
-        <Grid Margin="28,480,832,208">
-            <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="From:" VerticalAlignment="Top"/>
-            <TextBox x:Name="FromTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
-            <TextBox x:Name="FromAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="FromNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <controls:PageHeader Text="Manage Websites' Templates" Frame="{x:Bind Frame}"></controls:PageHeader>
+
+        <Grid>
+            <TextBlock x:Name="textBlock33" HorizontalAlignment="Left" Margin="28,56,0,0" TextWrapping="Wrap" Text="Template List:" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+            
+            <ListView x:Name="TemplateListView" HorizontalAlignment="Left" Height="153" Margin="28,81,0,0" VerticalAlignment="Top" Width="211" IsItemClickEnabled="True" ItemsSource="{Binding TemplateTables}" SelectionMode="Single" SelectedValue="{Binding SelectedValue,Mode=TwoWay}" SelectedValuePath="Name" DisplayMemberPath="Name" ItemClick="ListViewBase_OnItemClick"/>
         </Grid>
-        <Grid Margin="28,512,832,176">
-            <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="To:" VerticalAlignment="Top"/>
-            <TextBox x:Name="ToTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-            <TextBox x:Name="ToAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="ToNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <Grid Margin="-2,0,2,0">
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="28,251,0,0" TextWrapping="Wrap" Text="Common:" VerticalAlignment="Top"/>
+            <Grid Margin="28,276,968,412">
+                <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Website Name:" VerticalAlignment="Top"/>
+                <TextBox x:Name="WebsiteNameTextBox" HorizontalAlignment="Left" Margin="117,0,0,0" TextWrapping="Wrap" Text="{Binding Template.CommonInfo.WebsiteName ,Mode=TwoWay}" VerticalAlignment="Top" Width="167"/>
+            </Grid>
+            <Grid Margin="28,313,968,375">
+                <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Website URL:" VerticalAlignment="Top" Width="100"/>
+                <TextBox x:Name="WebsiteUrlTextBox" HorizontalAlignment="Left" Margin="117,0,0,0" TextWrapping="Wrap" Text="{Binding Template.CommonInfo.WebsiteUrl,Mode=TwoWay}" VerticalAlignment="Top" Width="167"/>
+            </Grid>
+            <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="332,276,0,0" VerticalAlignment="Top" Height="69" Width="83" BorderBrush="#FFF7E20F" Background="#33F72525" BorderThickness="5" FontWeight="Bold" FontSize="22" Click="{x:Bind ViewModel.SaveTemplate}"/>
         </Grid>
-        <Grid Margin="28,544,832,144">
-            <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Departure Date:" VerticalAlignment="Top"/>
-            <TextBox x:Name="DepDateTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-            <TextBox x:Name="DepDateAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="DepDateNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <Grid>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="28,369,0,0" TextWrapping="Wrap" Text="Search:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="173,377,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="252,377,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="327,377,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
+            <Grid Margin="28,402,832,286">
+                <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="From:" VerticalAlignment="Top"/>
+                <TextBox x:Name="FromTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.DeparturePoint.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="57"/>
+                <TextBox x:Name="FromAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.DeparturePoint.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="FromNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.DeparturePoint.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="28,439,832,249">
+                <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="To:" VerticalAlignment="Top"/>
+                <TextBox x:Name="ToTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ArrivalPoint.Tag,Mode=TwoWay}" VerticalAlignment="Top"/>
+                <TextBox x:Name="ToAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ArrivalPoint.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="ToNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ArrivalPoint.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="28,476,832,212">
+                <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Departure Date:" VerticalAlignment="Top"/>
+                <TextBox x:Name="DepDateTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.DepartureDate.Tag,Mode=TwoWay}" VerticalAlignment="Top"/>
+                <TextBox x:Name="DepDateAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.DepartureDate.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="DepDateNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.DepartureDate.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="28,513,832,175">
+                <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Arrival Date:" VerticalAlignment="Top"/>
+                <TextBox x:Name="ArrDateTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ArrivalDate.Tag,Mode=TwoWay}" VerticalAlignment="Top"/>
+                <TextBox x:Name="ArrDateAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ArrivalDate.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="ArrDateNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ArrivalDate.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="28,550,832,138">
+                <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Roundtrip:" VerticalAlignment="Top"/>
+                <TextBox x:Name="RoundtripTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.Roundtrip.Tag,Mode=TwoWay}" VerticalAlignment="Top"/>
+                <TextBox x:Name="RoundtripAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.Roundtrip.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="RoundtripNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.Roundtrip.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="28,587,832,101">
+                <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Confirmation Button:" VerticalAlignment="Top"/>
+                <TextBox x:Name="ConfirmTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ConfirmationButton.Tag,Mode=TwoWay}" VerticalAlignment="Top"/>
+                <TextBox x:Name="ConfirmAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ConfirmationButton.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="ConfirmNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.SearchEngine.ConfirmationButton.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
         </Grid>
-        <Grid Margin="28,576,832,112">
-            <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Arrival Date:" VerticalAlignment="Top"/>
-            <TextBox x:Name="ArrDateTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-            <TextBox x:Name="ArrDateAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="ArrDateNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <!-- Result Block -->
+        <Grid Margin="47,0,-47,0">
+            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="429,56,0,0" TextWrapping="Wrap" Text="Result:" VerticalAlignment="Top" Width="55"/>
+            <TextBlock x:Name="textBlock8_Copy" HorizontalAlignment="Left" Margin="572,61,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="652,61,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock10_Copy" HorizontalAlignment="Left" Margin="727,61,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
+            <Grid Margin="429,81,431,607">
+                <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="From:" VerticalAlignment="Top"/>
+                <TextBox x:Name="FromTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DeparturePoint.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="FromAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DeparturePoint.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="FromNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DeparturePoint.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,192,431,496">
+                <TextBlock x:Name="textBlock17" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="To:" VerticalAlignment="Top"/>
+                <TextBox x:Name="ToTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalPoint.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="ToAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalPoint.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="ToNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalPoint.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,118,431,570">
+                <TextBlock x:Name="textBlock18" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Departure Date:" VerticalAlignment="Top"/>
+                <TextBox x:Name="DepDateTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DepartureDate.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="DepDateAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DepartureDate.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="DepDateNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DepartureDate.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,229,431,459">
+                <TextBlock x:Name="textBlock19" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Arrival Date:" VerticalAlignment="Top"/>
+                <TextBox x:Name="ArrDateTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalDate.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="ArrDateAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalDate.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="ArrDateNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalDate.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,303,431,385">
+                <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Airline Name:" VerticalAlignment="Top"/>
+                <TextBox x:Name="AirlineNameTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.AirlineName.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="AirlineNameAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.AirlineName.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="AirlineNameNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.AirlineName.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,340,431,348">
+                <TextBlock x:Name="textBlock21" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Airline Number:" VerticalAlignment="Top"/>
+                <TextBox x:Name="AirlineNumberTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.AirlineNumber.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="AirlineNumberAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.AirlineNumber.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="AirlineNumberNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.AirlineNumber.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,377,431,311">
+                <TextBlock x:Name="textBlock22" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Tariff:" VerticalAlignment="Top"/>
+                <TextBox x:Name="TariffTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Tariff.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="TariffAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Tariff.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="TariffNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Tariff.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,414,431,274">
+                <TextBlock x:Name="textBlock23" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Tax:" VerticalAlignment="Top"/>
+                <TextBox x:Name="TaxTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Tax.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="TaxAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Tax.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="TaxNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Tax.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,451,431,237">
+                <TextBlock x:Name="textBlock24" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Fee:" VerticalAlignment="Top"/>
+                <TextBox x:Name="FeeTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Fee.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="FeeAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Fee.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="FeeNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Fee.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,488,431,200">
+                <TextBlock x:Name="textBlock25" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Price:" VerticalAlignment="Top"/>
+                <TextBox x:Name="PriceTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Price.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="PriceAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Price.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="PriceNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.Price.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,266,431,422">
+                <TextBlock x:Name="textBlock31" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Arrival Time:" VerticalAlignment="Top"/>
+                <TextBox x:Name="ArrTimeTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalTime.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="ArrTimeAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalTime.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="ArrTimeNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.ArrivalTime.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
+            <Grid Margin="429,155,431,533">
+                <TextBlock x:Name="textBlock30" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Departure Time:" VerticalAlignment="Top"/>
+                <TextBox x:Name="DepTimeTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DepartureTime.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="DepTimeAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DepartureTime.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="DepTimeNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.ResultEngine.DepartureTime.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
+            </Grid>
         </Grid>
-        <Grid Margin="28,608,832,80">
-            <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Roundtrip:" VerticalAlignment="Top"/>
-            <TextBox x:Name="RoundtripTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-            <TextBox x:Name="RoundtripAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="RoundtripNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="28,640,832,48">
-            <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Confirmation Button:" VerticalAlignment="Top"/>
-            <TextBox x:Name="ConfirmTagSearchTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-            <TextBox x:Name="ConfirmAttrSearchTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="ConfirmNameSearchTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <TextBlock x:Name="textBlock7_Copy" HorizontalAlignment="Left" Height="2" Margin="691,160,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="11"/>
-        <TextBlock x:Name="textBlock8_Copy" HorizontalAlignment="Left" Margin="719,61,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock9_Copy" HorizontalAlignment="Left" Margin="796,61,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock10_Copy" HorizontalAlignment="Left" Margin="872,61,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
-        <Grid Margin="576,91,284,597">
-            <TextBlock x:Name="textBlock16" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="From:" VerticalAlignment="Top"/>
-            <TextBox x:Name="FromTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="FromAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="FromNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,123,284,565">
-            <TextBlock x:Name="textBlock17" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="To:" VerticalAlignment="Top"/>
-            <TextBox x:Name="ToTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="ToAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="ToNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,155,284,533">
-            <TextBlock x:Name="textBlock18" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Departure Date:" VerticalAlignment="Top"/>
-            <TextBox x:Name="DepDateTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="DepDateAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="DepDateNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,187,284,501">
-            <TextBlock x:Name="textBlock19" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Arrival Date:" VerticalAlignment="Top"/>
-            <TextBox x:Name="ArrDateTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="ArrDateAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="ArrDateNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,219,284,469">
-            <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Airline Name:" VerticalAlignment="Top"/>
-            <TextBox x:Name="AirlineNameTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="AirlineNameAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="AirlineNameNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,251,284,437">
-            <TextBlock x:Name="textBlock21" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Airline Number:" VerticalAlignment="Top"/>
-            <TextBox x:Name="AirlineNumberTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="AirlineNumberAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="AirlineNumberNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,284,284,404">
-            <TextBlock x:Name="textBlock22" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Tariff:" VerticalAlignment="Top"/>
-            <TextBox x:Name="TariffTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="TariffAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="TariffNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,316,284,372">
-            <TextBlock x:Name="textBlock23" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Tax:" VerticalAlignment="Top"/>
-            <TextBox x:Name="TaxTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="TaxAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="TaxNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,348,284,340">
-            <TextBlock x:Name="textBlock24" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Fee:" VerticalAlignment="Top"/>
-            <TextBox x:Name="FeeTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="FeeAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="FeeNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="576,380,284,308">
-            <TextBlock x:Name="textBlock25" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Price:" VerticalAlignment="Top"/>
-            <TextBox x:Name="PriceTagResultTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="PriceAttrResultTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="PriceNameResultTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
+        <!-- Add Info -->
+        <Grid>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="923,56,0,0" TextWrapping="Wrap" Text="Filters:" VerticalAlignment="Top" RenderTransformOrigin="1.238,0.65"/>
         <TextBlock x:Name="textBlock7_Copy1" HorizontalAlignment="Left" Height="2" Margin="691,519,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="11"/>
-        <TextBlock x:Name="textBlock8_Copy1" HorizontalAlignment="Left" Margin="719,420,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock9_Copy1" HorizontalAlignment="Left" Margin="796,420,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock10_Copy1" HorizontalAlignment="Left" Margin="872,420,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
-        <Grid Margin="576,450,284,238">
-            <TextBlock x:Name="textBlock26" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="&quot;as List&quot;:" VerticalAlignment="Top"/>
-            <TextBox x:Name="AsListTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="AsListAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="AsListNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <TextBlock x:Name="textBlock8_Copy1" HorizontalAlignment="Left" Margin="997,61,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top" RenderTransformOrigin="1.386,2.3"/>
+        <TextBlock x:Name="textBlock9_Copy1" HorizontalAlignment="Left" Margin="1073,61,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock10_Copy1" HorizontalAlignment="Left" Margin="1150,61,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
+        <Grid Margin="850,81,10,607">
+            <TextBlock x:Name="textBlock26" Margin="0,12,294,-20" TextWrapping="Wrap" Text="&quot;as List&quot;:" VerticalAlignment="Top" HorizontalAlignment="Right" Width="65"/>
+                <TextBox x:Name="AsListTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ListAllowed.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="AsListAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ListAllowed.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="AsListNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ListAllowed.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
         </Grid>
-        <Grid Margin="576,482,284,206">
-            <TextBlock x:Name="textBlock27" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Detail:" VerticalAlignment="Top"/>
-            <TextBox x:Name="DetailTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="DetailAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="DetailNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+            <Grid Margin="850,118,10,570">
+                <TextBlock x:Name="textBlock27" HorizontalAlignment="Left" Margin="74,12,0,0" TextWrapping="Wrap" Text="Detail:" VerticalAlignment="Top"/>
+                <TextBox x:Name="DetailTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Detail.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="DetailAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Detail.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="DetailNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Detail.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
         </Grid>
-        <Grid Margin="576,514,284,174">
-            <TextBlock x:Name="textBlock28" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Back:" VerticalAlignment="Top"/>
-            <TextBox x:Name="BackTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="BackAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="BackNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <Grid Margin="850,155,10,533">
+            <TextBlock x:Name="textBlock28" HorizontalAlignment="Left" Margin="79,10,0,0" TextWrapping="Wrap" Text="Back:" VerticalAlignment="Top" RenderTransformOrigin="2.456,0.675"/>
+                <TextBox x:Name="BackTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Back.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="BackAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Back.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="BackNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Back.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
         </Grid>
-        <Grid Margin="576,546,284,142">
-            <TextBlock x:Name="textBlock29" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Exactly Airline:" VerticalAlignment="Top"/>
-            <TextBox x:Name="ExactAirlineTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="ExactAirlineAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="ExactAirlineNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <Grid Margin="850,192,10,496">
+            <TextBlock x:Name="textBlock29" HorizontalAlignment="Left" Margin="70,0,0,0" TextWrapping="Wrap" Text="Exactly Airline:" VerticalAlignment="Top" Width="68" Height="32" FontSize="12"/>
+                <TextBox x:Name="ExactAirlineTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ExactlyAirline.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="ExactAirlineAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ExactlyAirline.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="ExactAirlineNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ExactlyAirline.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
         </Grid>
-        <TextBlock x:Name="textBlock7_Copy2" HorizontalAlignment="Left" Height="2" Margin="691,613,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="11"/>
-        <Grid Margin="576,576,284,112">
-            <TextBlock x:Name="textBlock30" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Departure Time:" VerticalAlignment="Top"/>
-            <TextBox x:Name="DepTimeTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="DepTimeAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="DepTimeNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
+        <Grid Margin="850,229,10,459">
+            <TextBlock x:Name="textBlock32" HorizontalAlignment="Left" Margin="72,0,0,-8" TextWrapping="Wrap" Text="Only Direct:" VerticalAlignment="Top" Width="53" FontSize="12"/>
+                <TextBox x:Name="DirectTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.OnlyDirect.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
+                <TextBox x:Name="DirectAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.OnlyDirect.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="DirectNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.OnlyDirect.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
         </Grid>
-        <Grid Margin="576,608,284,80">
-            <TextBlock x:Name="textBlock31" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Arrival Time:" VerticalAlignment="Top"/>
-            <TextBox x:Name="ArrTimeTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="ArrTimeAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="ArrTimeNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
         </Grid>
-        <Grid Margin="576,640,284,48">
-            <TextBlock x:Name="textBlock32" HorizontalAlignment="Left" Margin="0,12,0,0" TextWrapping="Wrap" Text="Only Direct:" VerticalAlignment="Top"/>
-            <TextBox x:Name="DirectTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="72"/>
-            <TextBox x:Name="DirectAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="71"/>
-            <TextBox x:Name="DirectNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <TextBlock x:Name="textBlock33" HorizontalAlignment="Left" Margin="28,56,0,0" TextWrapping="Wrap" Text="Template List:" VerticalAlignment="Top"/>
-        <ListView x:Name="TemplateListView" HorizontalAlignment="Left" Height="235" Margin="28,81,0,0" VerticalAlignment="Top" Width="310" IsItemClickEnabled="True" ItemClick="" ItemsSource="{Binding TemplateTables}"/>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="365,354,0,0" VerticalAlignment="Top" Height="69" Width="83" BorderBrush="#FFF7E20F" Background="#33F72525" BorderThickness="5" FontWeight="Bold" FontSize="22"/>
     </Grid>
 </Page>

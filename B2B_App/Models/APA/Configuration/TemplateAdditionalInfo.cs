@@ -14,7 +14,14 @@ namespace B2B_App.Models.APA.Configuration
         public HtmlTags ExactlyAirline { get; set; }
         public HtmlTags OnlyDirect { get; set; }
 
-        public TemplateAdditionalInfo() { }
+        public TemplateAdditionalInfo()
+        {
+            ListAllowed=new HtmlTags();
+            Detail=new HtmlTags();
+            Back=new HtmlTags();
+            ExactlyAirline=new HtmlTags();
+            OnlyDirect=new HtmlTags();
+        }
         public TemplateAdditionalInfo(TemplateAdditionalInfo additionalInfo)
         {
             ListAllowed = additionalInfo.ListAllowed;

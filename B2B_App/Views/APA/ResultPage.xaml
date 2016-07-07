@@ -5,9 +5,17 @@
     xmlns:local="using:B2B_App.Views.APA"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <controls:PageHeader Text="Preview Results" Frame="{x:Bind Frame}"></controls:PageHeader>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="276,53,0,0" TextWrapping="Wrap" Text="Time Period:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,78,0,0" TextWrapping="Wrap" Text="start" VerticalAlignment="Top" Width="82"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="340,78,0,0" TextWrapping="Wrap" Text="end" VerticalAlignment="Top" Width="82"/>
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="340,103,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="ShowResultPageButton" Content="SHOW" HorizontalAlignment="Left" Margin="665,78,0,0" VerticalAlignment="Top" Height="57" Width="134"/>
+        <GridView x:Name="ResultGridView" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="789" Height="549"/>
     </Grid>
 </Page>

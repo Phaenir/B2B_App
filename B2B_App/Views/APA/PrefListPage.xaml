@@ -5,9 +5,24 @@
     xmlns:local="using:B2B_App.Views.APA"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <controls:PageHeader Text="Set of Preferable Routes List"></controls:PageHeader>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,53,0,0" TextWrapping="Wrap" Text="Departure Point" VerticalAlignment="Top" Width="221"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="276,53,0,0" TextWrapping="Wrap" Text="Arrival Point" VerticalAlignment="Top" Width="221"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="615,53,0,0" TextWrapping="Wrap" Text="Routes" VerticalAlignment="Top" Width="221"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="877,115,0,0" TextWrapping="Wrap" Text="List of preferable routes:" VerticalAlignment="Top" Width="221"/>
+        <TextBox x:Name="DeparturePoint" HorizontalAlignment="Left" Margin="10,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="221"/>
+        <ListView x:Name="DepartureListView" HorizontalAlignment="Left" Height="483" Margin="10,115,0,0" VerticalAlignment="Top" Width="221"/>
+        <TextBox x:Name="ArrivalPoint" HorizontalAlignment="Left" Margin="276,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="221"/>
+        <ListView x:Name="ArrivalListView" HorizontalAlignment="Left" Height="483" Margin="276,115,0,0" VerticalAlignment="Top" Width="221"/>
+        <Button x:Name="AddRouteToListButton" Content="ADD" HorizontalAlignment="Left" Margin="526,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.569,0.531"/>
+        <ListView x:Name="RoutesListView" HorizontalAlignment="Left" Height="520" Margin="615,78,0,0" VerticalAlignment="Top" Width="204"/>
+        <Button x:Name="SaveRoutesButton" Content="SAVE" HorizontalAlignment="Left" Margin="952,78,0,0" VerticalAlignment="Top"/>
+        <ListView x:Name="PreferableRoutesListView" HorizontalAlignment="Left" Height="458" Margin="877,140,0,0" VerticalAlignment="Top" Width="221"/>
+        <Button x:Name="EditButton" Content="edit" HorizontalAlignment="Left" Margin="1103,140,0,0" VerticalAlignment="Top" Width="62"/>
+        <Button x:Name="DeleteButton" Content="delete" HorizontalAlignment="Left" Margin="1103,177,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

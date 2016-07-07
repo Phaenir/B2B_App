@@ -43,7 +43,7 @@ namespace B2B_App
             await Windows.Storage.FileIO.WriteTextAsync(_file, Serialize());
         }
 
-        public new static void SaveToFile(string fileName, CommonConfiguration xml,bool flag)
+        public static void SaveAltToFile(string fileName, CommonConfiguration xml,bool flag)
         {
             System.IO.FileStream file = null;
             System.IO.StreamWriter sr = null;
@@ -104,7 +104,7 @@ namespace B2B_App
 
             try
             {
-                file=new FileStream(fileName,FileMode.Create,FileAccess.Write);
+                file=new FileStream(fileName,FileMode.Open,FileAccess.Read);
                 sr = new System.IO.StreamReader(file);
                 string xmlString = sr.ReadToEnd();
                 sr.Dispose();

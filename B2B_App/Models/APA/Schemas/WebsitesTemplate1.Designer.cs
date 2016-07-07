@@ -202,7 +202,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -480,7 +480,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -679,7 +679,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -878,7 +878,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -1077,7 +1077,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -1276,7 +1276,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -1475,7 +1475,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -1674,7 +1674,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -2096,7 +2096,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -2295,7 +2295,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -2494,7 +2494,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -2693,7 +2693,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -2892,7 +2892,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -3091,7 +3091,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -3290,7 +3290,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -3489,7 +3489,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -3688,7 +3688,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -3887,7 +3887,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -4086,7 +4086,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -4285,7 +4285,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -4484,7 +4484,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -4738,7 +4738,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -4937,7 +4937,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -5136,7 +5136,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -5335,7 +5335,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -5534,7 +5534,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -5733,7 +5733,7 @@ namespace B2B_App
             {
                 memoryStream = new System.IO.MemoryStream();
                 System.Xml.XmlWriterSettings xmlWriterSettings = new System.Xml.XmlWriterSettings();
-                xmlWriterSettings.Indent = false;
+                xmlWriterSettings.Indent = true;
                 System.Xml.XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings);
                 Serializer.Serialize(xmlWriter, this);
                 memoryStream.Seek(0, System.IO.SeekOrigin.Begin);

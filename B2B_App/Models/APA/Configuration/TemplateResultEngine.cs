@@ -21,7 +21,21 @@ namespace B2B_App.Models.APA.Configuration
         public HtmlTags DepartureTime { get; set; }
         public HtmlTags ArrivalTime { get; set; }
 
-        public TemplateResultEngine() { }
+        public TemplateResultEngine()
+        {
+            DeparturePoint=new HtmlTags();
+            ArrivalPoint=new HtmlTags();
+            DepartureDate=new HtmlTags();
+            ArrivalDate=new HtmlTags();
+            AirlineName=new HtmlTags();
+            AirlineNumber=new HtmlTags();
+            DepartureTime=new HtmlTags();
+            ArrivalTime=new HtmlTags();
+            Tariff=new HtmlTags();
+            Tax=new HtmlTags();
+            Fee=new HtmlTags();
+            Price=new HtmlTags();
+        }
         public TemplateResultEngine(TemplateResultEngine resultEngine)
         {
             DeparturePoint = resultEngine.DeparturePoint;

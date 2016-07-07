@@ -104,8 +104,8 @@ namespace B2B_App.Models.APA.Configuration
             template.AdditionalInfo.OnlyDirect.Name = website.AdditionalInfo.OnlyDirect.Name;
             return template;
         }
-        
-        public void SetConfiguration(Template website)
+
+        public async Task SetConfiguration(Template website)
         {
             WebsiteTemplate template = new WebsiteTemplate
             {
@@ -188,9 +188,9 @@ namespace B2B_App.Models.APA.Configuration
             template.AdditionalInfo.OnlyDirect.Name = website.AdditionalInfo.OnlyDirect.Name;
 
             string xml = template.Serialize();
-            RemoteSave.SaveContentToFtp(xml,website.CommonInfo.WebsiteName,RemoteSave.State.TEMPLATE);
+            await RemoteSave.SaveContentToFtp(xml, website.CommonInfo.WebsiteName, RemoteSave.State.TEMPLATE);
         }
-        
+
         private async Task<bool> FileExist(string name)
         {
           return  await RemoteSave.FileExist(name + ".xml", RemoteSave.State.TEMPLATE);

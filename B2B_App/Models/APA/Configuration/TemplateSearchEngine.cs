@@ -15,7 +15,15 @@ namespace B2B_App.Models.APA.Configuration
         public HtmlTags Roundtrip { get; set; }
         public HtmlTags ConfirmationButton { get; set; }
 
-        public TemplateSearchEngine() { }
+        public TemplateSearchEngine()
+        {
+            DeparturePoint=new HtmlTags();
+            ArrivalPoint=new HtmlTags();
+            DepartureDate=new HtmlTags();
+            ArrivalDate=new HtmlTags();
+            Roundtrip=new HtmlTags();
+            ConfirmationButton=new HtmlTags();
+        }
         public TemplateSearchEngine(TemplateSearchEngine searchEngine)
         {
             DeparturePoint = searchEngine.DeparturePoint;
