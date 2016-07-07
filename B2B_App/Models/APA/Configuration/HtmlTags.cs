@@ -17,7 +17,7 @@ namespace B2B_App.Models.APA.Configuration
         private string _attr;
         public string Attr { get { return _attr; } set { _attr = value ?? " "; } }
         private string _name;
-        public string Name { get { return _name; } set { _name = value ?? " "; } }
+        public string Name { get { return _name; } set { _name = value ?? "n/a "; } }
 
         public HtmlTags()
         {

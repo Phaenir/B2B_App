@@ -10,36 +10,38 @@ namespace MyDatabase
 {
     public class Database
     {
-        private static readonly Database Templates=new Database();
+        private static Database Templates;
         private MySqlConnectionStringBuilder _builder;
         private MySqlConnection _connection;
 
-        private readonly ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
+        private ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
         public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;
-        private readonly ObservableCollection<string> _templateTableNames=new ObservableCollection<string>();
-        public ObservableCollection<string> TemplateTableNames => Templates._templateTableNames; 
 
-        public Database()
+        public Database(string server, string user, string password, string name, uint port=3306)
         {
-            Init();
+            Init(server, user, password, name, port);
+            Templates = this;
         }
-        private void Init()
+        
+        private void Init(string server, string user, string password, string name, uint port)
         {
             _builder = new MySqlConnectionStringBuilder
             {
-                Server = "185.106.120.107",
-                UserID = "admin",
-                Password = "0O2z6T7e",
-                Database = "b2b_support",
+                Server = server,
+                UserID = user,
+                Password = password,
+                Database = name,
                 CharacterSet = "utf8",
                 SslMode = MySqlSslMode.None,
-                Port = 3306,
+                Port = port,
             };
             _connection=new MySqlConnection(_builder.ToString());
         }
 
         public IEnumerable<TemplateTable> GetTemplates()
         {
+            _templateTables=new ObservableCollection<TemplateTable>();
+            TemplateTables.Clear();
             try
             {
                 _connection.Open();
@@ -50,8 +52,11 @@ namespace MyDatabase
                     while (reader.Read())
                     {
                         TemplateTable tt=new TemplateTable(reader.GetString("name"));
+                        if (Templates._templateTables.Contains(tt))
+                        {
+                            continue;
+                        }
                         Templates._templateTables.Add(tt);
-                        Templates._templateTableNames.Add(tt.Name);
                     }
                 }
             }
@@ -61,7 +66,7 @@ namespace MyDatabase
                 throw new Exception("Template Tables wrong access: "+e);
             }
             _connection.Close();
-            return Templates.TemplateTables;
+            return Templates._templateTables;
         }
 
         public bool InsertTemplatesToDatabase(string name, string path, string file)
@@ -69,7 +74,6 @@ namespace MyDatabase
             TemplateTable newRow=new TemplateTable(name,path,file);
             try
             {
-                _connection.Close();
                 _connection.Open();
                 MySqlCommand insert = _connection.CreateCommand();
                 insert.CommandText =

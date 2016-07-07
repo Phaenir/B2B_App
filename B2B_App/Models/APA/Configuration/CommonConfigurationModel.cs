@@ -12,9 +12,7 @@ namespace B2B_App.Models.APA.Configuration
 {
     class CommonConfigurationModel
     {
-        private readonly string ConfigFileName = "ConfigFile.xml";
-        //private readonly string CommonConfigFolder = "ConfigFiles";
-        //private CommonConfiguration configuration;
+        public readonly string ConfigFileName = "ConfigFile.xml";
         string _path;
         private void Init(out CommonConfiguration common)
         {
@@ -47,16 +45,9 @@ namespace B2B_App.Models.APA.Configuration
             common.SearchEngine = searchEngine;
             common.StateDate=DateTime.Now;
 
-            string xml= common.Serialize();
-            //CommonConfiguration.SaveAltToFile(PathToCommonConfigFile.NAME,common,true);
             common.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);
         }
 
-        public async void WaitConfig()
-        {
-            CommonConfiguration configuration = await CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME, PathToCommonConfigFile.FOLDER);
-            await Task.CompletedTask;
-        }
         public CommonConfig GetConfiguration()
         {
             CommonConfig config=new CommonConfig();
@@ -69,8 +60,6 @@ namespace B2B_App.Models.APA.Configuration
             {
                 configuration = CommonConfiguration.LoadFromFile(_path);
             }
-            //string path= @"D:\Common Documents\visual studio 2015\Projects\B2B_App\B2B_App\bin\x86\Debug\AppX\ConfigFiles\"+ConfigFileName;
-            //configuration=CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER).Result;
             config.AgencyName = configuration.BerlogicEngine.Agency.Name;
             config.AgencyNumber = configuration.BerlogicEngine.Agency.Number;
             config.AgencyPassword = configuration.BerlogicEngine.Agency.Password;
@@ -90,7 +79,6 @@ namespace B2B_App.Models.APA.Configuration
 
         public void SetConfiguration(CommonConfig config)
         {
-            //var configuration = CommonConfiguration.LoadFromFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER).Result;
             CommonConfiguration configuration = CommonConfiguration.LoadFromFile(_path);
             configuration.StateDate=DateTime.Now;
             configuration.BerlogicEngine.Agency.Name = config.AgencyName;
@@ -108,8 +96,6 @@ namespace B2B_App.Models.APA.Configuration
             configuration.SearchEngine.SearchLimit= config.SearchLimit;
             configuration.Serialize();
             configuration.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);
-            //string path = @"D:\Common Documents\visual studio 2015\Projects\B2B_App\B2B_App\bin\x86\Debug\AppX\ConfigFiles\" + ConfigFileName;
-            //CommonConfiguration.SaveToFile(path,configuration,true);
         }
 
         private bool FileExist()

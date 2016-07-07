@@ -18,8 +18,8 @@
 
         <Grid>
             <TextBlock x:Name="textBlock33" HorizontalAlignment="Left" Margin="28,56,0,0" TextWrapping="Wrap" Text="Template List:" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-            
-            <ListView x:Name="TemplateListView" HorizontalAlignment="Left" Height="153" Margin="28,81,0,0" VerticalAlignment="Top" Width="211" IsItemClickEnabled="True" ItemsSource="{Binding TemplateTables}" SelectionMode="Single" SelectedValue="{Binding SelectedValue,Mode=TwoWay}" SelectedValuePath="Name" DisplayMemberPath="Name" ItemClick="ListViewBase_OnItemClick"/>
+
+            <ListView x:Name="TemplateListView" HorizontalAlignment="Left" Height="153" Margin="28,81,0,0" VerticalAlignment="Top" Width="211" IsItemClickEnabled="True" ItemsSource="{Binding TemplateTables}" SelectionMode="Single" SelectedValuePath="Name" DisplayMemberPath="Name" ItemClick="{x:Bind ViewModel.ListViewBase_OnItemClick}"/>
         </Grid>
         <Grid Margin="-2,0,2,0">
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="28,251,0,0" TextWrapping="Wrap" Text="Common:" VerticalAlignment="Top"/>
@@ -156,41 +156,41 @@
         </Grid>
         <!-- Add Info -->
         <Grid>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="923,56,0,0" TextWrapping="Wrap" Text="Filters:" VerticalAlignment="Top" RenderTransformOrigin="1.238,0.65"/>
-        <TextBlock x:Name="textBlock7_Copy1" HorizontalAlignment="Left" Height="2" Margin="691,519,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="11"/>
-        <TextBlock x:Name="textBlock8_Copy1" HorizontalAlignment="Left" Margin="997,61,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top" RenderTransformOrigin="1.386,2.3"/>
-        <TextBlock x:Name="textBlock9_Copy1" HorizontalAlignment="Left" Margin="1073,61,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock10_Copy1" HorizontalAlignment="Left" Margin="1150,61,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
-        <Grid Margin="850,81,10,607">
-            <TextBlock x:Name="textBlock26" Margin="0,12,294,-20" TextWrapping="Wrap" Text="&quot;as List&quot;:" VerticalAlignment="Top" HorizontalAlignment="Right" Width="65"/>
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="923,56,0,0" TextWrapping="Wrap" Text="Filters:" VerticalAlignment="Top" RenderTransformOrigin="1.238,0.65"/>
+            <TextBlock x:Name="textBlock7_Copy1" HorizontalAlignment="Left" Height="2" Margin="691,519,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="11"/>
+            <TextBlock x:Name="textBlock8_Copy1" HorizontalAlignment="Left" Margin="997,61,0,0" TextWrapping="Wrap" Text="tag" VerticalAlignment="Top" RenderTransformOrigin="1.386,2.3"/>
+            <TextBlock x:Name="textBlock9_Copy1" HorizontalAlignment="Left" Margin="1073,61,0,0" TextWrapping="Wrap" Text="attr" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock10_Copy1" HorizontalAlignment="Left" Margin="1150,61,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top"/>
+            <Grid Margin="850,81,10,607">
+                <TextBlock x:Name="textBlock26" Margin="61,12,294,0" TextWrapping="Wrap" Text="&quot;as List&quot;:" VerticalAlignment="Top"/>
                 <TextBox x:Name="AsListTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ListAllowed.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
                 <TextBox x:Name="AsListAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ListAllowed.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
                 <TextBox x:Name="AsListNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ListAllowed.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
-        </Grid>
+            </Grid>
             <Grid Margin="850,118,10,570">
                 <TextBlock x:Name="textBlock27" HorizontalAlignment="Left" Margin="74,12,0,0" TextWrapping="Wrap" Text="Detail:" VerticalAlignment="Top"/>
                 <TextBox x:Name="DetailTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Detail.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
                 <TextBox x:Name="DetailAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Detail.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
                 <TextBox x:Name="DetailNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Detail.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="850,155,10,533">
-            <TextBlock x:Name="textBlock28" HorizontalAlignment="Left" Margin="79,10,0,0" TextWrapping="Wrap" Text="Back:" VerticalAlignment="Top" RenderTransformOrigin="2.456,0.675"/>
+            </Grid>
+            <Grid Margin="850,155,10,533">
+                <TextBlock x:Name="textBlock28" HorizontalAlignment="Left" Margin="79,10,0,0" TextWrapping="Wrap" Text="Back:" VerticalAlignment="Top" RenderTransformOrigin="2.456,0.675"/>
                 <TextBox x:Name="BackTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Back.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
                 <TextBox x:Name="BackAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Back.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
                 <TextBox x:Name="BackNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.Back.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="850,192,10,496">
-            <TextBlock x:Name="textBlock29" HorizontalAlignment="Left" Margin="70,0,0,0" TextWrapping="Wrap" Text="Exactly Airline:" VerticalAlignment="Top" Width="68" Height="32" FontSize="12"/>
+            </Grid>
+            <Grid Margin="850,192,10,496">
+                <TextBlock x:Name="textBlock29" HorizontalAlignment="Left" Margin="70,0,0,0" TextWrapping="Wrap" Text="Exactly Airline:" VerticalAlignment="Top" Width="68" Height="32" FontSize="12"/>
                 <TextBox x:Name="ExactAirlineTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ExactlyAirline.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
                 <TextBox x:Name="ExactAirlineAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ExactlyAirline.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
                 <TextBox x:Name="ExactAirlineNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.ExactlyAirline.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
-        </Grid>
-        <Grid Margin="850,229,10,459">
-            <TextBlock x:Name="textBlock32" HorizontalAlignment="Left" Margin="72,0,0,-8" TextWrapping="Wrap" Text="Only Direct:" VerticalAlignment="Top" Width="53" FontSize="12"/>
+            </Grid>
+            <Grid Margin="850,229,10,459">
+                <TextBlock x:Name="textBlock32" HorizontalAlignment="Left" Margin="72,0,0,-8" TextWrapping="Wrap" Text="Only Direct:" VerticalAlignment="Top" Width="53" FontSize="12"/>
                 <TextBox x:Name="DirectTagFiltersTextBox" HorizontalAlignment="Left" Margin="143,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.OnlyDirect.Tag,Mode=TwoWay}" VerticalAlignment="Top" Width="72"/>
                 <TextBox x:Name="DirectAttrFiltersTextBox" HorizontalAlignment="Left" Margin="220,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.OnlyDirect.Attr,Mode=TwoWay}" VerticalAlignment="Top" Width="71"/>
                 <TextBox x:Name="DirectNameFiltersTextBox" HorizontalAlignment="Left" Margin="296,0,0,0" TextWrapping="Wrap" Text="{Binding Template.AdditionalInfo.OnlyDirect.Name,Mode=TwoWay}" VerticalAlignment="Top" Width="124"/>
-        </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
