@@ -25,6 +25,9 @@ namespace B2B_App.Views.APA
         public ResultPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode=NavigationCacheMode.Enabled;
+            StartDate.MinYear=DateTimeOffset.Now;
+            EndDate.MinYear=DateTimeOffset.Now;
         }
     }
 }

@@ -121,6 +121,8 @@
     <Compile Include="Models\APA\Configuration\TemplateConfigModel.cs" />
     <Compile Include="Models\APA\Configuration\TemplateResultEngine.cs" />
     <Compile Include="Models\APA\Configuration\TemplateSearchEngine.cs" />
+    <Compile Include="Models\APA\DateTimeConverter.cs" />
+    <Compile Include="Models\APA\DateTimeToStringConverter.cs" />
     <Compile Include="Models\APA\Schemas\CommonConfiguration1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

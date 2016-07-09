@@ -10,32 +10,34 @@ namespace MyDatabase
 {
     public class Database
     {
-        private static Database Templates;
+        private static Database _templates;
         private MySqlConnectionStringBuilder _builder;
         private MySqlConnection _connection;
 
         private ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
-        public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;
+        public ObservableCollection<TemplateTable> TemplateTables => _templates._templateTables;
 
         private ObservableCollection<Airline> _airlines = new ObservableCollection<Airline>();
-        public ObservableCollection<Airline> Airlines => Templates._airlines;
+        public ObservableCollection<Airline> Airlines => _templates._airlines;
 
         private ObservableCollection<City> _cities = new ObservableCollection<City>();
-        public ObservableCollection<City> Cities => Templates._cities;
+        public ObservableCollection<City> Cities => _templates._cities;
 
         private ObservableCollection<Country> _countries = new ObservableCollection<Country>();
-        public ObservableCollection<Country> Countries => Templates._countries;
+        public ObservableCollection<Country> Countries => _templates._countries;
 
         private ObservableCollection<Airport> _airports = new ObservableCollection<Airport>();
-        public ObservableCollection<Airport> Airports => Templates._airports;
+        public ObservableCollection<Airport> Airports => _templates._airports;
 
         private ObservableCollection<FlightPoint> _travelPoints = new ObservableCollection<FlightPoint>();
-        public ObservableCollection<FlightPoint> TravelPoints => Templates._travelPoints;
+        public ObservableCollection<FlightPoint> TravelPoints => _templates._travelPoints;
+        private ObservableCollection<ResultView> _resultView = new ObservableCollection<ResultView>();
+        public ObservableCollection<ResultView> ResultViews => _templates._resultView;
 
         public Database(string server, string user, string password, string name, uint port=3306)
         {
             Init(server, user, password, name, port);
-            Templates = this;
+            _templates = this;
         }
         
         private void Init(string server, string user, string password, string name, uint port)
@@ -49,6 +51,7 @@ namespace MyDatabase
                 CharacterSet = "utf8",
                 SslMode = MySqlSslMode.None,
                 Port = port,
+                ConvertZeroDateTime = true,
             };
             _connection=new MySqlConnection(_builder.ToString());
         }
@@ -67,11 +70,11 @@ namespace MyDatabase
                     while (reader.Read())
                     {
                         TemplateTable tt=new TemplateTable(reader.GetString("name"));
-                        if (Templates._templateTables.Contains(tt))
+                        if (_templates._templateTables.Contains(tt))
                         {
                             continue;
                         }
-                        Templates._templateTables.Add(tt);
+                        _templates._templateTables.Add(tt);
                     }
                 }
             }
@@ -81,7 +84,7 @@ namespace MyDatabase
                 throw new Exception("Template Tables wrong access: "+e);
             }
             _connection.Close();
-            return Templates._templateTables;
+            return _templates._templateTables;
         }
 
         public bool InsertTemplatesToDatabase(string name, string path, string file)
@@ -97,7 +100,7 @@ namespace MyDatabase
                 insert.Parameters.AddWithValue("@path", path);
                 insert.Parameters.AddWithValue("@file", file);
                 insert.ExecuteNonQuery();
-                Templates._templateTables.Add(newRow);
+                _templates._templateTables.Add(newRow);
                 _connection.Close();
                 return true;
             }
@@ -142,11 +145,11 @@ namespace MyDatabase
                     while (reader.Read())
                     {
                         Airline tt = new Airline(reader.GetString("iata"),reader.GetString("name"));
-                        if (Templates._airlines.Contains(tt))
+                        if (_templates._airlines.Contains(tt))
                         {
                             continue;
                         }
-                        Templates._airlines.Add(tt);
+                        _templates._airlines.Add(tt);
                     }
                 }
             }
@@ -156,7 +159,7 @@ namespace MyDatabase
                 throw new Exception("Template Tables wrong access: " + e);
             }
             _connection.Close();
-            return Templates.Airlines;
+            return _templates.Airlines;
         }
         public IEnumerable<Country> GetCountries()
         {
@@ -172,11 +175,11 @@ namespace MyDatabase
                     while (reader.Read())
                     {
                         Country tt = new Country(reader.GetString("iata"),reader.GetString("name"));
-                        if (Templates._countries.Contains(tt))
+                        if (_templates._countries.Contains(tt))
                         {
                             continue;
                         }
-                        Templates._countries.Add(tt);
+                        _templates._countries.Add(tt);
                     }
                 }
             }
@@ -186,7 +189,7 @@ namespace MyDatabase
                 throw new Exception("Template Tables wrong access: " + e);
             }
             _connection.Close();
-            return Templates.Countries;
+            return _templates.Countries;
         }
         public IEnumerable<City> GetCities()
         {
@@ -202,11 +205,11 @@ namespace MyDatabase
                     while (reader.Read())
                     {
                         City tt = new City(reader.GetString("iata"),reader.GetString("name"), reader.GetString("coordinates"),reader.GetString("timezone"),reader.GetString("parent_name"));
-                        if (Templates._cities.Contains(tt))
+                        if (_templates._cities.Contains(tt))
                         {
                             continue;
                         }
-                        Templates._cities.Add(tt);
+                        _templates._cities.Add(tt);
                     }
                 }
             }
@@ -216,7 +219,7 @@ namespace MyDatabase
                 throw new Exception("Template Tables wrong access: " + e);
             }
             _connection.Close();
-            return Templates.Cities;
+            return _templates.Cities;
         }
         public IEnumerable<Airport> GetAirports()
         {
@@ -232,11 +235,11 @@ namespace MyDatabase
                     while (reader.Read())
                     {
                         Airport tt = new Airport(reader.GetString("iata"),reader.GetString("name"),reader.GetString("coordinates"),reader.GetString("timezone"),reader.GetString("parent_name"));
-                        if (Templates._airports.Contains(tt))
+                        if (_templates._airports.Contains(tt))
                         {
                             continue;
                         }
-                        Templates._airports.Add(tt);
+                        _templates._airports.Add(tt);
                     }
                 }
             }
@@ -246,7 +249,7 @@ namespace MyDatabase
                 throw new Exception("Template Tables wrong access: " + e);
             }
             _connection.Close();
-            return Templates.Airports;
+            return _templates.Airports;
         }
         public IEnumerable<FlightPoint> GetFlightPoints()
         {
@@ -262,11 +265,11 @@ namespace MyDatabase
                     while (reader.Read())
                     {
                         FlightPoint tt = new FlightPoint(reader.GetString("iata"),reader.GetString("name"),reader.GetString("coordinates"),reader.GetString("timezone"),reader.GetString("cityname"),reader.GetString("citycode"),reader.GetString("countryname"),reader.GetString("countrycode"));
-                        if (Templates._travelPoints.Contains(tt))
+                        if (_templates._travelPoints.Contains(tt))
                         {
                             continue;
                         }
-                        Templates._travelPoints.Add(tt);
+                        _templates._travelPoints.Add(tt);
                     }
                 }
             }
@@ -276,7 +279,80 @@ namespace MyDatabase
                 throw new Exception("Template Tables wrong access: " + e);
             }
             _connection.Close();
-            return Templates.TravelPoints;
+            return _templates.TravelPoints;
+        }
+
+        public int SetResultView(DateTime start, DateTime end)
+        {
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText =
+                    "create or replace view result_table as ( select  search.dep_date as DepartureDate, search.det_time as DepartureTime, search.departure as Departure, search.arrival as Arrival, search.roundtrip as RT, rt.dep_date as ReturnDate, rt.dep_time as ReturnTime, search.validate_carrier as ValidateCarrier, search.validateFlight_number as VC_Number, search.operate_carrier as OperateCarrier, search.operateFlight_number as OC_Number, search.travelDuration as Duration, search.price as Price from search_result as search, roundtrip as rt where search.roundtrip_id = rt.Id and(search.dep_date between @start and @end) ); ";
+                string str = String.Format("{0:yyyy-MM-dd}", start);
+                command.Parameters.AddWithValue("@start", String.Format("{0:yyyy-MM-dd}", start));
+                command.Parameters.AddWithValue("@end",String.Format("{0:yyyy-MM-dd}", end));
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
+            catch (Exception)
+            {
+                _connection.Close();
+                return 404;
+            }
+            return 200;
+        }
+
+        public int DropResultView()
+        {
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText = @"DROP VIEW result_table";
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
+            catch (Exception)
+            {
+                _connection.Close();
+                return 404;
+            }
+            return 200;
+        }
+        public IEnumerable<ResultView> GetResultView()
+        {
+            _resultView = new ObservableCollection<ResultView>();
+            ResultViews.Clear();
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText = "SELECT * FROM result_table;";
+                System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                Encoding.RegisterProvider(ppp);
+               
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ResultView tt = new ResultView {DepartureDate = reader.GetDateTime("DepartureDate").Date, DepartureTime = reader.GetDateTime("DepartureTime"), DeparturePoint = reader.GetString("Departure"), ArrivalPoint = reader.GetString("Arrival"),Roundtrip = reader.GetByte("RT"),RoundtripDate = reader.GetDateTime("ReturnDate"), RoundtripTime = reader.GetDateTime("ReturnTime"), ValidateCarrierName = reader.GetString("ValidateCarrier"), ValidateCarrierNumber = reader.GetInt16("VC_Number"),OperateCarrierName = reader.GetString("OperateCarrier"),OperateCarrierNumber = reader.GetInt16("OC_Number"), Duration = reader.GetInt16("Duration"),Price = reader.GetDecimal("Price")};
+                        if (_templates._resultView.Contains(tt))
+                        {
+                            continue;
+                        }
+                        _templates._resultView.Add(tt);
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+
+                throw new Exception("Template Tables wrong access: " + e);
+            }
+            _connection.Close();
+            return _templates.ResultViews;
         }
     }
 }

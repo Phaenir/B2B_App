@@ -6,16 +6,49 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:viewModel="using:B2B_App.ViewModels.APA"
+    xmlns:converters="using:B2B_App.Models.APA"
+    xmlns:data="using:MyDatabase"
     mc:Ignorable="d">
-
+    
+    <Page.DataContext>
+        <viewModel:AResultViewModel x:Name="Model"></viewModel:AResultViewModel>
+    </Page.DataContext>
+    <Page.Resources>
+        <converters:DateTimeConverter x:Key="Converter"></converters:DateTimeConverter>
+        <converters:DateTimeToStringConverter x:Key="StringConverter"></converters:DateTimeToStringConverter>
+    </Page.Resources>
+    
+    
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader Text="Preview Results" Frame="{x:Bind Frame}"></controls:PageHeader>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="276,53,0,0" TextWrapping="Wrap" Text="Time Period:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,78,0,0" TextWrapping="Wrap" Text="start" VerticalAlignment="Top" Width="82"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="340,78,0,0" TextWrapping="Wrap" Text="end" VerticalAlignment="Top" Width="82"/>
-        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="340,103,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="ShowResultPageButton" Content="SHOW" HorizontalAlignment="Left" Margin="665,78,0,0" VerticalAlignment="Top" Height="57" Width="134"/>
-        <GridView x:Name="ResultGridView" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="789" Height="549"/>
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="120" Header="Start Search Date:" Date="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Converter}}" DateChanged="{x:Bind Model.DateChanged}"/>
+        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="339,78,0,0" VerticalAlignment="Top" Header="End Search Date:" Date="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Converter}}"/>
+        <Button x:Name="ShowResultPageButton" Content="SHOW" HorizontalAlignment="Left" Margin="665,78,0,0" VerticalAlignment="Top" Height="60" Width="134" Click="{x:Bind Model.ShowResultButton}"/>
+        
+        <GridView x:Name="ResultGridView" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="1260" Height="549" Header="Results Preview:" ItemsSource="{Binding Result}" FontSize="10">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="data:ResultView">
+                    
+                    <RelativePanel HorizontalAlignment="Left" x:Name="Panel" Visibility="Visible" BorderBrush="Blue" BorderThickness="0,0,0,2">
+                        <TextBlock x:Name="depDate" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Text="{Binding DepartureDate, Converter={StaticResource StringConverter}, ConverterParameter='{}{0:d}'}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="depTime" RelativePanel.RightOf="depDate" Text="{x:Bind DepartureTime, Converter={StaticResource StringConverter}, ConverterParameter='{}{0:t}'}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="dep" RelativePanel.RightOf="depTime" Text="{x:Bind DeparturePoint}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="arr" RelativePanel.RightOf="dep" Text="{x:Bind ArrivalPoint}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="rt" RelativePanel.RightOf="arr" Text="{x:Bind Roundtrip}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="rtDate" RelativePanel.Below="depDate" Text="{x:Bind RoundtripDate, Converter={StaticResource StringConverter}, ConverterParameter='{}{0:d}'}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="rtTime" RelativePanel.Below="depTime" RelativePanel.RightOf="rtDate" Text="{x:Bind RoundtripTime, Converter={StaticResource StringConverter}, ConverterParameter='{}{0:t}'}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="vcName" RelativePanel.RightOf="rt" Text="{x:Bind ValidateCarrierName}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="vcNumber" RelativePanel.RightOf="vcName" Text="{x:Bind ValidateCarrierNumber}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="ocName" RelativePanel.Below="vcName" RelativePanel.RightOf="rt" Text="{x:Bind OperateCarrierName}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="ocNumber" RelativePanel.Below="vcNumber" RelativePanel.RightOf="ocName" Text="{x:Bind OperateCarrierNumber}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="Duration" RelativePanel.RightOf="vcNumber" Text="{x:Bind Duration}" Margin="20,0,0,0"/>
+                        <TextBlock x:Name="Price" RelativePanel.RightOf="Duration" Text="{x:Bind Price}" Margin="20,0,0,0"/>
+                    </RelativePanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            </GridView>
     </Grid>
 </Page>

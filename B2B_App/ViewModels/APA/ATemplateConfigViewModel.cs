@@ -49,7 +49,9 @@ namespace B2B_App.ViewModels.APA
         }
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-            Init();        
+            Init();
+            NavigationService.Frame.BackStack.Clear();
+
             await Task.CompletedTask;
         }      
 
@@ -85,8 +87,8 @@ namespace B2B_App.ViewModels.APA
             catch (Exception)
             {
                 //ignore
-            }            
-           
+            }
+
             this.NavigationService.Navigate(typeof(TemplateConfigPage),this.Template);                
         }
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
@@ -94,6 +96,8 @@ namespace B2B_App.ViewModels.APA
             if (suspending)
             {
             }
+            //NavigationService.Frame.BackStack.Clear();
+
             TemplateTables = null;
             await Task.CompletedTask;
         }

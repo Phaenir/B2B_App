@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="FlightPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultView.cs" />
     <Compile Include="TemplateTable.cs" />
     <EmbeddedResource Include="Properties\MyDatabase.rd.xml" />
   </ItemGroup>

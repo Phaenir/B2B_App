@@ -36,5 +36,8 @@ namespace B2B_App.ViewModels.APA
 
         public void GotoCommonConfigPage() => NavigationService.Navigate(typeof(Views.APA.CommonConfigPage), 0);
         public void GotoResultPage() => NavigationService.Navigate(typeof(Views.APA.ResultPage), 1);
+
+
+
     }
 }

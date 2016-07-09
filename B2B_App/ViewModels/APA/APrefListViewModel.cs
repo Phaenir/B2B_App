@@ -81,36 +81,37 @@ namespace B2B_App.ViewModels.APA
             t.Wait();
            // await OnNavigatedToAsync(typeof(PrefListPage), NavigationMode.Refresh, state);
            */
-
             NavigationService.Navigate(typeof(PrefListPage), Routes);
             await Task.CompletedTask;
         }
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-         //   if (suspensionState.Any())
-         //   {
-         //       Routes =(List<Route>)suspensionState["routes"];
-         //   }
-           // PrefListPage page = (PrefListPage) parameter;
-          //  page.InitializeComponent();
-            
-            
+            //   if (suspensionState.Any())
+            //   {
+            //       Routes =(List<Route>)suspensionState["routes"];
+            //   }
+            // PrefListPage page = (PrefListPage) parameter;
+            //  page.InitializeComponent();
+
+            NavigationService.Frame.BackStack.Clear();
+
             await Task.CompletedTask;
         }
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {
-           /* if (state.ContainsKey("routes"))
-            {
-                state["routes"] = Routes;
-            }
-            else
-            {
-                state.Add("routes", Routes);
-            }
-            if (suspending)
-            {
-                suspensionState["routes"] = Routes;
-            }*/
+            /* if (state.ContainsKey("routes"))
+             {
+                 state["routes"] = Routes;
+             }
+             else
+             {
+                 state.Add("routes", Routes);
+             }
+             if (suspending)
+             {
+                 suspensionState["routes"] = Routes;
+             }*/
+
             await Task.CompletedTask;
         }
 
