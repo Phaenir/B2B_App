@@ -5,6 +5,7 @@ using Template10.Common;
 using Template10.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using B2B_App.Models.APA.Configuration;
 
 namespace B2B_App.Views
 {
@@ -13,6 +14,7 @@ namespace B2B_App.Views
         public Busy()
         {
             InitializeComponent();
+            PrefListModel.Init();
         }
 
         public string BusyText

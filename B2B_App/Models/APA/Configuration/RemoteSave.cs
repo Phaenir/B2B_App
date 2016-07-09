@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Storage;
 using Chilkat;
 
@@ -18,6 +19,8 @@ namespace B2B_App.Models.APA.Configuration
 
         private static void Init()
         {
+            //_ftp.Dispose();
+            //_ftp = null;
             _ftp = new Ftp2();
             Success = _ftp.UnlockComponent("Anything for 30-day trial");
             if (!Success)
@@ -29,6 +32,7 @@ namespace B2B_App.Models.APA.Configuration
             _ftp.Password = "3P3k6P8t";
             _ftp.Port = 21;
             _ftp.Passive = false;
+            FileListOnRemote=new List<string>();
         }
 
         public static async Task SaveContentToFtp(string content, string fileName, State state)
@@ -54,6 +58,7 @@ namespace B2B_App.Models.APA.Configuration
         {
             Init();
             Success = await _ftp.ConnectAsync();
+            
             StorageFile file = await Folder.GetFileAsync(fileName);
             switch (state)
             {
@@ -137,10 +142,49 @@ namespace B2B_App.Models.APA.Configuration
             catch (Exception)
             {
                 return false;
-                throw;
-            }
-            
+            }            
         }
+
+        public static List<string> FileListOnRemote;
+        public static async Task<bool> GetFilesNames(State state)
+        {
+            Init();
+            Success = await _ftp.ConnectAsync();
+            try
+            {
+                int dir;
+                switch (state)
+                {
+                    case State.TEMPLATE:
+                        Success = await _ftp.ChangeRemoteDirAsync("Templates");
+                        FileListOnRemote.Clear();
+                        
+                        dir = await _ftp.GetDirCountAsync();
+                        for (int i = 0; i < dir; i++)
+                        {
+                            string fileName = await _ftp.GetFilenameAsync(i);
+                            FileListOnRemote.Add(fileName);
+                        }
+                        break;
+                    case State.ROUTE:
+                        Success = await _ftp.ChangeRemoteDirAsync("Routes");
+                        FileListOnRemote.Clear();
+                        dir = await _ftp.GetDirCountAsync();
+                        for (int i = 0; i < dir; i++)
+                        {
+                            string fileName = await _ftp.GetFilenameAsync(i);
+                            FileListOnRemote.Add(fileName);
+                        }
+                        break;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public enum State : int { TEMPLATE=0, ROUTE=1, }
     }
 }

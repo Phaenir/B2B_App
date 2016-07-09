@@ -107,9 +107,14 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airline.cs" />
+    <Compile Include="Airport.cs" />
+    <Compile Include="City.cs" />
+    <Compile Include="Country.cs" />
     <Compile Include="Database.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="FlightPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateTable.cs" />
     <EmbeddedResource Include="Properties\MyDatabase.rd.xml" />

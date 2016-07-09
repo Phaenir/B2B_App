@@ -86,8 +86,8 @@ namespace B2B_App.ViewModels.APA
             {
                 //ignore
             }            
-            
-            this.NavigationService.Navigate(typeof(TemplateConfigPage),this.Template);               
+           
+            this.NavigationService.Navigate(typeof(TemplateConfigPage),this.Template);                
         }
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {

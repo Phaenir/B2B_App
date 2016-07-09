@@ -7,11 +7,13 @@ using Template10.Common;
 using System;
 using System.Linq;
 using Windows.UI.Xaml.Data;
+using B2B_App.ViewModels.APA;
 
 namespace B2B_App
 {
     /// Documentation on APIs used in this page:
     /// https://github.com/Windows-XAML/Template10/wiki
+    /// 
 
     [Bindable]
     sealed partial class App : Template10.Common.BootStrapper

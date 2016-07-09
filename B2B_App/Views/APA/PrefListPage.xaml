@@ -6,23 +6,161 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:viewModel="using:B2B_App.ViewModels.APA"
+    xmlns:models="using:B2B_App.Models.APA.Configuration"
+    xmlns:data="using:MyDatabase"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <viewModel:APrefListViewModel x:Name="Model"></viewModel:APrefListViewModel>
+    </Page.DataContext>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:PageHeader Text="Set of Preferable Routes List"></controls:PageHeader>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,53,0,0" TextWrapping="Wrap" Text="Departure Point" VerticalAlignment="Top" Width="221"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="276,53,0,0" TextWrapping="Wrap" Text="Arrival Point" VerticalAlignment="Top" Width="221"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="615,53,0,0" TextWrapping="Wrap" Text="Routes" VerticalAlignment="Top" Width="221"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="877,115,0,0" TextWrapping="Wrap" Text="List of preferable routes:" VerticalAlignment="Top" Width="221"/>
-        <TextBox x:Name="DeparturePoint" HorizontalAlignment="Left" Margin="10,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="221"/>
-        <ListView x:Name="DepartureListView" HorizontalAlignment="Left" Height="483" Margin="10,115,0,0" VerticalAlignment="Top" Width="221"/>
-        <TextBox x:Name="ArrivalPoint" HorizontalAlignment="Left" Margin="276,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="221"/>
-        <ListView x:Name="ArrivalListView" HorizontalAlignment="Left" Height="483" Margin="276,115,0,0" VerticalAlignment="Top" Width="221"/>
-        <Button x:Name="AddRouteToListButton" Content="ADD" HorizontalAlignment="Left" Margin="526,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.569,0.531"/>
-        <ListView x:Name="RoutesListView" HorizontalAlignment="Left" Height="520" Margin="615,78,0,0" VerticalAlignment="Top" Width="204"/>
-        <Button x:Name="SaveRoutesButton" Content="SAVE" HorizontalAlignment="Left" Margin="952,78,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="PreferableRoutesListView" HorizontalAlignment="Left" Height="458" Margin="877,140,0,0" VerticalAlignment="Top" Width="221"/>
-        <Button x:Name="EditButton" Content="edit" HorizontalAlignment="Left" Margin="1103,140,0,0" VerticalAlignment="Top" Width="62"/>
-        <Button x:Name="DeleteButton" Content="delete" HorizontalAlignment="Left" Margin="1103,177,0,0" VerticalAlignment="Top"/>
+
+        <controls:PageHeader Text="Set of Preferable Routes List" Frame="{x:Bind Frame}" />
+
+        <Grid>
+
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Departure Point:" VerticalAlignment="Top" Width="221" Margin="36,326,0,0"/>
+            <StackPanel>
+                <Grid>
+                    <AutoSuggestBox 
+                x:Name="DeparturePointBox" 
+                HorizontalAlignment="Left" 
+                Margin="36,360,0,0" 
+                VerticalAlignment="Top" 
+                Width="310" 
+                QueryIcon="Find"
+                PlaceholderText="Please enter Departure code"
+                TextChanged="AutoSuggestBox_OnTextChanged"
+                QuerySubmitted="DepartureSuggestBox_OnQuerySubmitted"
+                SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"
+            Height="48" 
+            RenderTransformOrigin="0.5,0.5">
+                        <AutoSuggestBox.ItemTemplate>
+                            <DataTemplate x:DataType="data:FlightPoint">
+                                <RelativePanel HorizontalAlignment="Left" x:Name="DepartureSearch" Visibility="Visible" BorderBrush="DarkRed" BorderThickness="0,0,0,2">
+                                    <TextBlock 
+                                    Text="{x:Bind Iata}" x:Name="DepIata"
+                                    RelativePanel.AlignTopWithPanel="True"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                    Padding="2" />
+                                    <TextBlock 
+                                    Text="{x:Bind Name}"  
+                                    x:Name="DName"
+                                    RelativePanel.RightOf="DepIata"       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                    Padding="2"/>
+                                    <TextBlock 
+                                    Text="{x:Bind CountryCode}"
+                                    x:Name="DCCCode"
+                                    RelativePanel.RightOf="DName"                        RelativePanel.AlignRightWithPanel="True"
+                                    Padding="2"/>
+                                    <TextBlock 
+                                    Text="{x:Bind CityCode}"
+                                    x:Name="DCCode"
+                                    RelativePanel.Below="DepIata"
+                                    Padding="2" />
+                                    <TextBlock 
+                                    Text="{x:Bind CityName}"
+                                    x:Name="DCName" 
+                                    RelativePanel.Below="DName" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.RightOf="DCCode" 
+                                    Padding="2" />
+                                    <TextBlock 
+                                    Text="{x:Bind CountryName}"
+                                    x:Name="DCCName"
+                                    RelativePanel.Below="DCCCode" RelativePanel.AlignRightWithPanel="True" RelativePanel.RightOf="DCName" 
+                                    Padding="2"/>
+                                </RelativePanel>
+                            </DataTemplate>
+                        </AutoSuggestBox.ItemTemplate>
+                    </AutoSuggestBox>
+                    <TextBlock
+                        x:Name="NoResults"
+                        Text="No results found"
+                    Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                        Visibility="Collapsed" Margin="0,313,0,203"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+
+
+        <Grid>
+
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Arrival Point" VerticalAlignment="Top" Width="221" Margin="455,326,0,0"/>
+            <StackPanel>
+                <AutoSuggestBox 
+                    x:Name="ArrivalPointBox" 
+                    HorizontalAlignment="Left" 
+                    Margin="455,360,0,0"                    
+                    VerticalAlignment="Top" 
+                    Width="310" 
+                    Height="48"
+                    QueryIcon="Find"
+                    PlaceholderText="Please enter Departure code"
+                    TextChanged="AutoSuggestBox_OnTextChanged"
+                    QuerySubmitted="ArrivalSuggestBox_OnQuerySubmitted"
+                    SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"
+                    RenderTransformOrigin="0.5,0.5"
+                    >
+                    <AutoSuggestBox.ItemTemplate>
+                        <DataTemplate x:DataType="data:FlightPoint">
+                            <RelativePanel HorizontalAlignment="Left" x:Name="DepartureSearch" Visibility="Visible" BorderBrush="DarkRed" BorderThickness="0,0,0,2">
+                                <TextBlock 
+                                    Text="{x:Bind Iata}" x:Name="ArrIata"
+                                    RelativePanel.AlignTopWithPanel="True"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                    Padding="2" />
+                                <TextBlock 
+                                    Text="{x:Bind Name}"  
+                                    x:Name="AName"
+                                    RelativePanel.RightOf="ArrIata"       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                    Padding="2"/>
+                                <TextBlock 
+                                    Text="{x:Bind CountryCode}"
+                                    x:Name="ACCCode"
+                                    RelativePanel.RightOf="AName"                        RelativePanel.AlignRightWithPanel="True"
+                                    Padding="2"/>
+                                <TextBlock 
+                                    Text="{x:Bind CityCode}"
+                                    x:Name="ACCode"
+                                    RelativePanel.Below="ArrIata"
+                                    Padding="2" />
+                                <TextBlock 
+                                    Text="{x:Bind CityName}"
+                                    x:Name="ACName" 
+                                    RelativePanel.Below="AName" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.RightOf="ACCode" 
+                                    Padding="2" />
+                                <TextBlock 
+                                    Text="{x:Bind CountryName}"
+                                    x:Name="ACCName"
+                                    RelativePanel.Below="ACCCode" RelativePanel.AlignRightWithPanel="True" RelativePanel.RightOf="ACName" 
+                                    Padding="2"/>
+                            </RelativePanel>
+                        </DataTemplate>
+                    </AutoSuggestBox.ItemTemplate>
+                </AutoSuggestBox>
+            </StackPanel>
+        </Grid>
+
+        <Button x:Name="AddRouteToListButton" Content="ADD" HorizontalAlignment="Left" Margin="361.327,367.058,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.569,0.531" Height="34.818" Width="65"  UseLayoutRounding="False" d:LayoutRounding="Auto" Click="{x:Bind Model.AddRouteToList}">
+        </Button>
+
+
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Routes" VerticalAlignment="Top" Width="221" Margin="36,62,0,0"/>
+        <ListView x:Name="RoutesListView" HorizontalAlignment="Left" Height="221" Margin="36,92,0,0" VerticalAlignment="Top" Width="309" ItemsSource="{Binding Routes}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Route">
+                    <TextBlock Text="{Binding FlightLeg}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+         </ListView>
+
+        <TextBlock Text="File Name:" HorizontalAlignment="Left" Margin="455,230,0,0" VerticalAlignment="Top" Height="30" Width="221"/>
+        <TextBox Text="" HorizontalAlignment="Left" Margin="455,265,0,0" VerticalAlignment="Top" Height="35" Width="221" TextAlignment="DetectFromContent" Background="LightGray" PlaceholderText="Call your list please" Name="SaveFileBox" />
+        <Button x:Name="SaveRoutesButton" Content="SAVE" HorizontalAlignment="Left" Margin="701.213,268.059,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Height="29.851" Width="64.538" Click="ButtonBase_OnClick">
+        </Button>
+
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="List of preferable routes:" VerticalAlignment="Top" Width="221" Margin="455,62,0,0" />
+        <ListView x:Name="PreferableRoutesListView" HorizontalAlignment="Left" Height="133" Margin="455,92,0,0" VerticalAlignment="Top" Width="305" ItemsSource="{Binding FileList}"/>
     </Grid>
 </Page>

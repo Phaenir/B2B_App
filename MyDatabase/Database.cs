@@ -17,6 +17,21 @@ namespace MyDatabase
         private ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
         public ObservableCollection<TemplateTable> TemplateTables => Templates._templateTables;
 
+        private ObservableCollection<Airline> _airlines = new ObservableCollection<Airline>();
+        public ObservableCollection<Airline> Airlines => Templates._airlines;
+
+        private ObservableCollection<City> _cities = new ObservableCollection<City>();
+        public ObservableCollection<City> Cities => Templates._cities;
+
+        private ObservableCollection<Country> _countries = new ObservableCollection<Country>();
+        public ObservableCollection<Country> Countries => Templates._countries;
+
+        private ObservableCollection<Airport> _airports = new ObservableCollection<Airport>();
+        public ObservableCollection<Airport> Airports => Templates._airports;
+
+        private ObservableCollection<FlightPoint> _travelPoints = new ObservableCollection<FlightPoint>();
+        public ObservableCollection<FlightPoint> TravelPoints => Templates._travelPoints;
+
         public Database(string server, string user, string password, string name, uint port=3306)
         {
             Init(server, user, password, name, port);
@@ -112,6 +127,156 @@ namespace MyDatabase
 
                 return false;
             }
+        }
+        public IEnumerable<Airline> GetAirlines()
+        {
+            _airlines = new ObservableCollection<Airline>();
+            Airlines.Clear();
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText = "SELECT * FROM airline;";
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Airline tt = new Airline(reader.GetString("iata"),reader.GetString("name"));
+                        if (Templates._airlines.Contains(tt))
+                        {
+                            continue;
+                        }
+                        Templates._airlines.Add(tt);
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+
+                throw new Exception("Template Tables wrong access: " + e);
+            }
+            _connection.Close();
+            return Templates.Airlines;
+        }
+        public IEnumerable<Country> GetCountries()
+        {
+            _countries = new ObservableCollection<Country>();
+            Countries.Clear();
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText = "SELECT * FROM countries;";
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Country tt = new Country(reader.GetString("iata"),reader.GetString("name"));
+                        if (Templates._countries.Contains(tt))
+                        {
+                            continue;
+                        }
+                        Templates._countries.Add(tt);
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+
+                throw new Exception("Template Tables wrong access: " + e);
+            }
+            _connection.Close();
+            return Templates.Countries;
+        }
+        public IEnumerable<City> GetCities()
+        {
+            _cities = new ObservableCollection<City>();
+            Cities.Clear();
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText = "SELECT * FROM cities;";
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        City tt = new City(reader.GetString("iata"),reader.GetString("name"), reader.GetString("coordinates"),reader.GetString("timezone"),reader.GetString("parent_name"));
+                        if (Templates._cities.Contains(tt))
+                        {
+                            continue;
+                        }
+                        Templates._cities.Add(tt);
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+
+                throw new Exception("Template Tables wrong access: " + e);
+            }
+            _connection.Close();
+            return Templates.Cities;
+        }
+        public IEnumerable<Airport> GetAirports()
+        {
+            _airports = new ObservableCollection<Airport>();
+            Airports.Clear();
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText = "SELECT * FROM airports;";
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Airport tt = new Airport(reader.GetString("iata"),reader.GetString("name"),reader.GetString("coordinates"),reader.GetString("timezone"),reader.GetString("parent_name"));
+                        if (Templates._airports.Contains(tt))
+                        {
+                            continue;
+                        }
+                        Templates._airports.Add(tt);
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+
+                throw new Exception("Template Tables wrong access: " + e);
+            }
+            _connection.Close();
+            return Templates.Airports;
+        }
+        public IEnumerable<FlightPoint> GetFlightPoints()
+        {
+            _travelPoints = new ObservableCollection<FlightPoint>();
+            TravelPoints.Clear();
+            try
+            {
+                _connection.Open();
+                MySqlCommand command = _connection.CreateCommand();
+                command.CommandText = "SELECT * FROM airportlist;";
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        FlightPoint tt = new FlightPoint(reader.GetString("iata"),reader.GetString("name"),reader.GetString("coordinates"),reader.GetString("timezone"),reader.GetString("cityname"),reader.GetString("citycode"),reader.GetString("countryname"),reader.GetString("countrycode"));
+                        if (Templates._travelPoints.Contains(tt))
+                        {
+                            continue;
+                        }
+                        Templates._travelPoints.Add(tt);
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+
+                throw new Exception("Template Tables wrong access: " + e);
+            }
+            _connection.Close();
+            return Templates.TravelPoints;
         }
     }
 }
