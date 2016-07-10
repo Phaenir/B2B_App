@@ -6,6 +6,7 @@
     "Microsoft.AspNet.WebApi.Client": "5.2.3",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+    "MvvmLightLibs": "5.3.0",
     "Newtonsoft.Json": "9.0.1",
     "NUnit": "3.4.1",
     "Template10": "1.1.11"

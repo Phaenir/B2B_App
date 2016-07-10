@@ -9,10 +9,19 @@
     xmlns:apaview="using:B2B_App.Views.APA"
     xmlns:bbview="using:B2B_App.Views.B2B"
     xmlns:viewModel="using:B2B_App.ViewModels.APA"
+    xmlns:dbData="using:MyDatabase"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"  
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:converters="using:B2B_App.Models.APA"
     mc:Ignorable="d">
     <Page.DataContext>
         <viewModel:AMainPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
+    <Page.Resources>
+        <converters:SelectionChangedConverter x:Key="SelectionChangedConverter"></converters:SelectionChangedConverter>
+        <converters:DateTimeConverter x:Key="Converter"></converters:DateTimeConverter>
+        <converters:DateTimeToStringConverter x:Key="StringConverter"></converters:DateTimeToStringConverter>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader Text="Price Analyzing Application - Main Page" Frame="{x:Bind Frame}" Height="48">
@@ -21,22 +30,100 @@
                 <AppBarButton Label="Preview Result" Click="{x:Bind ViewModel.GotoResultPage}"/>
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
-        <ListView x:Name="WebsiteList" HorizontalAlignment="Left" Height="208" Margin="10,68,0,0" VerticalAlignment="Top" Width="209" BorderBrush="Black" BorderThickness="1"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" Text="Website list:" VerticalAlignment="Top" Width="209"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,293,0,0" TextWrapping="Wrap" Text="Prefferable Routes list:" VerticalAlignment="Top" Width="209"/>
-        <ListView x:Name="PrefRoutesList" HorizontalAlignment="Left" Height="237" Margin="10,313,0,0" VerticalAlignment="Top" Width="209" BorderThickness="1" BorderBrush="Black"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="226,48,0,0" TextWrapping="Wrap" Text="Browser:" VerticalAlignment="Top" Width="120" Height="20"/>
-        <RadioButton x:Name="radioButton" Content="Firefox" HorizontalAlignment="Left" Margin="226,67,0,0" VerticalAlignment="Top" Width="99"/>
-        <RadioButton x:Name="radioButton1" Content="Chrome" HorizontalAlignment="Left" Margin="226,99,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="226,293,0,0" TextWrapping="Wrap" Text="Routes:" VerticalAlignment="Top" Width="120" Height="20"/>
-        <ListView x:Name="RoutesList" HorizontalAlignment="Left" Height="237" Margin="226,313,0,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" BorderThickness="1"/>
-        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="671,79,0,0" TextWrapping="Wrap" Text="To:" VerticalAlignment="Top" Width="178"/>
-        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="435,79,0,0" TextWrapping="Wrap" Text="From:" VerticalAlignment="Top" Width="178"/>
-        <TextBox x:Name="DeparturePointTextBox" HorizontalAlignment="Left" Margin="435,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.349,1.68" Width="178"/>
-        <TextBox x:Name="ArrivalPointTextBox" HorizontalAlignment="Left" Margin="671,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178"/>
-        <Button x:Name="RoundTripButton" Content="" HorizontalAlignment="Left" Margin="614,142,0,0" VerticalAlignment="Top" Height="39" Width="54" RenderTransformOrigin="-0.322,0.787"/>
-        <CalendarDatePicker x:Name="DepartureDatePicker" HorizontalAlignment="Left" Margin="435,182,0,0" VerticalAlignment="Top" Width="178"/>
-        <CalendarDatePicker x:Name="RoundDepartureDatePicker" HorizontalAlignment="Left" Margin="671,182,0,0" VerticalAlignment="Top" Width="178"/>
-        <Button x:Name="SearchButton" Content="SEARCH" HorizontalAlignment="Left" Margin="567,238,0,0" VerticalAlignment="Top" Width="140" BorderBrush="#FF0EE40E" BorderThickness="5"/>
+        <ListView x:Name="WebsiteList" HorizontalAlignment="Left" Height="223" Margin="10,53,0,0" VerticalAlignment="Top" Width="170" BorderBrush="Black" BorderThickness="1" Header="Website List:" ItemsSource="{Binding Websites}" IsMultiSelectCheckBoxEnabled="False"  SelectionMode="Multiple">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding AddMembersToEvent}"
+                                      InputConverter="{StaticResource SelectionChangedConverter}"
+                                      InputConverterParameter="{Binding ElementName=WebsiteList}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="dbData:TemplateTable">
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="PrefRoutesList" HorizontalAlignment="Left" Height="237" Margin="10,292,0,0" VerticalAlignment="Top" Width="170" BorderThickness="1" BorderBrush="Black" Header="List of Preferable routes:" SelectionMode="Single" ItemsSource="{Binding FileList}" SelectionChanged="{x:Bind ViewModel.Selector_OnSelectionChanged}">
+        </ListView>
+        <ListView x:Name="RoutesListXaml" HorizontalAlignment="Left" Height="237" Margin="185,292,0,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" BorderThickness="1" Header="Routes:" Loading="{x:Bind ViewModel.FrameworkElement_OnLoading}">
+            
+         </ListView>
+        <StackPanel>
+        <AutoSuggestBox 
+            x:Name="DeparturePointTextBox" 
+            HorizontalAlignment="Left" 
+            Margin="185,53,0,0" 
+            VerticalAlignment="Top" 
+            Width="178" 
+            Header="From:"
+            QueryIcon="Find"
+            PlaceholderText="Departure Point code"
+            TextChanged="{x:Bind ViewModel.AutoSuggestBox_OnTextChanged}"
+            QuerySubmitted="{x:Bind ViewModel.DepartureSuggestBox_OnQuerySubmitted}"
+            SuggestionChosen="{x:Bind ViewModel.AutoSuggestBox_OnSuggestionChosen}">
+            <AutoSuggestBox.ItemTemplate>
+                <DataTemplate x:DataType="dbData:FlightPoint">
+                    <RelativePanel
+                        HorizontalAlignment="Left"
+                        x:Name="DeparturePoint"
+                        Visibility="Visible"
+                        BorderBrush="Blue"
+                        BorderThickness="0,0,0,2">
+                        <TextBlock Text="{x:Bind Iata}" x:Name="DepIata" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" Margin="15,0,0,0"/>
+                            <TextBlock Text="{x:Bind CityName}" x:Name="DepCity" RelativePanel.Below="DepIata" RelativePanel.AlignLeftWithPanel="True" Margin="15,0,0,0"/>
+                            <TextBlock Text="{x:Bind CountryCode}" x:Name="DepCountry" RelativePanel.RightOf="DepIata" Margin="15,0,0,0"/>
+                    </RelativePanel>
+                </DataTemplate>
+            </AutoSuggestBox.ItemTemplate>
+            </AutoSuggestBox>
+        </StackPanel>
+        <StackPanel>
+        <AutoSuggestBox 
+            x:Name="ArrivalPointTextBox" 
+            HorizontalAlignment="Left" 
+            Margin="368,53,0,0" 
+            VerticalAlignment="Top" 
+            Width="178" Header="To:"
+            QueryIcon="Find"
+                    PlaceholderText="Arrival Point code"
+                    TextChanged="{x:Bind ViewModel.AutoSuggestBox_OnTextChanged}"
+                    QuerySubmitted="{x:Bind ViewModel.ArrivalSuggestBox_OnQuerySubmitted}"
+                    SuggestionChosen="{x:Bind ViewModel.AutoSuggestBox_OnSuggestionChosen}">
+                <AutoSuggestBox.ItemTemplate>
+                    <DataTemplate x:DataType="dbData:FlightPoint">
+                    <RelativePanel
+                        HorizontalAlignment="Left"
+                        x:Name="ArrivalPoint"
+                        Visibility="Visible"
+                        BorderBrush="Blue"
+                        BorderThickness="0,0,0,2">
+                        <TextBlock Text="{x:Bind Iata}" x:Name="ArrIata" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" Margin="15,0,0,0"/>
+                           <TextBlock Text="{x:Bind CityName}" x:Name="ArrCity" RelativePanel.Below="ArrIata" RelativePanel.AlignLeftWithPanel="True" Margin="15,0,0,0"/>
+                            <TextBlock Text="{x:Bind CountryCode}" x:Name="ArrCountry" RelativePanel.RightOf="ArrIata" Margin="15,0,0,0"/>
+                    </RelativePanel>
+                </DataTemplate>
+                </AutoSuggestBox.ItemTemplate>
+
+            </AutoSuggestBox>
+        </StackPanel>
+        <Button x:Name="RoundTripButton" Content="" HorizontalAlignment="Left" Margin="564.945,80,0,0" VerticalAlignment="Top" Height="73" Width="75" RenderTransformOrigin="-0.322,0.787" UseLayoutRounding="False" d:LayoutRounding="Auto" Click="{x:Bind ViewModel.RoundtripButton_OnClick}">
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0.422"/>
+                    <GradientStop Color="White" Offset="0.679"/>
+                    <GradientStop Color="WhiteSmoke" Offset="0.566"/>
+                    <GradientStop Color="#FF16E07B" Offset="0.819"/>
+                    <GradientStop Color="#FF1C41EA" Offset="0.157"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush ImageSource="ms-appx:///Assets/oneway.png"/>
+            </Button.Background>
+
+        </Button>
+        <CalendarDatePicker x:Name="DepartureDatePicker" HorizontalAlignment="Left" Margin="185,121,0,0" VerticalAlignment="Top" Width="178" Loading="{x:Bind ViewModel.DepartureElement_OnLoading}" DateChanged="{x:Bind ViewModel.CalendarDatePicker_OnDateChanged}"/>
+        <CalendarDatePicker x:Name="RoundDepartureDatePicker" HorizontalAlignment="Left" Margin="368,121,0,0" VerticalAlignment="Top" Width="178" Loading="{x:Bind ViewModel.ArrivalElement_OnLoading}"/>
+        <Button x:Name="SearchButton" Content="SEARCH" HorizontalAlignment="Left" Margin="295,177,0,0" VerticalAlignment="Top" Width="140" BorderBrush="#FF0EE40E" BorderThickness="5" Click="{x:Bind ViewModel.SearchButton}"/>
     </Grid>
 </Page>

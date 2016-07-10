@@ -44,15 +44,28 @@ namespace B2B_App.Models.APA.Configuration
             common.Database = database;
             common.SearchEngine = searchEngine;
             common.StateDate=DateTime.Now;
+            CommonConfiguration temp = common;
+            var t = Task.Run(async () =>
+            {
+                await temp.SaveToFile(PathToCommonConfigFile.NAME, PathToCommonConfigFile.FOLDER);
 
-            common.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);
+            });
+            t.Wait();
+            common = temp;
         }
 
         public CommonConfig GetConfiguration()
         {
             CommonConfig config=new CommonConfig();
             CommonConfiguration configuration;
-            if (!FileExist())
+            bool isExist=true;
+            var t = Task.Run(async () =>
+            {
+               isExist=  await FileExist();
+
+            });
+            t.Wait();
+            if (!isExist)
             {
                 Init(out configuration);
             }
@@ -95,10 +108,16 @@ namespace B2B_App.Models.APA.Configuration
             configuration.SearchEngine.PageLimit= config.PageLimit;
             configuration.SearchEngine.SearchLimit= config.SearchLimit;
             configuration.Serialize();
-            configuration.SaveToFile(PathToCommonConfigFile.NAME,PathToCommonConfigFile.FOLDER);
+            var t = Task.Run(async () =>
+            {
+                await configuration.SaveToFile(PathToCommonConfigFile.NAME, PathToCommonConfigFile.FOLDER);
+
+            });
+            t.Wait();
+            
         }
 
-        private bool FileExist()
+        private async Task<bool> FileExist()
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
             _path = storageFolder.Path + "\\" + ConfigFileName;
@@ -106,7 +125,16 @@ namespace B2B_App.Models.APA.Configuration
             PathToCommonConfigFile.NAME = ConfigFileName;
             try
             {
-                IAsyncOperation<StorageFile> b= StorageFile.GetFileFromPathAsync(_path);
+                string contents = null;
+                if (storageFolder.TryGetItemAsync(ConfigFileName)!=null)
+                {
+                    StorageFile file =await storageFolder.GetFileAsync(ConfigFileName);
+                    contents = FileIO.ReadTextAsync(file).ToString();
+                }
+                if (String.IsNullOrEmpty(contents))
+                {
+                    return false;
+                }
                 return true;
             }
             catch (Exception)

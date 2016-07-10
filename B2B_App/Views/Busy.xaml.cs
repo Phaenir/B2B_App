@@ -14,7 +14,14 @@ namespace B2B_App.Views
         public Busy()
         {
             InitializeComponent();
-            PrefListModel.Init();
+            try
+            {
+                PrefListModel.Init();
+            }
+            catch (Exception)
+            {
+                //ignore
+            }
         }
 
         public string BusyText

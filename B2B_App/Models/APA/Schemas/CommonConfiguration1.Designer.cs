@@ -36,7 +36,9 @@ namespace B2B_App
         
         private static XmlSerializer serializer;
         
-        public async virtual void SaveToFile(string fileName, Windows.Storage.StorageFolder folder)
+        public async virtual         
+        Task
+SaveToFile(string fileName, Windows.Storage.StorageFolder folder)
         {
             var _option = Windows.Storage.CreationCollisionOption.ReplaceExisting;
             var _file = await folder.CreateFileAsync(fileName, _option);

@@ -26,5 +26,8 @@ namespace B2B_App.Views.APA
         {
             this.InitializeComponent();
         }
+
+
+        
     }
 }
