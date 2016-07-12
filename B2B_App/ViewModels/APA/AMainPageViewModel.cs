@@ -281,7 +281,8 @@ namespace B2B_App.ViewModels.APA
                 arr = _arrivalDatePicker.Date;
             }
             MainPageModel model=new MainPageModel();
-            model.Start(WebsiteMembers, _flightLeg, dep, !_isRoundtripPushed, arr);           
+
+            model.Start(WebsiteMembers, _flightLeg, dep, !_isRoundtripPushed, arr,_configuration.Path);           
         }
 
     }

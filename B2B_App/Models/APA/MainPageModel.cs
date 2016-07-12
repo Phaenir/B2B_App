@@ -9,9 +9,10 @@ namespace B2B_App.Models.APA
 {
     class MainPageModel
     {
-        public void Start(List<object> websiteMembers, List<Route> flightLeg, DateTimeOffset? dep, bool isRoundtripPushed, DateTimeOffset? arr)
+        public void Start(List<object> websiteMembers, List<Route> flightLeg, DateTimeOffset? dep, bool isRoundtripPushed, DateTimeOffset? arr, string path)
         {
-                
+           SeleniumSearchForm search=new SeleniumSearchForm();
+           search.Start(websiteMembers, flightLeg, dep,arr, path);
         }
     }
 }

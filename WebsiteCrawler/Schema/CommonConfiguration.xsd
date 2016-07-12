@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CommonConfiguration"
+    targetNamespace="http://tempuri.org/CommonConfiguration.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/CommonConfiguration.xsd"
+    xmlns:mstns="http://tempuri.org/CommonConfiguration.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+    attributeFormDefault="unqualified" 
+    vc:minVersion="1.1"           
+>
+  	<xs:element name="CommonConfiguration">
+		<xs:annotation>
+			<xs:documentation>In this root we save and update common configuration variables that used for application work</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Database">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Host" type="xs:string"/>
+							<xs:element name="RemoteHost" type="xs:string"/>
+							<xs:element name="Port" type="xs:int" default="3306"/>
+							<xs:element name="User" type="xs:string" default="root"/>
+							<xs:element name="Password" type="xs:string"/>
+            	<xs:element name="Name" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="BerlogicEngine">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Agency">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Name" type="xs:string"/>
+										<xs:element name="Number" type="xs:string"/>
+										<xs:element name="Salespoint" type="xs:string"/>
+										<xs:element name="Password" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="SearchEngine">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PageLimit" type="xs:int" default="1"/>
+							<xs:element name="FormLimit" type="xs:int" default="2"/>
+							<xs:element name="SearchLimit" type="xs:int" default="5"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="StateDate" type="xs:dateTime" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

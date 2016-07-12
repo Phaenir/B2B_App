@@ -13,7 +13,7 @@ namespace B2B_App.Models.APA.Configuration
     class CommonConfigurationModel
     {
         public readonly string ConfigFileName = "ConfigFile.xml";
-        string _path;
+        public string Path;
         private void Init(out CommonConfiguration common)
         {
             common=new CommonConfiguration();
@@ -71,7 +71,7 @@ namespace B2B_App.Models.APA.Configuration
             }
             else
             {
-                configuration = CommonConfiguration.LoadFromFile(_path);
+                configuration = CommonConfiguration.LoadFromFile(Path);
             }
             config.AgencyName = configuration.BerlogicEngine.Agency.Name;
             config.AgencyNumber = configuration.BerlogicEngine.Agency.Number;
@@ -92,7 +92,7 @@ namespace B2B_App.Models.APA.Configuration
 
         public void SetConfiguration(CommonConfig config)
         {
-            CommonConfiguration configuration = CommonConfiguration.LoadFromFile(_path);
+            CommonConfiguration configuration = CommonConfiguration.LoadFromFile(Path);
             configuration.StateDate=DateTime.Now;
             configuration.BerlogicEngine.Agency.Name = config.AgencyName;
             configuration.BerlogicEngine.Agency.Number= config.AgencyNumber;
@@ -120,7 +120,7 @@ namespace B2B_App.Models.APA.Configuration
         private async Task<bool> FileExist()
         {
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            _path = storageFolder.Path + "\\" + ConfigFileName;
+            Path = storageFolder.Path + "\\" + ConfigFileName;
             PathToCommonConfigFile.FOLDER = storageFolder;
             PathToCommonConfigFile.NAME = ConfigFileName;
             try

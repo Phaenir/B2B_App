@@ -50,6 +50,9 @@ namespace B2B_App.Models.APA.Configuration
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
                     Success = await _ftp.PutFileFromTextDataAsync(fileName+".csv", content, Encoding.UTF8.EncodingName);
                     break;
+                    case State.INTERMEDIATE:
+                    Success = await _ftp.PutFileFromTextDataAsync(fileName + ".csv", content, Encoding.UTF8.EncodingName);
+                    break;
             }
             Success = await _ftp.DisconnectAsync();
         }
@@ -69,6 +72,9 @@ namespace B2B_App.Models.APA.Configuration
                 case State.ROUTE:
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
                     Success = await _ftp.PutFileAsync(file.Path, fileName+".csv");
+                    break;
+                    case State.INTERMEDIATE:
+                    Success = await _ftp.PutFileAsync(file.Path, fileName + ".csv");
                     break;
             }
             Success = await _ftp.PutFileAsync(file.Path,fileName);
@@ -90,6 +96,9 @@ namespace B2B_App.Models.APA.Configuration
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
                     data = await _ftp.GetRemoteFileTextDataAsync(fileName+".csv");
                     break;
+                    case State.INTERMEDIATE:
+                    data = await _ftp.GetRemoteFileTextDataAsync(fileName + ".csv");
+                    break;
             }
             Success = await _ftp.DisconnectAsync();
             return data;
@@ -109,6 +118,9 @@ namespace B2B_App.Models.APA.Configuration
                 case State.ROUTE:
                     Success = await _ftp.ChangeRemoteDirAsync("Routes");
                     Success = await _ftp.GetFileAsync(localPath, fileName+".csv");
+                    break;
+                    case State.INTERMEDIATE:
+                    Success = await _ftp.GetFileAsync(localPath, fileName + ".csv");
                     break;
             }
             Success = await _ftp.DisconnectAsync();
@@ -135,6 +147,9 @@ namespace B2B_App.Models.APA.Configuration
                     case State.ROUTE:
                         Success = await _ftp.ChangeRemoteDirAsync("Routes");
                         file = await _ftp.GetRemoteFileTextDataAsync(fileName+".csv");
+                        break;
+                        case State.INTERMEDIATE:
+                        file = await _ftp.GetRemoteFileTextDataAsync(fileName + ".csv");
                         break;
                 }
                 return true;
@@ -176,6 +191,15 @@ namespace B2B_App.Models.APA.Configuration
                             FileListOnRemote.Add(fileName);
                         }
                         break;
+                    case State.INTERMEDIATE:
+                        FileListOnRemote.Clear();
+                        dir = await _ftp.GetDirCountAsync();
+                        for (int i = 0; i < dir; i++)
+                        {
+                            string fileName = await _ftp.GetFilenameAsync(i);
+                            FileListOnRemote.Add(fileName);
+                        }
+                        break;
                 }
                 return true;
             }
@@ -185,6 +209,6 @@ namespace B2B_App.Models.APA.Configuration
             }
         }
 
-        public enum State : int { TEMPLATE=0, ROUTE=1, }
+        public enum State : int { TEMPLATE=0, ROUTE=1, INTERMEDIATE=3, }
     }
 }

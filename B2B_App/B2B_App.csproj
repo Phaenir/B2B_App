@@ -104,6 +104,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="project.json" />
+    <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
+    <None Include="Service References\de.berlogic.devlt\Avia.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -138,8 +140,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Models\APA\SelectionChangedConverter.cs" />
+    <Compile Include="Models\APA\SeleniumSearchForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionChangedConverter .cs" />
+    <Compile Include="Service References\de.berlogic.devlt\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\APA\ACommonConfigModelView.cs" />
     <Compile Include="ViewModels\APA\AMainPageViewModel.cs" />
@@ -205,6 +213,48 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.authenticateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.cancelReservationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.changePasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.checkPricingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.createReservationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.finishBookingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.preparePaymentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.searchFlightsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.searchRemarksResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.searchScheduleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.sendEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\B2B_App.de.berlogic.devlt.voidTicketsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\de.berlogic.devlt\configuration.svcinfo" />
+    <None Include="Service References\de.berlogic.devlt\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -276,6 +326,12 @@
       <Name>MyDatabase</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\de.berlogic.devlt\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
@@ -286,7 +342,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Typemock="{&quot;UnitTestProject&quot;:&quot;d7a0986d-9919-4f15-a905-9b3e0faa7d46&quot;}" />
+      <UserProperties Typemock="{&quot;UnitTestProject&quot;:&quot;83b310dd-f9e5-42d4-80a4-0a6da2aa1fe1&quot;}" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

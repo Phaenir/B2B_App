@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://partner.webservice.berlogic.de/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="Avia" targetNamespace="http://partner.webservice.berlogic.de/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://partner.webservice.berlogic.de/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="authenticate" type="tns:authenticate" />
+      <xs:element name="authenticateResponse" type="tns:authenticateResponse" />
+      <xs:element name="cancelReservation" type="tns:cancelReservation" />
+      <xs:element name="cancelReservationResponse" type="tns:cancelReservationResponse" />
+      <xs:element name="changePassword" type="tns:changePassword" />
+      <xs:element name="changePasswordResponse" type="tns:changePasswordResponse" />
+      <xs:element name="checkPricing" type="tns:checkPricing" />
+      <xs:element name="checkPricingResponse" type="tns:checkPricingResponse" />
+      <xs:element name="createReservation" type="tns:createReservation" />
+      <xs:element name="createReservationResponse" type="tns:createReservationResponse" />
+      <xs:element name="finishBooking" type="tns:finishBooking" />
+      <xs:element name="finishBookingResponse" type="tns:finishBookingResponse" />
+      <xs:element name="preparePayment" type="tns:preparePayment" />
+      <xs:element name="preparePaymentResponse" type="tns:preparePaymentResponse" />
+      <xs:element name="searchFlights" type="tns:searchFlights" />
+      <xs:element name="searchFlightsResponse" type="tns:searchFlightsResponse" />
+      <xs:element name="searchRemarks" type="tns:searchRemarks" />
+      <xs:element name="searchRemarksResponse" type="tns:searchRemarksResponse" />
+      <xs:element name="searchSchedule" type="tns:searchSchedule" />
+      <xs:element name="searchScheduleResponse" type="tns:searchScheduleResponse" />
+      <xs:element name="sendEmail" type="tns:sendEmail" />
+      <xs:element name="sendEmailResponse" type="tns:sendEmailResponse" />
+      <xs:element name="voidTickets" type="tns:voidTickets" />
+      <xs:element name="voidTicketsResponse" type="tns:voidTicketsResponse" />
+      <xs:complexType name="searchSchedule">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="agencyCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="salesPointCode" type="xs:string" />
+          <xs:element minOccurs="0" name="beginLocation" type="xs:string" />
+          <xs:element minOccurs="0" name="endLocation" type="xs:string" />
+          <xs:element minOccurs="0" name="periodBegin" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="periodEnd" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="serviceClass" type="tns:serviceClass" />
+          <xs:element minOccurs="0" name="airlineCode" type="xs:string" />
+          <xs:element name="directOnly" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchScheduleResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:scheduleElement" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="scheduleElement">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="applicableDays" nillable="true" type="tns:dayOfTheWeek" />
+          <xs:element minOccurs="0" name="board" type="xs:string" />
+          <xs:element minOccurs="0" name="boardCode" type="xs:string" />
+          <xs:element minOccurs="0" name="cityBegin" type="xs:string" />
+          <xs:element minOccurs="0" name="cityEnd" type="xs:string" />
+          <xs:element name="connected" type="xs:boolean" />
+          <xs:element minOccurs="0" name="flightNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="locationBegin" type="xs:string" />
+          <xs:element minOccurs="0" name="locationEnd" type="xs:string" />
+          <xs:element name="nextDay" type="xs:boolean" />
+          <xs:element minOccurs="0" name="periodBegin" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="periodEnd" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="serviceClass" nillable="true" type="tns:serviceClass" />
+          <xs:element minOccurs="0" name="timeBegin" type="xs:string" />
+          <xs:element minOccurs="0" name="timeEnd" type="xs:string" />
+          <xs:element name="travelDuration" type="xs:int" />
+          <xs:element minOccurs="0" name="vendor" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sendEmail">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="booking" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="booking">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:bookingBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="flight" type="tns:flight" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="bookingBase" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="agencyCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="bookingNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="context" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="cost" type="tns:cost" />
+          <xs:element minOccurs="0" name="customer" type="tns:contact" />
+          <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="documents" nillable="true" type="tns:document" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="logItems" nillable="true" type="tns:bookingLogItem" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="passengers" nillable="true" type="tns:passenger" />
+          <xs:element minOccurs="0" name="payment" type="tns:payment" />
+          <xs:element minOccurs="0" name="recordLocator" type="xs:string" />
+          <xs:element minOccurs="0" name="salesPoint" type="tns:salesPoint" />
+          <xs:element minOccurs="0" name="status" type="tns:bookingStatus" />
+          <xs:element minOccurs="0" name="timeLimit" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="flight">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="allowedPaymentType" nillable="true" type="tns:paymentTypeWithFee" />
+          <xs:element minOccurs="0" name="context" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="cost" type="tns:cost" />
+          <xs:element name="eticket" type="xs:boolean" />
+          <xs:element name="latinRegistration" type="xs:boolean" />
+          <xs:element name="passportRequired" type="xs:boolean" />
+          <xs:element name="reservable" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="segments" nillable="true" type="tns:flightSegment" />
+          <xs:element minOccurs="0" name="timeLimit" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="paymentTypeWithFee">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fee" type="xs:decimal" />
+          <xs:element minOccurs="0" name="feeCurrency" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="tns:paymentType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cost">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="currency" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="elements" nillable="true" type="tns:costElement" />
+          <xs:element minOccurs="0" name="fee" type="xs:decimal" />
+          <xs:element minOccurs="0" name="SSRs" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="surcharges" nillable="true" type="tns:surcharge" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="costElement">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="category" type="tns:passengerCategory" />
+          <xs:element minOccurs="0" name="context" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="fee" type="xs:decimal" />
+          <xs:element name="seats" type="xs:int" />
+          <xs:element minOccurs="0" name="tariff" type="xs:decimal" />
+          <xs:element minOccurs="0" name="taxes" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="surcharge">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="code" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="flightSegment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="airlineLocator" type="xs:string" />
+          <xs:element minOccurs="0" name="beginDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="beginLocation" type="tns:location" />
+          <xs:element minOccurs="0" name="board" type="xs:string" />
+          <xs:element minOccurs="0" name="boardCode" type="xs:string" />
+          <xs:element minOccurs="0" name="bookingClass" type="xs:string" />
+          <xs:element name="connected" type="xs:boolean" />
+          <xs:element minOccurs="0" name="context" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="endLocation" type="tns:location" />
+          <xs:element minOccurs="0" name="fareBasis" type="xs:string" />
+          <xs:element minOccurs="0" name="flightNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="luggageAllowed" type="xs:string" />
+          <xs:element minOccurs="0" name="marketingVendor" type="tns:vendor" />
+          <xs:element minOccurs="0" name="operatingVendor" type="tns:vendor" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="SSRs" nillable="true" type="tns:ssr" />
+          <xs:element name="seats" type="xs:int" />
+          <xs:element minOccurs="0" name="serviceClass" type="tns:serviceClass" />
+          <xs:element minOccurs="0" name="terminalBegin" type="xs:string" />
+          <xs:element minOccurs="0" name="terminalEnd" type="xs:string" />
+          <xs:element minOccurs="0" name="travelDuration" type="xs:int" />
+          <xs:element minOccurs="0" name="vendor" type="tns:vendor" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="location">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseResource">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="countryId" type="xs:string" />
+              <xs:element minOccurs="0" name="parentLocationId" type="xs:string" />
+              <xs:element minOccurs="0" name="railwayCodeId" type="xs:string" />
+              <xs:element minOccurs="0" name="type" type="tns:locationType" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseResource" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="displayCode" type="xs:string" />
+          <xs:element minOccurs="0" name="id" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="vendor">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:baseResource">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ssr">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amountOfPieces" type="xs:int" />
+          <xs:element minOccurs="0" name="id" type="xs:string" />
+          <xs:element minOccurs="0" name="tariff" type="xs:decimal" />
+          <xs:element minOccurs="0" name="taxes" type="xs:decimal" />
+          <xs:element minOccurs="0" name="type" type="tns:ssrType" />
+          <xs:element minOccurs="0" name="weight" type="xs:double" />
+          <xs:element minOccurs="0" name="weightType" type="tns:ssrWeightType" />
+          <xs:element minOccurs="0" name="wholeLeg" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="contact" final="extension restriction">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="birthday" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="city" type="xs:string" />
+          <xs:element minOccurs="0" name="company" type="xs:string" />
+          <xs:element minOccurs="0" name="country" type="xs:string" />
+          <xs:element minOccurs="0" name="email" type="xs:string" />
+          <xs:element minOccurs="0" name="fax" type="xs:string" />
+          <xs:element minOccurs="0" name="firstName" type="xs:string" />
+          <xs:element minOccurs="0" name="gender" type="tns:gender" />
+          <xs:element minOccurs="0" name="houseNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="ipAddress" type="xs:string" />
+          <xs:element minOccurs="0" name="lastName" type="xs:string" />
+          <xs:element minOccurs="0" name="middleName" type="xs:string" />
+          <xs:element minOccurs="0" name="mobile" type="xs:string" />
+          <xs:element minOccurs="0" name="notes" type="xs:string" />
+          <xs:element minOccurs="0" name="phoneHome" type="xs:string" />
+          <xs:element minOccurs="0" name="phoneWork" type="xs:string" />
+          <xs:element minOccurs="0" name="postAddress" type="xs:string" />
+          <xs:element minOccurs="0" name="region" type="xs:string" />
+          <xs:element minOccurs="0" name="zipCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="document">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="charset" type="xs:string" />
+          <xs:element minOccurs="0" name="data" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="mimeType" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="tns:documentType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="bookingLogItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+          <xs:element minOccurs="0" name="severity" type="tns:severity" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="passenger" final="extension restriction">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="birthday" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="category" type="tns:passengerCategory" />
+          <xs:element minOccurs="0" name="citizenship" type="xs:string" />
+          <xs:element minOccurs="0" name="discountCardNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="firstName" type="xs:string" />
+          <xs:element minOccurs="0" name="gender" type="tns:gender" />
+          <xs:element minOccurs="0" name="idCardExpireDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="idCardNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="idCardType" type="tns:idCardType" />
+          <xs:element minOccurs="0" name="lastName" type="xs:string" />
+          <xs:element minOccurs="0" name="middleName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="SSRs" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ticketNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="ticketStatus" type="tns:tktStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="payment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cc" type="tns:creditCard" />
+          <xs:element minOccurs="0" name="code" type="xs:string" />
+          <xs:element minOccurs="0" name="currency" type="xs:string" />
+          <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="failureUrl" type="xs:anyURI" />
+          <xs:element minOccurs="0" name="issueEmd90" type="xs:boolean" />
+          <xs:element minOccurs="0" name="notes" type="xs:string" />
+          <xs:element minOccurs="0" name="number" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentFee" type="xs:decimal" />
+          <xs:element minOccurs="0" name="paymentPage" type="xs:anyURI" />
+          <xs:element minOccurs="0" name="price" type="xs:decimal" />
+          <xs:element minOccurs="0" name="state" type="tns:paymentState" />
+          <xs:element minOccurs="0" name="successUrl" type="xs:anyURI" />
+          <xs:element minOccurs="0" name="timeLimit" type="xs:dateTime" />
+          <xs:element name="timeout" type="xs:int" />
+          <xs:element minOccurs="0" name="type" type="tns:paymentType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="creditCard">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cvc" type="xs:string" />
+          <xs:element minOccurs="0" name="expired" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="number" type="xs:string" />
+          <xs:element minOccurs="0" name="owner" type="xs:string" />
+          <xs:element minOccurs="0" name="vendor" type="tns:creditCardVendor" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="salesPoint">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="timeZone" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sendEmailResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="voidTickets">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="agencyCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="salesPointCode" type="xs:string" />
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="bookingNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="voidTicketsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelReservation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="booking" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelReservationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchFlights">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="settings" type="tns:flightSearchSettings" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="flightSearchSettings">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="seats">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" name="key" type="tns:passengerCategory" />
+                      <xs:element minOccurs="0" name="value" type="xs:int" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="agencyCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentCode" type="xs:string" />
+          <xs:element minOccurs="0" name="agentPassword" type="xs:string" />
+          <xs:element name="dateTolerance" type="xs:int" />
+          <xs:element name="eticketsOnly" type="xs:boolean" />
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element name="mixedVendors" type="xs:boolean" />
+          <xs:element minOccurs="0" name="preferredCurrency" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="preferredVendors" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="route" nillable="true" type="tns:routeSegment" />
+          <xs:element minOccurs="0" name="salesPoint" type="xs:string" />
+          <xs:element minOccurs="0" name="serviceClass" type="tns:serviceClass" />
+          <xs:element name="skipConnected" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="tenantAllowedGDSes" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="routeSegment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="beginLocation" type="xs:string" />
+          <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="departureTimeFrom" type="xs:string" />
+          <xs:element minOccurs="0" name="departureTimeTo" type="xs:string" />
+          <xs:element minOccurs="0" name="endLocation" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchFlightsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:flight" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchRemarks">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="booking" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchRemarksResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changePassword">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="agentCode" type="xs:string" />
+          <xs:element minOccurs="0" name="password" type="xs:string" />
+          <xs:element minOccurs="0" name="newPassword" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changePasswordResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="preparePayment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="booking" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="preparePaymentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticate">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="agentCode" type="xs:string" />
+          <xs:element minOccurs="0" name="password" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:authenticationResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authenticationResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="agentEmail" type="xs:string" />
+          <xs:element minOccurs="0" name="agentHotelLogin" type="xs:string" />
+          <xs:element minOccurs="0" name="agentHotelPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="agentLogin" type="xs:string" />
+          <xs:element minOccurs="0" name="agentName" type="xs:string" />
+          <xs:element minOccurs="0" name="agentTelephone" type="xs:string" />
+          <xs:element minOccurs="0" name="agentTkpLogin" type="xs:string" />
+          <xs:element minOccurs="0" name="agentTkpPassword" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="allowedCurrencies" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="availableSalesPoints" nillable="true" type="tns:salesPointExtended" />
+          <xs:element name="successful" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="salesPointExtended">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:salesPoint">
+            <xs:sequence>
+              <xs:element name="agencyAeroexpressAllowed" type="xs:boolean" />
+              <xs:element minOccurs="0" name="agencyCode" type="xs:string" />
+              <xs:element minOccurs="0" name="agencyEmail" type="xs:string" />
+              <xs:element minOccurs="0" name="agencyName" type="xs:string" />
+              <xs:element minOccurs="0" name="agencyTelephone" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="allowedCurrencies" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="allowedPayments" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="defaultServiceCharge" type="xs:decimal" />
+              <xs:element minOccurs="0" name="maximumServiceCharge" type="xs:decimal" />
+              <xs:element minOccurs="0" name="minimumServiceCharge" type="xs:decimal" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="createReservation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="booking" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createReservationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkPricing">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="booking" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkPricingResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="finishBooking">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lang" type="xs:string" />
+          <xs:element minOccurs="0" name="booking" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="finishBookingResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:booking" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="serviceClass">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ECONOM" />
+          <xs:enumeration value="STANDARD" />
+          <xs:enumeration value="BUSINESS" />
+          <xs:enumeration value="ROUNDTRIP" />
+          <xs:enumeration value="FIRST" />
+          <xs:enumeration value="CHILDREN" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="dayOfTheWeek">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MONDAY" />
+          <xs:enumeration value="TUESDAY" />
+          <xs:enumeration value="WEDNESDAY" />
+          <xs:enumeration value="THURSDAY" />
+          <xs:enumeration value="FRIDAY" />
+          <xs:enumeration value="SATURDAY" />
+          <xs:enumeration value="SUNDAY" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="paymentType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CASH_OFFICE" />
+          <xs:enumeration value="CC_OFFICE" />
+          <xs:enumeration value="CC_ONLINE" />
+          <xs:enumeration value="INVOICE" />
+          <xs:enumeration value="SIRENA_CC_ONLINE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="passengerCategory">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ADULT" />
+          <xs:enumeration value="INFANT" />
+          <xs:enumeration value="CHILD" />
+          <xs:enumeration value="SENIOR" />
+          <xs:enumeration value="STUDENT" />
+          <xs:enumeration value="YOUTH" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="locationType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AIRPORT" />
+          <xs:enumeration value="CITY" />
+          <xs:enumeration value="REGION" />
+          <xs:enumeration value="STATION" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ssrType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="LUGGAGE" />
+          <xs:enumeration value="BIKE" />
+          <xs:enumeration value="SKI" />
+          <xs:enumeration value="MEAL" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ssrWeightType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PER_PIECE" />
+          <xs:enumeration value="TOTAL" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="gender">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MALE" />
+          <xs:enumeration value="FEMALE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="documentType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CONFIRMATION" />
+          <xs:enumeration value="TICKET" />
+          <xs:enumeration value="RECEIPT" />
+          <xs:enumeration value="REPORT" />
+          <xs:enumeration value="TRAVELDOCUMENT" />
+          <xs:enumeration value="OTHER" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="severity">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="INFO" />
+          <xs:enumeration value="WARNING" />
+          <xs:enumeration value="ERROR" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="idCardType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CIVIL_PASSPORT" />
+          <xs:enumeration value="FOREIGN_PASSPORT" />
+          <xs:enumeration value="DIPLOMATIC_PASSPORT" />
+          <xs:enumeration value="BIRTH_NOTIFICATION" />
+          <xs:enumeration value="CERTIFICATE_OF_RELEASE" />
+          <xs:enumeration value="SEAMANS_ID" />
+          <xs:enumeration value="MILITARY_ID" />
+          <xs:enumeration value="RESIDENCE_PERMIT" />
+          <xs:enumeration value="OTHER" />
+          <xs:enumeration value="ALIEN_RESIDENT_CARD" />
+          <xs:enumeration value="PERMANENT_RESIDENT_CARD" />
+          <xs:enumeration value="PASSPORT" />
+          <xs:enumeration value="TRAVEL_DOCUMENT" />
+          <xs:enumeration value="FACILITATION_DOCUMENT" />
+          <xs:enumeration value="NATURALIZATION_CERTIFICATE" />
+          <xs:enumeration value="BORDER_CROSSING_CARD" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="tktStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NotIssued" />
+          <xs:enumeration value="Issued" />
+          <xs:enumeration value="Voided" />
+          <xs:enumeration value="Refunded" />
+          <xs:enumeration value="Exchanged" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="creditCardVendor">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="VISA" />
+          <xs:enumeration value="VISA_ELECTRON_DEBIT" />
+          <xs:enumeration value="VISA_ELECTRON_CREDIT" />
+          <xs:enumeration value="MASTER_CARD" />
+          <xs:enumeration value="AMEX" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="paymentState">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NoPayment" />
+          <xs:enumeration value="Prepared" />
+          <xs:enumeration value="Initialized" />
+          <xs:enumeration value="Authorized" />
+          <xs:enumeration value="Acquired" />
+          <xs:enumeration value="Canceled" />
+          <xs:enumeration value="Failed" />
+          <xs:enumeration value="Refunded" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="bookingStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CONFIRMED" />
+          <xs:enumeration value="WAIT_LIST" />
+          <xs:enumeration value="UNCONFIRMED" />
+          <xs:enumeration value="CANCELLED" />
+          <xs:enumeration value="ERROR" />
+          <xs:enumeration value="COMPLETED" />
+          <xs:enumeration value="UNDEFINED" />
+          <xs:enumeration value="VOIDED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="SecurityException" type="tns:SecurityException" />
+      <xs:complexType name="SecurityException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Exception" type="tns:Exception" />
+      <xs:complexType name="Exception">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ServiceException" type="tns:ServiceException" />
+      <xs:complexType name="ServiceException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="errorCode" type="xs:string" />
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="checkPricingResponse">
+    <wsdl:part name="parameters" element="tns:checkPricingResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchSchedule">
+    <wsdl:part name="parameters" element="tns:searchSchedule" />
+  </wsdl:message>
+  <wsdl:message name="voidTicketsResponse">
+    <wsdl:part name="parameters" element="tns:voidTicketsResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchScheduleResponse">
+    <wsdl:part name="parameters" element="tns:searchScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceException">
+    <wsdl:part name="ServiceException" element="tns:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="SecurityException">
+    <wsdl:part name="SecurityException" element="tns:SecurityException" />
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception" />
+  </wsdl:message>
+  <wsdl:message name="searchRemarks">
+    <wsdl:part name="parameters" element="tns:searchRemarks" />
+  </wsdl:message>
+  <wsdl:message name="changePassword">
+    <wsdl:part name="parameters" element="tns:changePassword" />
+  </wsdl:message>
+  <wsdl:message name="sendEmailResponse">
+    <wsdl:part name="parameters" element="tns:sendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="preparePaymentResponse">
+    <wsdl:part name="parameters" element="tns:preparePaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="createReservationResponse">
+    <wsdl:part name="parameters" element="tns:createReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="authenticateResponse">
+    <wsdl:part name="parameters" element="tns:authenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendEmail">
+    <wsdl:part name="parameters" element="tns:sendEmail" />
+  </wsdl:message>
+  <wsdl:message name="searchFlightsResponse">
+    <wsdl:part name="parameters" element="tns:searchFlightsResponse" />
+  </wsdl:message>
+  <wsdl:message name="voidTickets">
+    <wsdl:part name="parameters" element="tns:voidTickets" />
+  </wsdl:message>
+  <wsdl:message name="cancelReservation">
+    <wsdl:part name="parameters" element="tns:cancelReservation" />
+  </wsdl:message>
+  <wsdl:message name="finishBookingResponse">
+    <wsdl:part name="parameters" element="tns:finishBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="cancelReservationResponse">
+    <wsdl:part name="parameters" element="tns:cancelReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchFlights">
+    <wsdl:part name="parameters" element="tns:searchFlights" />
+  </wsdl:message>
+  <wsdl:message name="searchRemarksResponse">
+    <wsdl:part name="parameters" element="tns:searchRemarksResponse" />
+  </wsdl:message>
+  <wsdl:message name="preparePayment">
+    <wsdl:part name="parameters" element="tns:preparePayment" />
+  </wsdl:message>
+  <wsdl:message name="changePasswordResponse">
+    <wsdl:part name="parameters" element="tns:changePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="authenticate">
+    <wsdl:part name="parameters" element="tns:authenticate" />
+  </wsdl:message>
+  <wsdl:message name="createReservation">
+    <wsdl:part name="parameters" element="tns:createReservation" />
+  </wsdl:message>
+  <wsdl:message name="checkPricing">
+    <wsdl:part name="parameters" element="tns:checkPricing" />
+  </wsdl:message>
+  <wsdl:message name="finishBooking">
+    <wsdl:part name="parameters" element="tns:finishBooking" />
+  </wsdl:message>
+  <wsdl:portType name="WSAvia">
+    <wsdl:operation name="searchSchedule">
+      <wsdl:input name="searchSchedule" message="tns:searchSchedule" />
+      <wsdl:output name="searchScheduleResponse" message="tns:searchScheduleResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="sendEmail">
+      <wsdl:input name="sendEmail" message="tns:sendEmail" />
+      <wsdl:output name="sendEmailResponse" message="tns:sendEmailResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="voidTickets">
+      <wsdl:input name="voidTickets" message="tns:voidTickets" />
+      <wsdl:output name="voidTicketsResponse" message="tns:voidTicketsResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelReservation">
+      <wsdl:input name="cancelReservation" message="tns:cancelReservation" />
+      <wsdl:output name="cancelReservationResponse" message="tns:cancelReservationResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="searchFlights">
+      <wsdl:input name="searchFlights" message="tns:searchFlights" />
+      <wsdl:output name="searchFlightsResponse" message="tns:searchFlightsResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="searchRemarks">
+      <wsdl:input name="searchRemarks" message="tns:searchRemarks" />
+      <wsdl:output name="searchRemarksResponse" message="tns:searchRemarksResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="changePassword">
+      <wsdl:input name="changePassword" message="tns:changePassword" />
+      <wsdl:output name="changePasswordResponse" message="tns:changePasswordResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="preparePayment">
+      <wsdl:input name="preparePayment" message="tns:preparePayment" />
+      <wsdl:output name="preparePaymentResponse" message="tns:preparePaymentResponse" />
+      <wsdl:fault name="ServiceException" message="tns:ServiceException" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="authenticate">
+      <wsdl:input name="authenticate" message="tns:authenticate" />
+      <wsdl:output name="authenticateResponse" message="tns:authenticateResponse" />
+      <wsdl:fault name="ServiceException" message="tns:ServiceException" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+    </wsdl:operation>
+    <wsdl:operation name="createReservation">
+      <wsdl:input name="createReservation" message="tns:createReservation" />
+      <wsdl:output name="createReservationResponse" message="tns:createReservationResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="checkPricing">
+      <wsdl:input name="checkPricing" message="tns:checkPricing" />
+      <wsdl:output name="checkPricingResponse" message="tns:checkPricingResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="finishBooking">
+      <wsdl:input name="finishBooking" message="tns:finishBooking" />
+      <wsdl:output name="finishBookingResponse" message="tns:finishBookingResponse" />
+      <wsdl:fault name="SecurityException" message="tns:SecurityException" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AviaSoapBinding" type="tns:WSAvia">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="searchSchedule">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="searchSchedule">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchScheduleResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendEmail">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="sendEmail">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendEmailResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="voidTickets">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="voidTickets">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="voidTicketsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelReservation">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cancelReservation">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cancelReservationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="searchFlights">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="searchFlights">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchFlightsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="searchRemarks">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="searchRemarks">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchRemarksResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changePassword">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="changePassword">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="changePasswordResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="preparePayment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="preparePayment">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="preparePaymentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="authenticate">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="authenticate">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="authenticateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault use="literal" name="ServiceException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createReservation">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="createReservation">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createReservationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkPricing">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="checkPricing">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkPricingResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="finishBooking">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="finishBooking">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="finishBookingResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SecurityException">
+        <soap:fault use="literal" name="SecurityException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Avia">
+    <wsdl:port name="WSAviaImplPort" binding="tns:AviaSoapBinding">
+      <soap:address location="http://localhost:8080/Partner/Avia" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
