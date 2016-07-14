@@ -6,8 +6,10 @@ using Template10.Controls;
 using Template10.Common;
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Windows.UI.Xaml.Data;
 using B2B_App.ViewModels.APA;
+
 
 namespace B2B_App
 {

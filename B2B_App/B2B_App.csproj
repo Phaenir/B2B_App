@@ -17,7 +17,11 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>B2B_App_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>B2B_App_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>B90D8EEB004D4BD9BE07617A062A5E3531842FB2</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -91,7 +95,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="B2B_App_StoreKey.pfx" />
     <None Include="B2B_App_TemporaryKey.pfx" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Models\APA\Schemas\CommonConfiguration.xsd">
       <SubType>Designer</SubType>
       <LastGenOutput>CommonConfiguration1.Designer.cs</LastGenOutput>
@@ -207,6 +213,7 @@
     <Content Include="Assets\roundtrip.png" />
     <Content Include="Assets\Square71x71Logo.scale-100.png" />
     <Content Include="Help.htm" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

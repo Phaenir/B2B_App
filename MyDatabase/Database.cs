@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using MySql.Data.MySqlClient;
 
@@ -92,6 +93,8 @@ namespace MyDatabase
         /// </summary>
         /// <returns>IEnumerable</returns>
         /// <exception cref="Exception">MySqlException</exception>
+        ///
+
         public IEnumerable<TemplateTable> GetTemplates()
         {
             _templateTables=new ObservableCollection<TemplateTable>();
