@@ -1,21 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using Windows.Networking;
-using Windows.Networking.Sockets;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml.Automation.Peers;
-using B2B_App.Models.APA;
-using Chilkat;
+﻿using System.Threading.Tasks;
 
 namespace B2B_App.Models.APA.Configuration
 {
@@ -189,11 +172,6 @@ namespace B2B_App.Models.APA.Configuration
 
             string xml = template.Serialize();
             await RemoteSave.SaveContentToFtp(xml, website.CommonInfo.WebsiteName, RemoteSave.State.TEMPLATE);
-        }
-
-        private async Task<bool> FileExist(string name)
-        {
-          return  await RemoteSave.FileExist(name + ".xml", RemoteSave.State.TEMPLATE);
         }
     }
 }

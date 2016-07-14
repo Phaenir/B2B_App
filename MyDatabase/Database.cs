@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Diagnostics;
 using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 namespace MyDatabase
 {
+    /// <summary>
+    /// Class that provide methods to manage with data in tables in database
+    /// </summary>
     public class Database
     {
         private static Database _templates;
@@ -15,25 +17,54 @@ namespace MyDatabase
         private MySqlConnection _connection;
 
         private ObservableCollection<TemplateTable> _templateTables=new ObservableCollection<TemplateTable>();
+        /// <summary>
+        /// Provides information about templates as list
+        /// </summary>
         public ObservableCollection<TemplateTable> TemplateTables => _templates._templateTables;
 
         private ObservableCollection<Airline> _airlines = new ObservableCollection<Airline>();
-        public ObservableCollection<Airline> Airlines => _templates._airlines;
+        /// <summary>
+        /// Provide as list information about airlines
+        /// </summary>
+        private ObservableCollection<Airline> Airlines => _templates._airlines;
 
         private ObservableCollection<City> _cities = new ObservableCollection<City>();
-        public ObservableCollection<City> Cities => _templates._cities;
+        /// <summary>
+        /// Provide as list information about cities
+        /// </summary>
+        private ObservableCollection<City> Cities => _templates._cities;
 
         private ObservableCollection<Country> _countries = new ObservableCollection<Country>();
-        public ObservableCollection<Country> Countries => _templates._countries;
+        /// <summary>
+        /// Provide as list information about countries
+        /// </summary>
+        private ObservableCollection<Country> Countries => _templates._countries;
 
         private ObservableCollection<Airport> _airports = new ObservableCollection<Airport>();
-        public ObservableCollection<Airport> Airports => _templates._airports;
+        /// <summary>
+        /// provide information as list about airports
+        /// </summary>
+        private ObservableCollection<Airport> Airports => _templates._airports;
 
         private ObservableCollection<FlightPoint> _travelPoints = new ObservableCollection<FlightPoint>();
+        /// <summary>
+        /// provide information as list about flight legs (routes)
+        /// </summary>
         public ObservableCollection<FlightPoint> TravelPoints => _templates._travelPoints;
         private ObservableCollection<ResultView> _resultView = new ObservableCollection<ResultView>();
+        /// <summary>
+        /// Provide a list with result in short view
+        /// </summary>
         public ObservableCollection<ResultView> ResultViews => _templates._resultView;
 
+        /// <summary>
+        /// Initialize database
+        /// </summary>
+        /// <param name="server">server host or ip</param>
+        /// <param name="user">database user</param>
+        /// <param name="password">password to access database</param>
+        /// <param name="name">the name of database</param>
+        /// <param name="port">tcp/ip port</param>
         public Database(string server, string user, string password, string name, uint port=3306)
         {
             Init(server, user, password, name, port);
@@ -56,6 +87,11 @@ namespace MyDatabase
             _connection=new MySqlConnection(_builder.ToString());
         }
 
+        /// <summary>
+        /// Get list with information about where templates saved
+        /// </summary>
+        /// <returns>IEnumerable</returns>
+        /// <exception cref="Exception">MySqlException</exception>
         public IEnumerable<TemplateTable> GetTemplates()
         {
             _templateTables=new ObservableCollection<TemplateTable>();
@@ -77,16 +113,24 @@ namespace MyDatabase
                         _templates._templateTables.Add(tt);
                     }
                 }
+                _connection.Close();
             }
             catch (MySqlException e)
             {
-                
-                throw new Exception("Template Tables wrong access: "+e);
+                _connection.Close();
+                Debug.Assert(true,e.Message);
             }
             _connection.Close();
             return _templates._templateTables;
         }
 
+        /// <summary>
+        /// Insert in template_storage values
+        /// </summary>
+        /// <param name="name">template name</param>
+        /// <param name="path">path on the remote server</param>
+        /// <param name="file">file name where template saved</param>
+        /// <returns>true - if success</returns>
         public bool InsertTemplatesToDatabase(string name, string path, string file)
         {
             TemplateTable newRow=new TemplateTable(name,path,file);
@@ -104,13 +148,20 @@ namespace MyDatabase
                 _connection.Close();
                 return true;
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
-
+                _connection.Close();
+                Debug.Assert(true, e.Message);
                 return false;
             }           
         }
 
+        /// <summary>
+        /// Upgrade values in template_storage
+        /// </summary>
+        /// <param name="old">old name</param>
+        /// <param name="upd">new name</param>
+        /// <returns>true - if success</returns>
         public bool UpgradeTemplatesInDatabase(string old, string upd)
         {
             try
@@ -125,12 +176,18 @@ namespace MyDatabase
                 _connection.Close();
                 return true;
             }
-            catch (MySqlException)
+            catch (MySqlException exception)
             {
-
+                _connection.Close();
+                Debug.Assert(true,exception.Message);
                 return false;
             }
         }
+        /// <summary>
+        /// Get list of airlines
+        /// </summary>
+        /// <returns>IEnumerable</returns>
+        /// <exception cref="Exception">MySqlException</exception>
         public IEnumerable<Airline> GetAirlines()
         {
             _airlines = new ObservableCollection<Airline>();
@@ -152,15 +209,22 @@ namespace MyDatabase
                         _templates._airlines.Add(tt);
                     }
                 }
+                _connection.Close();
             }
             catch (MySqlException e)
             {
-
+                _connection.Close();
+                Debug.Assert(true,e.Message);
                 throw new Exception("Template Tables wrong access: " + e);
             }
             _connection.Close();
             return _templates.Airlines;
         }
+        /// <summary>
+        /// Get list of countries
+        /// </summary>
+        /// <returns>IEnumerable</returns>
+        /// <exception cref="Exception">MySqlException</exception>
         public IEnumerable<Country> GetCountries()
         {
             _countries = new ObservableCollection<Country>();
@@ -182,15 +246,21 @@ namespace MyDatabase
                         _templates._countries.Add(tt);
                     }
                 }
+                _connection.Close();
             }
             catch (MySqlException e)
             {
-
-                throw new Exception("Template Tables wrong access: " + e);
+                _connection.Close();
+                Debug.Assert(true,e.Message);
             }
             _connection.Close();
             return _templates.Countries;
         }
+        /// <summary>
+        /// Get list of cities
+        /// </summary>
+        /// <returns>IEnumerable</returns>
+        /// <exception cref="Exception">MySqlException</exception>
         public IEnumerable<City> GetCities()
         {
             _cities = new ObservableCollection<City>();
@@ -215,12 +285,17 @@ namespace MyDatabase
             }
             catch (MySqlException e)
             {
-
-                throw new Exception("Template Tables wrong access: " + e);
+                _connection.Close();
+                Debug.Assert(true,e.Message);
             }
             _connection.Close();
             return _templates.Cities;
         }
+        /// <summary>
+        /// Get list of airports
+        /// </summary>
+        /// <returns>IEnumerable</returns>
+        /// <exception cref="Exception">MySqlException</exception>
         public IEnumerable<Airport> GetAirports()
         {
             _airports = new ObservableCollection<Airport>();
@@ -242,15 +317,21 @@ namespace MyDatabase
                         _templates._airports.Add(tt);
                     }
                 }
+                _connection.Close();
             }
             catch (MySqlException e)
             {
-
-                throw new Exception("Template Tables wrong access: " + e);
+                _connection.Close();
+                Debug.Assert(true,e.Message);
             }
             _connection.Close();
             return _templates.Airports;
         }
+        /// <summary>
+        /// list of routes
+        /// </summary>
+        /// <returns>IEnumerable</returns>
+        /// <exception cref="Exception">MySqlException</exception>
         public IEnumerable<FlightPoint> GetFlightPoints()
         {
             _travelPoints = new ObservableCollection<FlightPoint>();
@@ -272,16 +353,23 @@ namespace MyDatabase
                         _templates._travelPoints.Add(tt);
                     }
                 }
+                _connection.Close();
             }
             catch (MySqlException e)
             {
-
-                throw new Exception("Template Tables wrong access: " + e);
+                _connection.Close();
+                Debug.Assert(true,e.Message);
             }
             _connection.Close();
             return _templates.TravelPoints;
         }
 
+        /// <summary>
+        /// Send command to form result view
+        /// </summary>
+        /// <param name="start">date from what data need get in view</param>
+        /// <param name="end">date upto what data need get in view</param>
+        /// <returns>200 - if success; 404 - if unsuccessful</returns>
         public int SetResultView(DateTime start, DateTime end)
         {
             try
@@ -289,21 +377,26 @@ namespace MyDatabase
                 _connection.Open();
                 MySqlCommand command = _connection.CreateCommand();
                 command.CommandText =
-                    "create or replace view result_table as ( select  search.dep_date as DepartureDate, search.det_time as DepartureTime, search.departure as Departure, search.arrival as Arrival, search.roundtrip as RT, rt.dep_date as ReturnDate, rt.dep_time as ReturnTime, search.validate_carrier as ValidateCarrier, search.validateFlight_number as VC_Number, search.operate_carrier as OperateCarrier, search.operateFlight_number as OC_Number, search.travelDuration as Duration, search.price as Price from search_result as search, roundtrip as rt where search.roundtrip_id = rt.Id and(search.dep_date between @start and @end) ); ";
+                    "create or replace view result_table as ( select  search.dep_date as DepartureDate, search.dep_time as DepartureTime, search.departure as Departure, search.arrival as Arrival, search.roundtrip as RT, rt.dep_date as ReturnDate, rt.dep_time as ReturnTime, search.validate_carrier as ValidateCarrier, search.validateFlight_number as VC_Number, search.operate_carrier as OperateCarrier, search.operateFlight_number as OC_Number, search.travelDuration as Duration, search.price as Price from search_result as search, roundtrip as rt where search.roundtrip_id = rt.Id and(search.dep_date between @start and @end) ); ";
                 string str = String.Format("{0:yyyy-MM-dd}", start);
                 command.Parameters.AddWithValue("@start", String.Format("{0:yyyy-MM-dd}", start));
                 command.Parameters.AddWithValue("@end",String.Format("{0:yyyy-MM-dd}", end));
                 command.ExecuteNonQuery();
                 _connection.Close();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.Assert(true,exception.Message);
                 _connection.Close();
                 return 404;
             }
             return 200;
         }
 
+        /// <summary>
+        /// Drop view
+        /// </summary>
+        /// <returns>200 - if success; 404 - if unsuccessful</returns>
         public int DropResultView()
         {
             try
@@ -314,13 +407,18 @@ namespace MyDatabase
                 command.ExecuteNonQuery();
                 _connection.Close();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.Assert(true, exception.Message);
                 _connection.Close();
                 return 404;
             }
             return 200;
         }
+        /// <summary>
+        /// get list with preview result data
+        /// </summary>
+        /// <returns>IEnumerable</returns>
         public IEnumerable<ResultView> GetResultView()
         {
             _resultView = new ObservableCollection<ResultView>();
@@ -330,14 +428,37 @@ namespace MyDatabase
                 _connection.Open();
                 MySqlCommand command = _connection.CreateCommand();
                 command.CommandText = "SELECT * FROM result_table;";
-                System.Text.EncodingProvider ppp = System.Text.CodePagesEncodingProvider.Instance;
+                EncodingProvider ppp = CodePagesEncodingProvider.Instance;
                 Encoding.RegisterProvider(ppp);
                
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        ResultView tt = new ResultView {DepartureDate = reader.GetDateTime("DepartureDate").Date, DepartureTime = reader.GetDateTime("DepartureTime"), DeparturePoint = reader.GetString("Departure"), ArrivalPoint = reader.GetString("Arrival"),Roundtrip = reader.GetByte("RT"),RoundtripDate = reader.GetDateTime("ReturnDate"), RoundtripTime = reader.GetDateTime("ReturnTime"), ValidateCarrierName = reader.GetString("ValidateCarrier"), ValidateCarrierNumber = reader.GetInt16("VC_Number"),OperateCarrierName = reader.GetString("OperateCarrier"),OperateCarrierNumber = reader.GetInt16("OC_Number"), Duration = reader.GetInt16("Duration"),Price = reader.GetDecimal("Price")};
+                        ResultView tt = new ResultView
+                        {
+                            Price = reader.GetDecimal("Price"),
+                            Duration = reader.GetInt32("Duration"),
+                            OperateCarrierNumber = reader.GetInt32("OC_Number"),
+                            ValidateCarrierNumber = reader.GetInt16("VC_Number"),
+                            ValidateCarrierName = reader.GetString("ValidateCarrier"),
+                            RoundtripTime = reader.GetDateTime("ReturnTime"),
+                            RoundtripDate = reader.GetDateTime("ReturnDate"),
+                            Roundtrip = reader.GetByte("RT"),
+                            ArrivalPoint = reader.GetString("Arrival"),
+                            DeparturePoint = reader.GetString("Departure"),
+                            DepartureTime = reader.GetDateTime("DepartureTime"),
+                            DepartureDate = reader.GetDateTime("DepartureDate").Date
+                        };
+                        try
+                        {
+                            tt.OperateCarrierName = reader.GetString("OperateCarrier");
+                        }
+                        catch (Exception)
+                        {
+                            tt.OperateCarrierName = "n/a";
+                        }                        
+                        
                         if (_templates._resultView.Contains(tt))
                         {
                             continue;
@@ -345,11 +466,12 @@ namespace MyDatabase
                         _templates._resultView.Add(tt);
                     }
                 }
+                _connection.Close();
             }
             catch (MySqlException e)
             {
-
-                throw new Exception("Template Tables wrong access: " + e);
+                _connection.Close();
+                Debug.Assert(true,e.Message);
             }
             _connection.Close();
             return _templates.ResultViews;

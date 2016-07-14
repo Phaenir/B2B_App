@@ -126,7 +126,6 @@
     <Compile Include="Models\APA\Configuration\TemplateSearchEngine.cs" />
     <Compile Include="Models\APA\DateTimeConverter.cs" />
     <Compile Include="Models\APA\DateTimeToStringConverter.cs" />
-    <Compile Include="Models\APA\KeyValuePairs.cs" />
     <Compile Include="Models\APA\MainPageModel.cs" />
     <Compile Include="Models\APA\Schemas\CommonConfiguration1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -202,9 +201,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\oneway.png" />
     <Content Include="Assets\Price Analyse.png" />
     <Content Include="Assets\roundtrip.png" />
+    <Content Include="Assets\Square71x71Logo.scale-100.png" />
     <Content Include="Help.htm" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

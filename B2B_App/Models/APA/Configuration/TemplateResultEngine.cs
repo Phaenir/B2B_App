@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace B2B_App.Models.APA.Configuration
+﻿namespace B2B_App.Models.APA.Configuration
 {
     class TemplateResultEngine
     {
@@ -35,49 +29,6 @@ namespace B2B_App.Models.APA.Configuration
             Tax=new HtmlTags();
             Fee=new HtmlTags();
             Price=new HtmlTags();
-        }
-        public TemplateResultEngine(TemplateResultEngine resultEngine)
-        {
-            DeparturePoint = resultEngine.DeparturePoint;
-            DepartureDate = resultEngine.DepartureDate;
-            DepartureTime = resultEngine.DepartureTime;
-            ArrivalPoint = resultEngine.ArrivalPoint;
-            ArrivalDate = resultEngine.ArrivalDate;
-            AirlineName = resultEngine.AirlineName;
-            AirlineNumber = resultEngine.AirlineNumber;
-            Tariff = resultEngine.Tariff;
-            Tax = resultEngine.Tax;
-            Fee = resultEngine.Fee;
-            Price = resultEngine.Price;
-        }
-
-        public bool IsSame(TemplateResultEngine resultEngine)
-        {
-            if (DeparturePoint != resultEngine.DeparturePoint)
-                return false;
-            if (DepartureDate != resultEngine.DepartureDate)
-                return false;
-            if (DepartureTime != resultEngine.DepartureTime)
-                return false;
-            if (ArrivalPoint != resultEngine.ArrivalPoint)
-                return false;
-            if (ArrivalDate != resultEngine.ArrivalDate)
-                return false;
-            if (ArrivalTime != resultEngine.ArrivalTime)
-                return false;
-            if (AirlineName != resultEngine.AirlineName)
-                return false;
-            if (AirlineNumber != resultEngine.AirlineNumber)
-                return false;
-            if (Tariff != resultEngine.Tariff)
-                return false;
-            if (Tax != resultEngine.Tax)
-                return false;
-            if (Fee != resultEngine.Fee)
-                return false;
-            if (Price != resultEngine.Price)
-                return false;
-            return true;
         }
     }
 }

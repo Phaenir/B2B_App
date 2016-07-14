@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -89,10 +87,9 @@ namespace B2B_App.ViewModels.APA
                 database.GetTemplates();
                 _website = database.TemplateTables.ToList();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                //_configuration.SetConfiguration(_common);
-                //throw;
+                Debug.Assert(true,exception.Message);
             }
             
             Websites = _website;
@@ -282,7 +279,7 @@ namespace B2B_App.ViewModels.APA
             }
             MainPageModel model=new MainPageModel();
 
-            model.Start(WebsiteMembers, _flightLeg, dep, !_isRoundtripPushed, arr,_configuration.Path);           
+            model.Start(WebsiteMembers, _flightLeg, dep, arr,_configuration.Path);           
         }
 
     }

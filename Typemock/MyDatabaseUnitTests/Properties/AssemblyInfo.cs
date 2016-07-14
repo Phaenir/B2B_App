@@ -2,11 +2,11 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
 using TypeMock.ArrangeActAssert.Suggest;
-[assembly: AssemblyTitle("WebsiteCrawlerUnitTests")]
+[assembly: AssemblyTitle("MyDatabaseUnitTests")]
 [assembly: AssemblyDescription("Typemock Suggested Unit Tests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WebsiteCrawlerUnitTests")]
+[assembly: AssemblyProduct("MyDatabaseUnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

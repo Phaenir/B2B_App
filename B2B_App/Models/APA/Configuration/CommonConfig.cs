@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace B2B_App.Models.APA.Configuration
+﻿namespace B2B_App.Models.APA.Configuration
 {
     class CommonConfig
     {
@@ -23,33 +17,5 @@ namespace B2B_App.Models.APA.Configuration
         public int FormLimit { get; set; }
         public int PageLimit { get; set; }
         public int SearchLimit { get; set; }
-
-        public bool IsSame(CommonConfig start)
-        {
-            if (PageLimit==start.PageLimit && FormLimit==start.FormLimit && SearchLimit==start.SearchLimit && AgencyName==start.AgencyName && AgencyNumber==start.AgencyNumber && AgencyPassword==start.AgencyPassword && AgencySalespoint==start.AgencySalespoint && DatabaseName==start.DatabaseName && DatabasePassword==start.DatabasePassword && DatabasePort==start.DatabasePort && DatabaseRemote == start.DatabaseRemote && DatabaseUser == start.DatabaseUser && DatabaseHost == start.DatabaseHost)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void Copy(CommonConfig start)
-        {
-            PageLimit = start.PageLimit;
-            FormLimit = start.FormLimit;
-            SearchLimit = start.SearchLimit;
-
-            AgencyName = start.AgencyName;
-            AgencyNumber = start.AgencyNumber;
-            AgencyPassword = start.AgencyPassword;
-            AgencySalespoint = start.AgencySalespoint;
-
-            DatabaseName = start.DatabaseName;
-            DatabasePassword = start.DatabasePassword;
-            DatabasePort = start.DatabasePort;
-            DatabaseRemote = start.DatabaseRemote;
-            DatabaseUser = start.DatabaseUser;
-            DatabaseHost = start.DatabaseHost;
-        }
     }
 }

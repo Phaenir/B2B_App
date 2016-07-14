@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
-using Windows.Foundation;
 using Windows.Storage;
 
 namespace B2B_App.Models.APA.Configuration
@@ -137,13 +132,17 @@ namespace B2B_App.Models.APA.Configuration
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.Assert(true,exception.Message);
                 return false;
             }
         }
     }
 
+    /// <summary>
+    /// Path builder under rules of .NET Framework 5.0 +
+    /// </summary>
     public class PathToCommonConfigFile
     {
         public static StorageFolder FOLDER;

@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using B2B_App.Models.APA.Configuration;
 using B2B_App.Views.APA;
 using MyDatabase;
 using Template10.Mvvm;
-using Template10.Behaviors;
-using System.Windows.Input;
-using Windows.UI.Core;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media.Animation;
-using Template10.Common;
 using Template10.Services.NavigationService;
 
 namespace B2B_App.ViewModels.APA
@@ -69,9 +61,9 @@ namespace B2B_App.ViewModels.APA
                 database.InsertTemplatesToDatabase(Template.CommonInfo.WebsiteName, "/Templates/",
                 Template.CommonInfo.WebsiteName + ".xml");
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                //ignore
+                Debug.Assert(true, exception.Message);
             }                     
         }
         public async void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
@@ -84,9 +76,9 @@ namespace B2B_App.ViewModels.APA
                 _template = await configModel.GetConfiguration(_clickedItem.Name);
                 Template = _template;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                //ignore
+                Debug.Assert(true, exception.Message);
             }
 
             this.NavigationService.Navigate(typeof(TemplateConfigPage),this.Template);                

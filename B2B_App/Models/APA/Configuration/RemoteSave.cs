@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
 using Windows.Storage;
 using Chilkat;
 
@@ -19,8 +17,6 @@ namespace B2B_App.Models.APA.Configuration
 
         private static void Init()
         {
-            //_ftp.Dispose();
-            //_ftp = null;
             _ftp = new Ftp2();
             Success = _ftp.UnlockComponent("Anything for 30-day trial");
             if (!Success)
@@ -209,6 +205,7 @@ namespace B2B_App.Models.APA.Configuration
             }
         }
 
-        public enum State : int { TEMPLATE=0, ROUTE=1, INTERMEDIATE=3, }
+        public enum State
+        { TEMPLATE=0, ROUTE=1, INTERMEDIATE=3, }
     }
 }

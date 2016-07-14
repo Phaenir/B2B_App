@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Media.Audio;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using B2B_App.Models.APA.Configuration;
 using B2B_App.Views.APA;
@@ -21,8 +14,6 @@ namespace B2B_App.ViewModels.APA
     class APrefListViewModel:ViewModelBase
     {
         public static APrefListViewModel _viewModel=new APrefListViewModel();
-       // IDictionary<string,object> state = Template10.Common.BootStrapper.Current.SessionState;
-
         private static List<FlightPoint> _travelPoints=new List<FlightPoint>(); 
         public List<FlightPoint> TravelPoints { get { return _travelPoints; } set { Set(ref _travelPoints, value); } } 
 
@@ -35,12 +26,10 @@ namespace B2B_App.ViewModels.APA
 
         public APrefListViewModel()
         {
-           // var t = Task.Run(async () => { await Init(); });
             Init();
         }
         private void Init()
         {
-            //state.Clear();
             _travelPoints = PrefListModel.FlightPoints.ToList();
             TravelPoints = _travelPoints;
             FileList = model.GetFiles();
@@ -65,53 +54,16 @@ namespace B2B_App.ViewModels.APA
         public async void AddRouteToList()
         {
             _viewModel.Routes = _routes;
-       /*     if (state.ContainsKey("routes"))
-            {
-                state["routes"] = Routes;
-            }
-            else
-            {
-                state.Add("routes", Routes);
-            }
-            var t = Task.Run(async () =>
-            {
-                await OnNavigatedToAsync(typeof(PrefListPage), NavigationMode.Refresh, state);
-
-            });
-            t.Wait();
-           // await OnNavigatedToAsync(typeof(PrefListPage), NavigationMode.Refresh, state);
-           */
             NavigationService.Navigate(typeof(PrefListPage), Routes);
             await Task.CompletedTask;
         }
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-            //   if (suspensionState.Any())
-            //   {
-            //       Routes =(List<Route>)suspensionState["routes"];
-            //   }
-            // PrefListPage page = (PrefListPage) parameter;
-            //  page.InitializeComponent();
-
             NavigationService.Frame.BackStack.Clear();
-
             await Task.CompletedTask;
         }
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {
-            /* if (state.ContainsKey("routes"))
-             {
-                 state["routes"] = Routes;
-             }
-             else
-             {
-                 state.Add("routes", Routes);
-             }
-             if (suspending)
-             {
-                 suspensionState["routes"] = Routes;
-             }*/
-
             await Task.CompletedTask;
         }
 
@@ -130,14 +82,6 @@ namespace B2B_App.ViewModels.APA
             await RemoteSave.SaveContentToFtp(file, text, RemoteSave.State.ROUTE);
             _viewModel.Routes = null;
             FileList = model.GetFiles();
-          /*  var t = Task.Run(async () =>
-            {
-                await OnNavigatedToAsync(typeof(MainPage), NavigationMode.Refresh, state);
-
-            });
-            t.Wait();*/
-           // await OnNavigatedToAsync(typeof (MainPage), NavigationMode.Refresh, state);
-           //NavigationService.Navigate(typeof(MainPage));
         }
     }
 }

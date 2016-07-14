@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDatabase", "MyDatabase\My
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteCrawler", "WebsiteCrawler\WebsiteCrawler.csproj", "{A149B6FB-AD3E-423B-B45B-0DB2B2AA53F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Typemock", "Typemock", "{284445DA-4672-4DE9-B93F-CB124D335F6D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteCrawlerUnitTests", "Typemock\WebsiteCrawlerUnitTests\WebsiteCrawlerUnitTests.csproj", "{EB67DA52-AF59-401C-B25C-0E4D0F538B14}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,27 +73,8 @@ Global
 		{A149B6FB-AD3E-423B-B45B-0DB2B2AA53F3}.Release|x64.Build.0 = Release|Any CPU
 		{A149B6FB-AD3E-423B-B45B-0DB2B2AA53F3}.Release|x86.ActiveCfg = Release|Any CPU
 		{A149B6FB-AD3E-423B-B45B-0DB2B2AA53F3}.Release|x86.Build.0 = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|ARM.Build.0 = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|x64.Build.0 = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Debug|x86.Build.0 = Debug|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|ARM.ActiveCfg = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|ARM.Build.0 = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|x64.ActiveCfg = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|x64.Build.0 = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|x86.ActiveCfg = Release|Any CPU
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EB67DA52-AF59-401C-B25C-0E4D0F538B14} = {284445DA-4672-4DE9-B93F-CB124D335F6D}
 	EndGlobalSection
 EndGlobal

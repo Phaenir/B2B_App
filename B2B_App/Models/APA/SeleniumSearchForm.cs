@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
-using B2B_App.de.berlogic.devlt;
+using Windows.UI.ViewManagement;
 using B2B_App.Models.APA.Configuration;
 using MyDatabase;
 
@@ -30,9 +27,18 @@ namespace B2B_App.Models.APA
             t.Wait();
 
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFile file =await folder.GetFileAsync("chromedriver.exe");
-            
-            await Launcher.LaunchFileAsync(file);            
+            StorageFile file =await folder.GetFileAsync("WebsiteCrawler.exe");
+            bool success=false;
+            var n = Task.Run(async () =>
+            {
+                LauncherOptions options = new LauncherOptions
+                {
+                    TreatAsUntrusted = false,
+                    DesiredRemainingView = ViewSizePreference.UseMinimum, DisplayApplicationPicker = true, 
+                };
+                success= await Launcher.LaunchFileAsync(file,options);
+            });
+            n.Wait();                     
         }
     }
 }

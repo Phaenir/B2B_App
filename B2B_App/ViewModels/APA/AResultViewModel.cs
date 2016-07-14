@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
@@ -23,7 +22,6 @@ namespace B2B_App.ViewModels.APA
             get { return _endDate; }
             set { Set(ref _endDate,value); } }
 
-        IDictionary<string, object> state = Template10.Common.BootStrapper.Current.SessionState;
         public AResultViewModel()
         {
             StartDate=DateTime.Today;
@@ -32,17 +30,13 @@ namespace B2B_App.ViewModels.APA
         }
 
         private static List<ResultView> _result = new List<ResultView>();
-        public List<ResultView> Result { get { return _result; } set { Set(ref _result, value); } }
+        public List<ResultView> Result { get { return _result; }
+            private set { Set(ref _result, value); } }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             if (suspensionState.Any())
             {
-                //Value = suspensionState[nameof(Value)]?.ToString();
-                //state = (IDictionary<string, object>) suspensionState[nameof(state)];                
-                //Result = (List<ResultView>) state["resultTable"];
-                //StartDate = (DateTime) state["startDate"];
-                //EndDate = (DateTime) state["endDate"];
                 Result = (List<ResultView>) suspensionState[nameof(Result)];
                 StartDate = (DateTime) suspensionState[nameof(StartDate)];
                 EndDate = (DateTime) suspensionState[nameof(EndDate)];
@@ -55,8 +49,6 @@ namespace B2B_App.ViewModels.APA
         {
             if (suspending)
             {
-                //suspensionState[nameof(Value)] = Value;
-                //suspensionState[nameof(state)] = state;
                 suspensionState[nameof(EndDate)] = EndDate;
                 suspensionState[nameof(StartDate)] = StartDate;
                 suspensionState[nameof(Result)] = Result;
@@ -79,10 +71,6 @@ namespace B2B_App.ViewModels.APA
             database.GetResultView();
             Result = database.ResultViews.ToList();
             database.DropResultView();
-            
-            //state["startDate"] = StartDate;
-            //state["endDate"] = EndDate;
-            //state["resultTable"] = Result;
             NavigationService.Navigate(typeof(ResultPage), Result);
         }
 
