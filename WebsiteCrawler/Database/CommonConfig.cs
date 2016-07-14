@@ -26,24 +26,5 @@
             }
             return false;
         }
-
-        public void Copy(CommonConfig start)
-        {
-            PageLimit = start.PageLimit;
-            FormLimit = start.FormLimit;
-            SearchLimit = start.SearchLimit;
-
-            AgencyName = start.AgencyName;
-            AgencyNumber = start.AgencyNumber;
-            AgencyPassword = start.AgencyPassword;
-            AgencySalespoint = start.AgencySalespoint;
-
-            DatabaseName = start.DatabaseName;
-            DatabasePassword = start.DatabasePassword;
-            DatabasePort = start.DatabasePort;
-            DatabaseRemote = start.DatabaseRemote;
-            DatabaseUser = start.DatabaseUser;
-            DatabaseHost = start.DatabaseHost;
-        }
     }
 }

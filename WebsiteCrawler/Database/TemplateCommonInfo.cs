@@ -1,29 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace B2B_App.Models.APA.Configuration
+﻿namespace WebsiteCrawler.Database
 {
+    /// <summary>
+    /// In this class we manage data with xml file where website template saved in part of common information
+    /// </summary>
     public class TemplateCommonInfo
     {
+        /// <summary>
+        /// The name of site
+        /// </summary>
         public string WebsiteName { get; set; }
+        /// <summary>
+        /// the exact url of the site
+        /// </summary>
         public string WebsiteUrl { get; set; }
-        public TemplateCommonInfo() { }
-        public TemplateCommonInfo(TemplateCommonInfo commonInfo)
-        {
-            WebsiteName = commonInfo.WebsiteName;
-            WebsiteUrl = commonInfo.WebsiteUrl;
-        }
-
-        public bool IsSame(TemplateCommonInfo commonInfo)
-        {
-            if (WebsiteName != commonInfo.WebsiteName)
-                return false;
-            if (WebsiteUrl != commonInfo.WebsiteUrl)
-                return false;
-            return true;
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace B2B_App.Models.APA
             }
             catch (Exception ex)
             {
+                Debug.Assert(true,ex.Message);
                 return DateTimeOffset.MinValue;
             }
         }
@@ -31,6 +33,7 @@ namespace B2B_App.Models.APA
             }
             catch (Exception ex)
             {
+                Debug.Assert(true, ex.Message);
                 return DateTime.MinValue;
             }
         }

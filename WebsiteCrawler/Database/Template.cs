@@ -1,36 +1,36 @@
-﻿using B2B_App.Models.APA.Configuration;
-
-namespace WebsiteCrawler.Database
+﻿namespace WebsiteCrawler.Database
 {
+    /// <summary>
+    /// In this class we combine all data about website to make possible it to parse
+    /// </summary>
     public class Template
     {
-        public TemplateSearchEngine SearchEngine { get; set; }
-        public TemplateResultEngine ResultEngine { get; set; }
-        public TemplateAdditionalInfo AdditionalInfo { get; set; }
-        public TemplateCommonInfo CommonInfo { get; set; }
+        /// <summary>
+        /// Part that required to fill booking form on website
+        /// </summary>
+        public TemplateSearchEngine SearchEngine { get; }
+        /// <summary>
+        /// Part that required to get data from result page of website
+        /// </summary>
+        public TemplateResultEngine ResultEngine { get; }
+        /// <summary>
+        /// Part that specify and make more detailed information from result page
+        /// </summary>
+        public TemplateAdditionalInfo AdditionalInfo { get; }
+        /// <summary>
+        /// Part that store common information to get access on website
+        /// </summary>
+        public TemplateCommonInfo CommonInfo { get; }
 
+        /// <summary>
+        /// In this constructor we initialize variables
+        /// </summary>
         public Template()
         {
             SearchEngine=new TemplateSearchEngine();
             ResultEngine=new TemplateResultEngine();
             AdditionalInfo=new TemplateAdditionalInfo();
             CommonInfo=new TemplateCommonInfo();
-        }
-
-        public Template(Template template)
-        {
-            this.SearchEngine = template.SearchEngine;
-            this.ResultEngine = template.ResultEngine;
-            this.AdditionalInfo = template.AdditionalInfo;
-            this.CommonInfo = template.CommonInfo;
-        }
-        public bool IsSame(Template start)
-        {
-            if (SearchEngine == start.SearchEngine && ResultEngine == start.ResultEngine && AdditionalInfo == start.AdditionalInfo&&CommonInfo==start.CommonInfo)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace WebsiteCrawler.Database
+﻿namespace WebsiteCrawler.Database
 {
     class CommonConfigurationModel
     {
@@ -22,7 +19,6 @@ namespace WebsiteCrawler.Database
             config.FormLimit = configuration.SearchEngine.FormLimit;
             config.PageLimit = configuration.SearchEngine.PageLimit;
             config.SearchLimit = configuration.SearchEngine.SearchLimit;
-
             return config;
         }
     }

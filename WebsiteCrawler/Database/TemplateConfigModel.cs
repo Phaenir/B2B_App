@@ -1,10 +1,17 @@
-﻿using System.Threading.Tasks;
-using WebsiteCrawler.FTP;
+﻿using WebsiteCrawler.FTP;
 
 namespace WebsiteCrawler.Database
 {
+    /// <summary>
+    /// In this class we load from remote server the file with website preferences saved as template in xml, Deserialize it and save in variables.
+    /// </summary>
     public class TemplateConfigModel
     {      
+        /// <summary>
+        /// This method parse data from xml in object's variables
+        /// </summary>
+        /// <param name="fileName">name of file where website preferences saved</param>
+        /// <returns></returns>
         public Template GetConfiguration(string fileName)
         {
             Template template = new Template();
@@ -87,11 +94,6 @@ namespace WebsiteCrawler.Database
             template.AdditionalInfo.OnlyDirect.Attr = website.AdditionalInfo.OnlyDirect.Attr;
             template.AdditionalInfo.OnlyDirect.Name = website.AdditionalInfo.OnlyDirect.Name;
             return template;
-        }
-
-        public bool FileExist(string name)
-        {
-          return RemoteSave.FileExist(name,RemoteSave.State.TEMPLATE);
         }
     }
 }

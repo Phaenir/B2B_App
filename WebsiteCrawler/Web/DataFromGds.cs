@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
-using Rhino.Mocks.Constraints;
 using WebsiteCrawler.de.berlogic.devlt;
 using WebsiteCrawler.Database;
 
 namespace WebsiteCrawler.Web
 {
+    /// <summary>
+    /// In this class we define method to get data from web service from GDS
+    /// </summary>
     class DataFromGds
     {
-        public bool Start(Controller controller, Route leg)
+        /// <summary>
+        /// Method of receiving and store data from GDS using web service
+        /// </summary>
+        /// <param name="controller">object variable with predefined application configuration and parameters of investigation</param>
+        /// <param name="leg">object variable where stored information about flight routes that need to investigate (Departure point and Arrival point)</param>
+        public void Start(Controller controller, Route leg)
         {
             var wdslUrl = new Uri("https://devlt.berlogic.de:444/Partner/Avia?wsdl ");
             var serviceUrl = new Uri("https://devlt.berlogic.de:444/Partner/Avia");
@@ -98,7 +105,7 @@ namespace WebsiteCrawler.Web
             {
                 client.authenticate(agentCode, agentPassword);
                 var response = client.searchFlights(settings);
-                Task.Delay(40000);
+                Thread.Sleep(5000);
                 Database.Database database=new Database.Database(controller.Config.DatabaseRemote,controller.Config.DatabaseUser,controller.Config.DatabasePassword,controller.Config.DatabaseName,(uint)controller.Config.DatabasePort);
                 foreach (flight flight in response)
                 {
@@ -108,7 +115,6 @@ namespace WebsiteCrawler.Web
                     List<Stops> stopsList=new List<Stops>();
                     Service rtService = new Service();
 
-                    decimal price;
                     decimal fee = 0;
                     decimal tariff = 0;
                     decimal taxes = 0;
@@ -119,7 +125,7 @@ namespace WebsiteCrawler.Web
                         tariff += t.tariff;
                         taxes += t.taxes;
                     }
-                    price = fee + tariff + taxes;
+                    var price = fee + tariff + taxes;
                     result.Fee = fee;
                     result.Tariff = tariff;
                     result.Taxes = taxes;
@@ -132,13 +138,12 @@ namespace WebsiteCrawler.Web
                     result.Url = salesPoint;
 
                     bool isOneWay = true;
-                    bool isStop;
 
                     int segments = flight.segments.Length;
                     for (int i = 0; i < segments; i++)
                     {
                         Stops stops = new Stops();
-                        isStop = flight.segments[i].connected;
+                        var isStop = flight.segments[i].connected;
                         if (isOneWay&&!isStop) //в одну сторону без пересадки
                         {
                             result.Departure = flight.segments[i].beginLocation.id;
@@ -243,13 +248,9 @@ namespace WebsiteCrawler.Web
                                 roundtrip.ServiceClass = rtService.Id;
                                 roundtrip.TravelDuration = durationSecondLeg;
                             }
-                            continue;
                         }
                     }
-                    int rtid;
-                    if (database.RoundtripIsExistsInDatabase(roundtrip) == 0)
-                        rtid = database.InsertRoundtripsToDatabase(roundtrip);
-                    else rtid = database.RoundtripIsExistsInDatabase(roundtrip);
+                    var rtid = database.RoundtripIsExistsInDatabase(roundtrip) == 0 ? database.InsertRoundtripsToDatabase(roundtrip) : database.RoundtripIsExistsInDatabase(roundtrip);
 
                     int sid = 0;
 
@@ -277,12 +278,11 @@ namespace WebsiteCrawler.Web
                     }                   
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.Assert(true,exception.Message);
                 //ignore
             }
-
-            return true;
         }
     }
 }

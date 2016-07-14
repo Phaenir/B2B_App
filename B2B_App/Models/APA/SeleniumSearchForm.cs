@@ -5,6 +5,8 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.System;
 using B2B_App.de.berlogic.devlt;
 using B2B_App.Models.APA.Configuration;
 using MyDatabase;
@@ -13,7 +15,7 @@ namespace B2B_App.Models.APA
 {
     class SeleniumSearchForm
     {    
-        internal void Start(List<object> websiteMembers, List<Route> flightLeg, DateTimeOffset? dep, DateTimeOffset? arr, string path)
+        internal async void Start(List<object> websiteMembers, List<Route> flightLeg, DateTimeOffset? dep, DateTimeOffset? arr, string path)
         {
             string conf = websiteMembers.Cast<TemplateTable>().Aggregate<TemplateTable, string>(null, (current, member) => current + (member.Name + ";"));
             conf += Environment.NewLine;
@@ -26,6 +28,11 @@ namespace B2B_App.Models.APA
                 await RemoteSave.SaveContentToFtp(conf, "conf", RemoteSave.State.INTERMEDIATE);
             });
             t.Wait();
+
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile file =await folder.GetFileAsync("chromedriver.exe");
+            
+            await Launcher.LaunchFileAsync(file);            
         }
     }
 }

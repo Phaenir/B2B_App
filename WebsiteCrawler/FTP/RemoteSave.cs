@@ -1,19 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Chilkat;
 
 namespace WebsiteCrawler.FTP
 {
-    class RemoteSave
+    /// <summary>
+    /// Class to manage data in remote server using ftp
+    /// </summary>
+    static class RemoteSave
     {
+        /// <summary>
+        /// define ftp
+        /// </summary>
             private static Ftp2 _ftp;
+        /// <summary>
+        /// the flag that show result of process
+        /// </summary>
             private static bool Success { get; set; }
-
-
+        /// <summary>
+        /// initialize parameters for ftp connection
+        /// </summary>
             private static void Init()
             {
                 _ftp = new Ftp2();
@@ -29,7 +35,12 @@ namespace WebsiteCrawler.FTP
                 _ftp.Passive = false;
             }
 
-
+        /// <summary>
+        /// take content from remote server
+        /// </summary>
+        /// <param name="fileName">the name of file</param>
+        /// <param name="state">state that defines in which folder this file exist</param>
+        /// <returns></returns>
             public static string GetContentFromFtp(string fileName, State state)
             {
                 Init();
@@ -52,8 +63,13 @@ namespace WebsiteCrawler.FTP
                 Success = _ftp.Disconnect();
                 return data;
             }
-
-            public static void GetFileFromFtp(string path,string fileName, State state)
+        /// <summary>
+        /// download files from remote server using ftp 
+        /// </summary>
+        /// <param name="path">path in local machine where need save file</param>
+        /// <param name="fileName">name of the file that need to download</param>
+        /// <param name="state">state that defines in which folder this file exist</param>
+        public static void GetFileFromFtp(string path,string fileName, State state)
             {
                 Init();
                 Success = _ftp.Connect();
@@ -74,38 +90,8 @@ namespace WebsiteCrawler.FTP
                 }
                 Success = _ftp.Disconnect();
             }
-
-            public static bool FileExist(string fileName, State state)
-            {
-                Init();
-                Success = _ftp.Connect();
-                string file;
-                try
-                {
-                    switch (state)
-                    {
-                        case State.TEMPLATE:
-                            Success = _ftp.ChangeRemoteDir("Templates");
-                            file = _ftp.GetRemoteFileTextData(fileName + ".xml");
-                            break;
-                        case State.ROUTE:
-                            Success = _ftp.ChangeRemoteDir("Routes");
-                            file = _ftp.GetRemoteFileTextData(fileName + ".csv");
-                            break;
-                        case State.INTERMEDIATE:
-                            file = _ftp.GetRemoteFileTextData(fileName + ".csv");
-                            break;
-                    }
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-
-            public enum State : int { TEMPLATE = 0, ROUTE = 1, INTERMEDIATE = 3, }
         
-
+            public enum State
+            { TEMPLATE = 0, ROUTE = 1, INTERMEDIATE = 3, }       
     }
 }

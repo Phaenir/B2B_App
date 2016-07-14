@@ -1,24 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebsiteCrawler.Database;
 using WebsiteCrawler.FTP;
 
 namespace WebsiteCrawler
 {
-    
+    /// <summary>
+    /// In this class we set initial dates from whole solution
+    /// </summary>
     class Controller
     {
-        public List<string> WebsiteDomList { get; }
+        /// <summary>
+        /// the list of string variables where in xml format with website template preferences stored
+        /// </summary>
+        private List<string> WebsiteDomList { get; }
+        /// <summary>
+        /// the list of website names that need to investigate
+        /// </summary>
         public List<string> SiteNames { get; }
+        /// <summary>
+        /// the list of routes that need to investigate
+        /// </summary>
         public List<Route> FlightLegs { get; }
+        /// <summary>
+        /// departure date
+        /// </summary>
         public string DepartureDate { get; private set; }
+        /// <summary>
+        /// arrival date
+        /// </summary>
         public string ArrivalDate { get; private set; }
-        public string ConfigFilePath { get; private set; }
+        /// <summary>
+        /// the path where common configuration of application saved
+        /// </summary>
+        private string ConfigFilePath { get; set; }
+        /// <summary>
+        /// object where application configuration stored
+        /// </summary>
         public CommonConfig Config { get; private set; }
+        /// <summary>
+        /// the list of objects where website preferences stored in variables
+        /// </summary>
         public List<Template> WebsiteTemplates { get; }
+        /// <summary>
+        /// the model that define rules of get and save configuration of application
+        /// </summary>
         private readonly CommonConfigurationModel _configuration=new CommonConfigurationModel();
 
 
@@ -29,13 +56,15 @@ namespace WebsiteCrawler
             WebsiteDomList=new List<string>();
             WebsiteTemplates=new List<Template>();
         }
+        /// <summary>
+        /// In this method we receive data that was defined in B2B_app application and required for websites and web service investigation
+        /// </summary>
         public void GetDataFromUser()
         {
             string data = RemoteSave.GetContentFromFtp("conf", RemoteSave.State.INTERMEDIATE);
             var strArr = data.Split(Environment.NewLine.ToCharArray());
             List<string> condData= strArr.Where(s => !String.IsNullOrEmpty(s)).ToList();
-            string temp;
-            temp = condData[0];
+            var temp = condData[0];
             var temp2 = temp.Split(';');
             foreach (string s in temp2.Where(s => !String.IsNullOrEmpty(s)))
             {
@@ -88,8 +117,7 @@ namespace WebsiteCrawler
                         {
                             ArrivalDate=s;
                         }
-                    }
-                    
+                    }                    
                 }
             }
             temp = condData[3];
@@ -103,8 +131,7 @@ namespace WebsiteCrawler
             }
             TemplateConfigModel template=new TemplateConfigModel();
             foreach (string s in SiteNames)
-            {
-                
+            {                
                 WebsiteTemplates.Add(template.GetConfiguration(s));
             }
         }
